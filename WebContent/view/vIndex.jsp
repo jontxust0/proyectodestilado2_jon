@@ -6,7 +6,9 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <!-- Compiled and minified CSS -->
     <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css'>
-    <link rel='stylesheet' href='css/main.css'>
+
+    <link rel='stylesheet' href='../css/main.css'>
+
     <title>Main</title>
 </head>
 <body class="">
@@ -14,10 +16,12 @@
         <h1 class="col s12 center-align">Destila2</h1>
         <div class="row cuerpo">
             <div class="col s12 botones">
-                <a href="admin.html" class="waves-effect waves-light btn-large col s12 ">Administrador</a>
+
+                <a href="vAdmin.jsp" class="waves-effect waves-light btn-large col s12 ">Administrador</a>
             </div>    
             <div class="col s12 ">
-                <a class="waves-effect waves-light btn-large col s12">Clientes</a>
+                <a href="vCliente.jsp" class="waves-effect waves-light btn-large col s12">Clientes</a>
+
             </div> 
             </div>            
     </div>
