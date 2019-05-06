@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="css/style.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
 <body>
@@ -36,7 +36,7 @@
                 <div class="row">
                     <div class="col card-producto s3 teal lighten-2  z-depth-1">
                         
-                        <img class="responsive-img" src="../img/licorFuegoVal.png"/>
+                        <img class="responsive-img" src="img/licorFuegoVal.png"/>
                         
                             <p class="center-align"><b>Nombre</b></p>
                         
