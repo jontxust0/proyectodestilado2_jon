@@ -15,11 +15,11 @@
         <div class="row cuerpo">
 
                 <div class="col s12 botones">
-                    <a class="waves-effect waves-light btn-large modal-trigger col s12"  href="#modalAñadir" >Añadir producto</a>
+                    <a class="waves-effect waves-light btn-large modal-trigger col s12"  href="#modalAÃ±adir" >AÃ±adir producto</a>
     
-                    <div id="modalAñadir" class="modal">
+                    <div id="modalAÃ±adir" class="modal">
                         <div class="modal-content">
-                            <h4>Añadir producto</h4>
+                            <h4>AÃ±adir producto</h4>
 
 
                         </div>
@@ -76,7 +76,10 @@
                         </div>
             
                 <div class="col-12 botones">
+
+
                         <a href="vIndex.jsp" class="waves-effect waves-light btn-large modal-trigger col s12">Cambiar de usuario</a>
+
                 </div>
         
         </div>

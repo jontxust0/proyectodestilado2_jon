@@ -1,0 +1,25 @@
+.sidebar{
+    height:100%;
+}
+
+.cuerpoProductos{
+    height:100%;
+}
+
+.card-producto{
+    margin:5%;
+    height: 250px;
+
+}
+
+.cuerpo{
+    height: 1000px;
+}
+
+img{
+margin-top:10px;
+}
+
+.categorias{
+    margin-top: 10px;
+}
