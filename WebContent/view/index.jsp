@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <!-- Compiled and minified CSS -->
+    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css'>
+    <link rel='stylesheet' href='css/main.css'>
+    <title>Main</title>
+</head>
+<body class="">
+    <div class="container">
+        <h1 class="col s12 center-align">Destila2</h1>
+        <div class="row cuerpo">
+            <div class="col s12 botones">
+                <a href="admin.html" class="waves-effect waves-light btn-large col s12 ">Administrador</a>
+            </div>    
+            <div class="col s12 ">
+                <a class="waves-effect waves-light btn-large col s12">Clientes</a>
+            </div> 
+            </div>            
+    </div>
+</body>
+
+<!-- Compiled and minified JavaScript -->
+<script src='https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js'></script>  
+</html>
