@@ -38,7 +38,7 @@
                         
                         <img class="responsive-img" src="../img/licorFuegoVal.png"/>
                         
-                            <p class="center-align"><b>nombre</b></p>
+                            <p class="center-align"><b>Nombre</b></p>
                         
                         
                     </div> 
