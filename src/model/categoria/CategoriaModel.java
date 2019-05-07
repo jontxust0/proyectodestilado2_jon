@@ -1,5 +1,9 @@
 package model.categoria;
 
-public class CategoriaModel {
+import java.util.ArrayList;
 
+public class CategoriaModel extends CategoriaClass{
+
+	ArrayList<CategoriaClass> categoria =new ArrayList<CategoriaClass>();
+	
 }

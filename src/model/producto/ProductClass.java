@@ -1,6 +1,8 @@
 package model.producto;
 
-public class ProductClass {
+import model.Connect;
+
+public class ProductClass extends Connect{
 
 	protected int id;
 	protected String nombre;

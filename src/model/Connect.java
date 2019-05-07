@@ -18,7 +18,7 @@ public class Connect {
 
 	public Connection createConnection() {
 		String driver = "com.mysql.jdbc.Driver";
-		String url = "jdbc:mysql://localhost:3306/";
+		String url = "jdbc:mysql://localhost:3306/proyectodestila2";
 		String userBbdd = "root";
 		String passBbdd = "";
 		try {
@@ -45,4 +45,5 @@ public class Connect {
 	public void disconnect() {
 		this.con = null;
 	}
+	
 }

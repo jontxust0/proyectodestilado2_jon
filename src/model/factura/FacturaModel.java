@@ -1,5 +1,9 @@
 package model.factura;
 
-public class FacturaModel {
+import java.util.ArrayList;
 
+public class FacturaModel extends FacturaClass{
+
+	ArrayList<FacturaClass> categoria =new ArrayList<FacturaClass>();
+	
 }
