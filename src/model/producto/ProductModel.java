@@ -42,6 +42,7 @@ public class ProductModel extends ProductClass{
 			while (rs.next()) // reads the table line by line
 			{
 				ProductClass newD = new ProductClass();
+				
 				newD.id=Integer.parseInt(rs.getString(1));
 				newD.nombre=rs.getString(2);
 				newD.descripcion=rs.getString(3);
