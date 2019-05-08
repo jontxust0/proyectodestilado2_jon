@@ -5,15 +5,15 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
-import model.factura.FacturaModel;
-import model.producto.ProductModel;
+import model.factura.FacturaClass;
+import model.producto.ProductClass;
 import model.subcategoria.SubcategoriaModel;
 
 public class ProductoFacturaModel extends ProductoFacturaClass{
 
-	ArrayList<ProductModel> product =new ArrayList<>(); 
+	ArrayList<ProductClass> product =new ArrayList<>(); 
 	
-	ArrayList<FacturaModel> factura =new ArrayList<>(); 
+	ArrayList<FacturaClass> factura =new ArrayList<>(); 
 	
 	public void loadData()
 	{
@@ -23,11 +23,11 @@ public class ProductoFacturaModel extends ProductoFacturaClass{
 		try {
 			
 			st = this.con.createStatement();
-			ResultSet rs = st.executeQuery("SELECT * FROM subcategoria ");
+			ResultSet rs = st.executeQuery("SELECT * FROM producto_factura");
 
 			while (rs.next()) // reads the table line by line
 			{
-				SubcategoriaModel newD = new SubcategoriaModel();
+				ProductoFacturaModel newD = new ProductoFacturaModel();
 				newD.id=Integer.parseInt(rs.getString(1));
 				newD.nombre=rs.getString(2);
 				newD.id_categoria=Integer.parseInt(rs.getString(3));

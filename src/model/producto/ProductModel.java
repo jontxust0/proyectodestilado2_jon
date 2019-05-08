@@ -11,6 +11,24 @@ public class ProductModel extends ProductClass{
 
 	ArrayList<ProductClass> producto =new ArrayList<ProductClass>();
 	
+	public ProductModel() {
+		super();
+	}
+
+	public ProductModel(int id, String nombre, String descripcion, String img, double precio, int id_categoria,
+			ArrayList<ProductClass> producto) {
+		super(id, nombre, descripcion, img, precio, id_categoria);
+		this.producto = producto;
+	}
+
+	public ArrayList<ProductClass> getProducto() {
+		return producto;
+	}
+
+	public void setProducto(ArrayList<ProductClass> producto) {
+		this.producto = producto;
+	}
+
 	public void loadData()
 	{
 		this.createConnection();
@@ -19,7 +37,7 @@ public class ProductModel extends ProductClass{
 		try {
 			
 			st = this.con.createStatement();
-			ResultSet rs = st.executeQuery("SELECT * FROM subcategoria ");
+			ResultSet rs = st.executeQuery("SELECT * FROM producto");
 
 			while (rs.next()) // reads the table line by line
 			{
