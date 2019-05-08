@@ -19,13 +19,13 @@ import model.producto.ProductModel;
  * Servlet implementation class CCliente
  */
 @WebServlet("/CCliente")
-public class CCliente extends HttpServlet {
+public class CProductos extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public CCliente() {
+    public CProductos() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -39,21 +39,21 @@ public class CCliente extends HttpServlet {
 		productos.loadData();
 		
 		String jsonString = JSONStringer.valueToString(productos);
-		 ArrayList<JSONObject> jsonArray=new ArrayList<JSONObject>();
+		 ArrayList<JSONObject> jsonArrayProducto=new ArrayList<JSONObject>();
 
          for (int i=0;i<productos.getProducto().size();i++){
 
-             JSONObject jsonObject=new JSONObject();
+             JSONObject jsonProducto=new JSONObject();
              
-             jsonObject.put("id", productos.getProducto().get(i).getId());
-             jsonObject.put("nombre", productos.getProducto().get(i).getNombre());
-             jsonObject.put("descripcion", productos.getProducto().get(i).getDescripcion());
-             jsonObject.put("img", productos.getProducto().get(i).getImg());
-             jsonObject.put("precio", productos.getProducto().get(i).getPrecio());
-             jsonObject.put("id_categoria", productos.getProducto().get(i).getId_categoria());
+             jsonProducto.put("id", productos.getProducto().get(i).getId());
+             jsonProducto.put("nombre", productos.getProducto().get(i).getNombre());
+             jsonProducto.put("descripcion", productos.getProducto().get(i).getDescripcion());
+             jsonProducto.put("img", productos.getProducto().get(i).getImg());
+             jsonProducto.put("precio", productos.getProducto().get(i).getPrecio());
+             jsonProducto.put("id_categoria", productos.getProducto().get(i).getId_categoria());
              
              
-             jsonArray.add(jsonObject);
+             jsonArrayProducto.add(jsonProducto);
          }
 
         PrintWriter out = response.getWriter();
@@ -62,7 +62,7 @@ public class CCliente extends HttpServlet {
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
 
-        out.print(jsonArray);
+        out.print(jsonArrayProducto);
         out.flush();
 
         
