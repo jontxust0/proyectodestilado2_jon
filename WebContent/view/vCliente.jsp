@@ -77,9 +77,10 @@
           </tr>
         </tbody>
       </table>
+      <h3>Precio Total: 000$</h3>
     </div>
     <div class="modal-footer">
-      <a href="#!" class="modal-close waves-effect waves-green btn-flat">Comprar</a>
+      <a href="CPago" class="modal-close waves-effect waves-green btn-flat">Comprar</a>
     </div>
   </div>
   
