@@ -12,6 +12,14 @@ public class CategoriaClass extends Connect{
 	public CategoriaClass() {
 		super();
 	}
+	
+
+	public CategoriaClass(int id, String nombre) {
+		super();
+		this.id = id;
+		this.nombre = nombre;
+	}
+
 
 	//----------------------\\
 	public int getId() {

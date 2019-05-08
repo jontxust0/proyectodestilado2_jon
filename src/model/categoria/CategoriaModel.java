@@ -11,6 +11,28 @@ public class CategoriaModel extends CategoriaClass{
 
 	ArrayList<CategoriaClass> categoria =new ArrayList<CategoriaClass>();
 	
+	
+	public ArrayList<CategoriaClass> getCategoria() {
+		return categoria;
+	}
+
+
+	public void setCategoria(ArrayList<CategoriaClass> categoria) {
+		this.categoria = categoria;
+	}
+
+ //-----Method------\\
+	public CategoriaModel() {
+		super();
+	}
+
+
+	public CategoriaModel(int id, String nombre, ArrayList<CategoriaClass> categoria) {
+		super(id, nombre);
+		this.categoria = categoria;
+	}
+
+
 	public void loadData()
 	{
 		this.createConnection();
@@ -19,15 +41,16 @@ public class CategoriaModel extends CategoriaClass{
 		try {
 			
 			st = this.con.createStatement();
-			ResultSet rs = st.executeQuery("SELECT * FROM categoria ");
+			ResultSet rs = st.executeQuery("SELECT * FROM categorias ");
 
 			while (rs.next()) // reads the table line by line
 			{
-				CategoriaModel newD = new CategoriaModel();
-				newD.id=Integer.parseInt(rs.getString(1));
-				newD.nombre=rs.getString(2);
+				CategoriaModel newC = new CategoriaModel();
 				
-				this.categoria.add(newD);
+				newC.id=Integer.parseInt(rs.getString("id"));
+				newC.nombre=rs.getString("nombre");
+				
+				this.categoria.add(newC);
 			
 			} 
 		}catch (SQLException e1) {

@@ -28,6 +28,7 @@ public class Connect {
 
 		} catch (Exception ex) {
 			con = null;
+			System.out.println("La vida es una lenteja");
 
 		}
 		return this.con;
