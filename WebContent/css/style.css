@@ -23,3 +23,7 @@ margin-top:10px;
 .categorias{
     margin-top: 10px;
 }
+
+#botonPagar{
+	display: block;
+}
