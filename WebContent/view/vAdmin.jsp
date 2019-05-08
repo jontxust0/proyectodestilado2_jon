@@ -59,12 +59,12 @@
             					<label for="first_name">Descripcion del producto</label>
             					</div>
         					</div>
-        					<button type="submit"></button>
+        					<input type="submit" class="waves-effect waves-light btn-large modal-trigger col s12" value="Enviar"></input>
     						</form>
 
                         </div>
                         <div class="modal-footer">
-                            <a href="#!" class="modal-close waves-effect waves-green btn-flat">Agree</a>
+                            <a href="#!" class="modal-close waves-effect waves-green btn-flat" >Cerrar</a>
                         </div>
                         </div>
                 </div>
