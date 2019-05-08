@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="css/style.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
-<body>l
+<body>
     <nav>
         <div class="nav-wrapper teal lighten-1 z-depth-3">
           <a href="#!" class="brand-logo"><i class="material-icons">whatshot</i>DESTILA2</a>
