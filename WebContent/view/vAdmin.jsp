@@ -17,10 +17,50 @@
                 <div class="col s12 botones">
                     <a class="waves-effect waves-light btn-large modal-trigger col s12"  href="#modalAniadir" >Aniadir producto</a>
     
-                    <div id="modalAñadir" class="modal">
+                    <div id="modalAniadir" class="modal">
                         <div class="modal-content">
                             <h4>Aniadir producto</h4>
+                            <form>
+       	 					<div class="row">
+            					<div class="input-field col s12">
+            					<input placeholder="Placeholder" id="first_name" type="text" class="validate">
+            					<label for="first_name">Nombre </label>
+            					</div>
+        					</div>
 
+        					<div class="row">
+            					<div class="input-field col s12">
+                    			<select>
+                      				<option value="" disabled selected>Choose your option</option>
+                      				<option value="1">Option 1</option>
+                      				<option value="2">Option 2</option>
+                      				<option value="3">Option 3</option>
+                    			</select>
+                    			<label>Materialize Select</label>
+                  				</div>
+        					</div>
+
+        					<div class="row">
+            					<div class="input-field col s12">
+            						<input placeholder="Placeholder" id="first_name" type="text" class="validate">
+            						<label for="first_name">Precio</label>
+            					</div>
+        					</div>
+
+        					<div class="row">
+            					<div class="input-field col s12">
+            					<input placeholder="Placeholder" id="first_name" type="text" class="validate">
+           	 					<label for="first_name">URL de la imagen</label>
+            					</div>
+        					</div>
+        					<div class="row">
+            					<div class="input-field col s12">
+            					<input placeholder="Placeholder" id="first_name" type="text" class="validate">
+            					<label for="first_name">Descripcion del producto</label>
+            					</div>
+        					</div>
+        					<button type="submit"></button>
+    						</form>
 
                         </div>
                         <div class="modal-footer">
@@ -78,7 +118,7 @@
                 <div class="col-12 botones">
 
 
-                        <a href="vIndex.jsp" class="waves-effect waves-light btn-large modal-trigger col s12">Cambiar de usuario</a>
+                        <a href="CIndex" class="waves-effect waves-light btn-large modal-trigger col s12">Cambiar de usuario</a>
 
                 </div>
         
@@ -92,6 +132,7 @@
 <script>
     $(document).ready(function(){
         $('.modal').modal();
+        $('select').formSelect();
     });
 </script>
 </html>
