@@ -37,7 +37,7 @@ public class ProductModel extends ProductClass{
 		try {
 			
 			st = this.con.createStatement();
-			ResultSet rs = st.executeQuery("SELECT * FROM producto");
+			ResultSet rs = st.executeQuery("SELECT * FROM productos");
 
 			while (rs.next()) // reads the table line by line
 			{
@@ -47,7 +47,7 @@ public class ProductModel extends ProductClass{
 				newD.descripcion=rs.getString(3);
 				newD.img=rs.getString(4);
 				newD.precio=Double.parseDouble(rs.getString(5));
-				newD.id_categoria=Integer.parseInt(rs.getString(3));
+				newD.id_categoria=Integer.parseInt(rs.getString(6));
 				
 				this.producto.add(newD);
 			
