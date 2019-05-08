@@ -2,9 +2,10 @@ package model.subcategoria;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 
-import com.mysql.jdbc.Statement;
+import java.sql.Connection;
 
 public class SubcategoriaModel extends SubcategoriaClass {
 
@@ -17,6 +18,7 @@ public class SubcategoriaModel extends SubcategoriaClass {
 		
 		Statement st;
 		try {
+			
 			st = this.con.createStatement();
 			ResultSet rs = st.executeQuery("SELECT * FROM subcategoria ");
 
@@ -28,11 +30,11 @@ public class SubcategoriaModel extends SubcategoriaClass {
 				newD.id_categoria=Integer.parseInt(rs.getString(3));
 				
 				this.categoria.add(newD);
-			}
-	
-		} catch (SQLException e) {
+			
+			} 
+		}catch (SQLException e1) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			e1.printStackTrace();
 		}
 		this.disconnect();
 	}

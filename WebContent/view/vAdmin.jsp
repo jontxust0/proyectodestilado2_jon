@@ -15,11 +15,11 @@
         <div class="row cuerpo">
 
                 <div class="col s12 botones">
-                    <a class="waves-effect waves-light btn-large modal-trigger col s12"  href="#modalAñadir" >Añadir producto</a>
+                    <a class="waves-effect waves-light btn-large modal-trigger col s12"  href="#modalAniadir" >Aniadir producto</a>
     
                     <div id="modalAñadir" class="modal">
                         <div class="modal-content">
-                            <h4>Añadir producto</h4>
+                            <h4>Aniadir producto</h4>
 
 
                         </div>
