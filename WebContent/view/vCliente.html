@@ -38,6 +38,15 @@
 <!-- PRODUCTOS -->
       <div class="col s10 cuerpoProductos teal lighten-5">
       
+      
+      <div class="carousel carousel-slider">
+    	<a class="carousel-item" href="#one!"><img src="https://lorempixel.com/800/400/food/1"></a>
+    	<a class="carousel-item" href="#two!"><img src="https://lorempixel.com/800/400/food/2"></a>
+    	<a class="carousel-item" href="#three!"><img src="https://lorempixel.com/800/400/food/3"></a>
+   		<a class="carousel-item" href="#four!"><img src="https://lorempixel.com/800/400/food/4"></a>
+ 	 </div>
+    
+    
       </div>
       
       
@@ -89,7 +98,7 @@
  <!-- MODAL PRODUCTO -->
 <div id="modalProducto" class="modal modal-fixed-footer">
     <div class="modal-content">
-      <h4 class="productoTitulo"></h4>
+      <h4 class="productoTitulo center-align"></h4>
             <div class="container">
                 <div class="row">
                     <div class="col s6 productoImg">                        
@@ -124,8 +133,14 @@
     <script type="text/javascript" src="../js/clientesJavascript.js"></script>
     <script>
         $(document).ready(function(){
-         $('.modal').modal();        
+         $('.modal').modal();
+         
+         $('.carousel.carousel-slider').carousel({
+        	    fullWidth: true
+         });
         });
+        
+        
        </script>
 </body>
 </html>
