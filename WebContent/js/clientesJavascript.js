@@ -9,7 +9,7 @@ $(document).ready(function(){
           for (let index = 0; index < categorias.length; index++) {
             const categoria = categorias[index];
             html += '<div class="row">'
-            html +=	'<a class="waves-effect waves-teal btn-flat categorias col s12 center-align" href="#'+categoria.nombre+'" value="'+categoria.id+'">'+categoria.nombre+'</a>'
+            html +=	'<a class="waves-effect waves-teal btn-flat categorias col s12 center-align" href="#'+categoria.nombre+'" data-id="' + categoria.id + '">'+categoria.nombre+'</a>'
             html += '</div>'
           }
 
@@ -74,6 +74,37 @@ $(document).ready(function(){
           
           
           $('.productoImg').html(img);
+        }
+        
+      }
+
+
+    });
+  
+  
+  $(".categorias").on("click", function () {
+      var categoria_id = $(this).data('id');
+      var html_categoria = "";
+
+
+      for (let cat = 0; cat < productos.length; cat++) {
+        const producto = productos[cat];
+        if (categoria_id == producto.id_categoria) {
+          
+        	html_categoria +=	'<div class="col s6 m3 l3">'
+        	html_categoria +=	'<a href="#modalProducto" class="modal-trigger modalProducto" data-id="' + producto.id + '">'
+        	html_categoria +=	'<div class="container">'
+        	html_categoria +=	'<div class="row">'
+        	html_categoria +=	'<div class="teal lighten-2 card-producto z-depth-1">'
+        	html_categoria +=	'<img class="responsive-img circle" src="../'+producto.img+'"/>'
+        	html_categoria +=	'<p class="center-align"><b>'+producto.nombre+'</b></p>'
+    		html_categoria +=	'</div>'
+    		html_categoria +=	'</div>'
+    		html_categoria +=	'</div>'
+    		html_categoria +=	'</a>'
+    		html_categoria +=	'</div>' 
+          
+    	$('.cuerpoProductos').html(html_categoria);
         }
         
       }

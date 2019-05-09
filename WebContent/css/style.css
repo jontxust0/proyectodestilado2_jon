@@ -1,5 +1,5 @@
 .sidebar{
-    height:100%;
+    height:auto;
 }
 
 .cuerpoProductos{
@@ -21,7 +21,7 @@ margin-top:10px;
 }
 
 .categorias{
-    margin-top: 10px;
+    margin-top: 25px;
 }
 
 #botonPagar{
@@ -30,4 +30,16 @@ margin-top:10px;
 
 .productoDescripcion{
 	font-size:10px;
+}
+
+.botonSidebar{
+	margin-left:20px;
+}
+
+.rellenarCategorias{
+	height:100%;
+}
+
+.modalProducto{
+	height:100px;
 }
