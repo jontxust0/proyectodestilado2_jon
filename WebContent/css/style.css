@@ -13,7 +13,7 @@
 }
 
 .cuerpo{
-    height: 1000px;
+    height: auto;
 }
 
 img{
@@ -26,4 +26,8 @@ margin-top:10px;
 
 #botonPagar{
 	display: block;
+}
+
+.productoDescripcion{
+	font-size:10px;
 }

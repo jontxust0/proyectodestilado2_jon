@@ -8,15 +8,20 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     <link rel="stylesheet" href="../css/style.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
 </head>
-<body>
+<body class="teal lighten-5">
     <nav>
         <div class="nav-wrapper teal lighten-1 z-depth-3">
-          <a href="#!" class="brand-logo"><i class="material-icons">whatshot</i>DESTILA2</a>
+        <div class="container">
+          <a href="#!" class="brand-logo"><i class="fas fa-wine-bottle"></i>DESTILA2</a>
           <ul class="right hide-on-med-and-down">
+          <li><a href="../view/vIndex.html"><i class="material-icons">account_circle</i></a></li>
             <li><a href="#modalCarrito" class="modal-trigger"><i class="material-icons">shopping_cart</i></a></li>
             
+            
           </ul>
+        </div>
         </div>
       </nav>
 
@@ -24,26 +29,22 @@
 
 
     <div class="row cuerpo">
-      <div class="col s2 sidebar teal lighten-2">
-        <div class="row">
-            <a class="waves-effect waves-teal btn-flat categorias col s12 center-align" href="#categoria">categoria</a>
-        </div>
+    <!--  CATEGORIAS -->
+      <div class="col s2 sidebar teal lighten-2 rellenarCategorias">
+        
       </div>
       
       
-<!-- EJEMPLO PRODUCTO -->
-      <div class="col s10 cuerpoProductos teal lighten-5">
-         <a href="#modalProducto" class="modal-trigger">
-            <div class="container">
-                <div class="row">
-                    <div class="col card-producto s3 teal lighten-2  z-depth-1">                        
-                        <img class="responsive-img" src="../img/licorFuegoVal.png"/>                        
-                            <p class="center-align"><b>Nombre</b></p>                                            
-                    </div>                     
-                </div>
-            </div>
-          </a>
+<!-- PRODUCTOS -->
+      <div class="col s10  teal lighten-5">
+      
+      
+    
+    <div class="cuerpoProductos">
+    
+    </div>
       </div>
+      
       
       
 <!-- MODAL CARRITO -->
@@ -93,15 +94,15 @@
  <!-- MODAL PRODUCTO -->
 <div id="modalProducto" class="modal modal-fixed-footer">
     <div class="modal-content">
-      <h4>Nombre del producto</h4>
+      <h4 class="productoTitulo center-align"></h4>
             <div class="container">
                 <div class="row">
-                    <div class="col s6">                        
-                        <img class="responsive-img" src="../img/licorFuegoVal.png"/>                                                                   
+                    <div class="col s6 productoImg">                        
+                                                                                           
                     </div>   
                     <div class="col s6">     
                     	<h3>Descripcion</h3>                   
-                        <p>lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum </p>                                                                   
+                        <p class="productoDescripcion"></p>                                                                   
                     </div>                    
                 </div>
                 <div class="row">
@@ -111,7 +112,7 @@
                     </div>   
                     <div class="col s6">     
                     	<h5>Precio Unidad</h5>                   
-                        <h6><b>15$</b></h6>                                                                   
+                        <h6><b class="productoPrecio"></b><b>$</b></h6>                                                                   
                     </div>                    
                 </div>
             </div>
@@ -125,11 +126,17 @@
     </div>
     <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-    
+    <script type="text/javascript" src="../js/clientesJavascript.js"></script>
     <script>
         $(document).ready(function(){
-         $('.modal').modal();        
+         $('.modal').modal();
+         
+         $(document).ready(function(){
+        	    $('.carousel').carousel();
+        	  });
         });
+        
+        
        </script>
 </body>
 </html>

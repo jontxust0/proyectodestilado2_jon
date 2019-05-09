@@ -16,9 +16,9 @@ import org.json.JSONStringer;
 import model.producto.ProductModel;
 
 /**
- * Servlet implementation class CCliente
+ * Servlet implementation class CProductos
  */
-@WebServlet("/CCliente")
+@WebServlet("/CProductos")
 public class CProductos extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
