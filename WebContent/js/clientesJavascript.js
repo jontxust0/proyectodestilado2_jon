@@ -26,9 +26,13 @@ $(document).ready(function(){
 		var productos = response;        
 
 		var html = "";
+		
+	
+		
+		
 		for (let index = 0; index < productos.length; index++) {
 			const producto = productos[index];
-			html +=	'<div class="col s3">'
+			html +=	'<div class="col s6 m3 l3">'
 			html +=	'<a href="#modalProducto" class="modal-trigger modalProducto" data-id="' + producto.id + '">'
 			html +=	'<div class="container">'
 			html +=	'<div class="row">'
@@ -41,10 +45,14 @@ $(document).ready(function(){
 			html +=	'</a>'
 			html +=	'</div>' 
 			
+				
+			
+			
+			
   }
 
   $('.cuerpoProductos').html(html);
-
+ 
   
   
   

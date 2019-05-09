@@ -10,7 +10,7 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
 </head>
-<body>
+<body class="teal lighten-5">
     <nav>
         <div class="nav-wrapper teal lighten-1 z-depth-3">
         <div class="container">
@@ -36,17 +36,13 @@
       
       
 <!-- PRODUCTOS -->
-      <div class="col s10 cuerpoProductos teal lighten-5">
+      <div class="col s10  teal lighten-5">
       
       
-      <div class="carousel carousel-slider">
-    	<a class="carousel-item" href="#one!"><img src="https://lorempixel.com/800/400/food/1"></a>
-    	<a class="carousel-item" href="#two!"><img src="https://lorempixel.com/800/400/food/2"></a>
-    	<a class="carousel-item" href="#three!"><img src="https://lorempixel.com/800/400/food/3"></a>
-   		<a class="carousel-item" href="#four!"><img src="https://lorempixel.com/800/400/food/4"></a>
- 	 </div>
     
+    <div class="cuerpoProductos">
     
+    </div>
       </div>
       
       
@@ -135,9 +131,9 @@
         $(document).ready(function(){
          $('.modal').modal();
          
-         $('.carousel.carousel-slider').carousel({
-        	    fullWidth: true
-         });
+         $(document).ready(function(){
+        	    $('.carousel').carousel();
+        	  });
         });
         
         
