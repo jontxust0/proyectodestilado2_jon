@@ -1,7 +1,5 @@
 $(document).ready(function () {
 
-  
-
 
   $.getJSON("http://localhost:8080/Proyecto_destila2/CProductos"
   ).done(function (response) {
@@ -19,8 +17,8 @@ $(document).ready(function () {
       html += '<a href="#modalProducto" class="modal-trigger cardProducto" data-id="' + producto.id + '">'
       html += '<div class="container">'
       html += '<div class="row">'
-      html += '<div class="teal lighten-2 cardProducto z-depth-1">'
-      html += '<img class="responsive-img img-card circle" src="../' + producto.img + '"/>'
+      html += '<div class="teal lighten-2 card-producto z-depth-1">'
+      html += '<img class="responsive-img circle" src="../' + producto.img + '"/>'
       html += '<p class="center-align"><b>' + producto.nombre + '</b></p>'
       html += '</div>'
       html += '</div>'
@@ -66,8 +64,8 @@ $(document).ready(function () {
             html_categoria += '<a href="#modalProducto" class="modal-trigger cardProducto" data-id="' + producto.id + '">'
             html_categoria += '<div class="container">'
             html_categoria += '<div class="row">'
-            html_categoria += '<div class="teal lighten-2 cardProducto z-depth-1">'
-            html_categoria += '<img class="responsive-img img-card circle" src="../' + producto.img + '"/>'
+            html_categoria += '<div class="teal lighten-2 card-producto z-depth-1">'
+            html_categoria += '<img class="responsive-img circle" src="../' + producto.img + '"/>'
             html_categoria += '<p class="center-align"><b>' + producto.nombre + '</b></p>'
             html_categoria += '</div>'
             html_categoria += '</div>'

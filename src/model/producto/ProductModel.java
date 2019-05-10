@@ -4,6 +4,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.sql.PreparedStatement;
 
 import model.subcategoria.SubcategoriaModel;
 
@@ -61,5 +62,34 @@ public class ProductModel extends ProductClass{
 		this.disconnect();
 	}
 	
-	
+	public void editarProducto(int id) 
+		{
+			this.createConnection();
+			
+			String mensaje="";
+			PreparedStatement pst;
+			try {
+				pst = this.con.prepareStatement("UPDATE LIBROS " 
+												+ " SET nombre=?,  "
+												+" descripcion=? ,  "
+												+" img=?  "
+												+" precio=? , " 
+												+" WHERE productos.id=?");
+
+				pst.setInt(1, this.id);
+				pst.setString(3, this.nombre);
+				pst.setString(3, this.descripcion);
+				pst.setString(4, this.img);
+				pst.setDouble(5, this.precio);
+				pst.setInt(6, this.id_categoria);
+					
+				pst.execute();
+				
+				 
+			}catch (SQLException e) {
+				
+				e.printStackTrace();
+			}
+			this.disconnect();
+		}
 }

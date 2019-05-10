@@ -38,7 +38,7 @@ public class CProductos extends HttpServlet {
 		ProductModel productos = new ProductModel();
 		productos.loadData();
 		
-		String jsonString = JSONStringer.valueToString(productos);
+		//String jsonString = JSONStringer.valueToString(productos);
 		 ArrayList<JSONObject> jsonArrayProducto=new ArrayList<JSONObject>();
 
          for (int i=0;i<productos.getProducto().size();i++){
