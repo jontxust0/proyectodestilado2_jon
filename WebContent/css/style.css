@@ -6,18 +6,13 @@
     height:100%;
 }
 
-.card-producto{
-    margin:5%;
-    height: 250px;
-
-}
-
 .cuerpo{
     height: auto;
 }
 
-img{
-margin-top:10px;
+.img-card{
+margin-top:20px;
+
 }
 
 .categorias{
@@ -34,13 +29,18 @@ margin-top:10px;
 
 .botonSidebar{
 	margin-left:20px;
+	margin-top:20px;
+	float: left; 
 }
 
 .rellenarCategorias{
-	height:100%;
+	height:80%;
 }
 
 .cardProducto{
 	height:100px;
+	  margin:5%;
+    height: 250px;
 }
+
 

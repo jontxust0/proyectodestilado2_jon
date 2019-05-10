@@ -13,7 +13,7 @@
 <body class="teal lighten-5">
 <!-- NAVBAR -->
     <nav>
-        <div class="nav-wrapper teal lighten-1 z-depth-3">
+        <div class="nav-wrapper teal lighten-1">
     <div class="container">
           <a href="vCliente.html" class="brand-logo"><i class="fas fa-wine-bottle"></i>DESTILA2</a>
           <ul class="right hide-on-med-and-down">
@@ -39,15 +39,27 @@
       </div>
 
   </ul>
+  <br>
+
 
     <div class="row cuerpo">
-    <!--  CATEGORIAS -->
+
       
       
       
 <!-- PRODUCTOS -->
+
+<div class="carousel carousel-slider">
+
+    <a class="carousel-item z-depth-3" href="#one!"><img src="../img/carrusel1.jpg"></a>
+	<a class="carousel-item z-depth-3" href="#two!"><img src="../img/carrusel2.jpg"></a>
+    <a class="carousel-item z-depth-3" href="#three!"><img src="../img/carrusel3.jpg"></a>
+    <a class="carousel-item z-depth-3" href="#four!"><img src="../img/carrusel4.jpg"></a> 
+    <a data-target="slide-out" class="btn-floating btn-large waves-effect waves-light teal lighten-2 botonSidebar sidenav-trigger"><i class="material-icons">menu</i></a>
+  </div>
+  
 <br>
-<a data-target="slide-out" class="btn-floating btn-large waves-effect waves-light teal lighten-2 botonSidebar sidenav-trigger"><i class="material-icons">menu</i></a>
+
       <div class="col s12  teal lighten-5">
       
       
@@ -144,6 +156,10 @@
          $('.modal').modal();
          
          $('.sidenav').sidenav();
+         
+         $('.carousel.carousel-slider').carousel({
+        	    fullWidth: true
+        	  });
         });
         
         

@@ -118,7 +118,7 @@
                 <div class="col-12 botones">
 
 
-                        <a href="CIndex" class="waves-effect waves-light btn-large modal-trigger col s12">Cambiar de usuario</a>
+                        <a href="view/vIndex.html" class="waves-effect waves-light btn-large modal-trigger col s12">Cambiar de usuario</a>
 
                 </div>
         
