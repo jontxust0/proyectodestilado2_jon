@@ -11,32 +11,44 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
 </head>
 <body class="teal lighten-5">
+<!-- NAVBAR -->
     <nav>
         <div class="nav-wrapper teal lighten-1 z-depth-3">
-        <div class="container">
-          <a href="#!" class="brand-logo"><i class="fas fa-wine-bottle"></i>DESTILA2</a>
+    <div class="container">
+          <a href="vCliente.html" class="brand-logo"><i class="fas fa-wine-bottle"></i>DESTILA2</a>
           <ul class="right hide-on-med-and-down">
           <li><a href="../view/vIndex.html"><i class="material-icons">account_circle</i></a></li>
             <li><a href="#modalCarrito" class="modal-trigger"><i class="material-icons">shopping_cart</i></a></li>
-            
-            
-          </ul>
-        </div>
+            <ul id="nav-mobile" class="left hide-on-med-and-down">
+        <li><a href="#" data-target="slide-out" class="sidenav-trigger"><i class="material-icons">menu</i></a></li>
+      </ul>
+         
+</div> 
         </div>
       </nav>
 
+<!-- SIDENAVBAR -->
+<ul id="slide-out" class="sidenav teal lighten-2">
+<div class="col s2 sidebar teal lighten-2">
+   <div class="row">
+   <a class="waves-effect waves-teal btn-flat categorias col s12 center-align" href="vCliente.html"> Todos</a>
+   </div>
+      </div>
+<div class="col s2 sidebar teal lighten-2 rellenarCategorias">
+        
+      </div>
 
-
+  </ul>
 
     <div class="row cuerpo">
     <!--  CATEGORIAS -->
-      <div class="col s2 sidebar teal lighten-2 rellenarCategorias">
-        
-      </div>
+      
       
       
 <!-- PRODUCTOS -->
-      <div class="col s10  teal lighten-5">
+<br>
+<a data-target="slide-out" class="btn-floating btn-large waves-effect waves-light teal lighten-2 botonSidebar sidenav-trigger"><i class="material-icons">menu</i></a>
+      <div class="col s12  teal lighten-5">
       
       
     
@@ -131,9 +143,7 @@
         $(document).ready(function(){
          $('.modal').modal();
          
-         $(document).ready(function(){
-        	    $('.carousel').carousel();
-        	  });
+         $('.sidenav').sidenav();
         });
         
         
