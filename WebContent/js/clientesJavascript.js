@@ -35,32 +35,7 @@ $(document).ready(function () {
     }
 
     $('.cuerpoProductos').html(html);
-
-    $(".cardProducto").on("click", function () {
-      var producto_id = 0;
-      producto_id = $(this).data('id');
-      var img = "";
-
-
-      for (let modal = 0; modal < productos.length; modal++) {
-        const producto = productos[modal];
-        if (producto.id == producto_id) {
-          $('.productoTitulo').html(producto.nombre);
-
-          $('.productoDescripcion').html(producto.descripcion);
-
-          $('.productoPrecio').html(producto.precio);
-
-          img += '<img class="responsive-img" src="../' + producto.img + '"/>'
-
-
-          $('.productoImg').html(img);
-        }
-
-      }
-
-
-    });
+    rellenarModalProducto();
 
     $.getJSON("http://localhost:8080/Proyecto_destilado2/CCategoria"
     ).done(function (response) {
@@ -102,31 +77,7 @@ $(document).ready(function () {
   
             $('.cuerpoProductos').html(html_categoria);
 
-            $(".cardProducto").on("click", function () {
-              var producto_id = 0;
-              producto_id = $(this).data('id');
-              var img = "";
-        
-        
-              for (let modal = 0; modal < productos.length; modal++) {
-                const producto = productos[modal];
-                if (producto.id == producto_id) {
-                  $('.productoTitulo').html(producto.nombre);
-        
-                  $('.productoDescripcion').html(producto.descripcion);
-        
-                  $('.productoPrecio').html(producto.precio);
-        
-                  img += '<img class="responsive-img" src="../' + producto.img + '"/>'
-        
-        
-                  $('.productoImg').html(img);
-                }
-        
-              }
-        
-        
-            });
+rellenarModalProducto();
           }
   
         }
@@ -138,5 +89,36 @@ $(document).ready(function () {
 
   });
 
+  function rellenarModalProducto(){
+    $(".cardProducto").on("click", function () {
+      var producto_id = 0;
+      producto_id = $(this).data('id');
+      var img = "";
 
+      $.getJSON("http://localhost:8080/Proyecto_destilado2/CProductos"
+      ).done(function (response) {
+  
+        var productos = response;
+      for (let modal = 0; modal < productos.length; modal++) {
+        const producto = productos[modal];
+        if (producto.id == producto_id) {
+          $('.productoTitulo').html(producto.nombre);
+  
+          $('.productoDescripcion').html(producto.descripcion);
+  
+          $('.productoPrecio').html(producto.precio);
+  
+          img += '<img class="responsive-img" src="../' + producto.img + '"/>'
+  
+  
+          $('.productoImg').html(img);
+        }
+  
+      }
+  
+  
+    });
+  });
+  };
 });
+
