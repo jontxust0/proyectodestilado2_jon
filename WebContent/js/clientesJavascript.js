@@ -3,7 +3,7 @@ $(document).ready(function () {
   
 
 
-  $.getJSON("http://localhost:8080/Proyecto_destilado2/CProductos"
+  $.getJSON("http://localhost:8080/Proyecto_destila2/CProductos"
   ).done(function (response) {
     console.log(response);
     var productos = response;
@@ -37,7 +37,7 @@ $(document).ready(function () {
     $('.cuerpoProductos').html(html);
     rellenarModalProducto();
 
-    $.getJSON("http://localhost:8080/Proyecto_destilado2/CCategoria"
+    $.getJSON("http://localhost:8080/Proyecto_destila2/CCategoria"
     ).done(function (response) {
       console.log(response);
       var categorias = response;
@@ -95,7 +95,7 @@ rellenarModalProducto();
       producto_id = $(this).data('id');
       var img = "";
 
-      $.getJSON("http://localhost:8080/Proyecto_destilado2/CProductos"
+      $.getJSON("http://localhost:8080/Proyecto_destila2/CProductos"
       ).done(function (response) {
   
         var productos = response;
