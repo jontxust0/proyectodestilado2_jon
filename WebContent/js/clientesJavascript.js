@@ -1,6 +1,5 @@
 $(document).ready(function () {
 
-
   $.getJSON("http://localhost:8080/Proyecto_destila2/CProductos"
   ).done(function (response) {
     console.log(response);
@@ -34,6 +33,7 @@ $(document).ready(function () {
 
     $('.cuerpoProductos').html(html);
     rellenarModalProducto();
+    
 
     $.getJSON("http://localhost:8080/Proyecto_destila2/CCategoria"
     ).done(function (response) {
@@ -76,6 +76,7 @@ $(document).ready(function () {
             $('.cuerpoProductos').html(html_categoria);
 
 rellenarModalProducto();
+
           }
   
         }
@@ -84,14 +85,63 @@ rellenarModalProducto();
       });
   
     });
+    
+    //Añade productos al carrito
+    $(".botonAddCarrito").on("click", function () {
+  	  var idProd = $(".imgModalProducto").data('id');
+  	  var cantidadProd = $("#cantidadProducto").val();
+  	  var precioTot = 0;
+  	  
+      $.getJSON("http://localhost:8080/Proyecto_destila2/CProductos"
+      ).done(function (response) {
+        var productos = response;
+        
+        var html_carrito = "";
+      for (let modal = 0; modal < productos.length; modal++) {
+        const producto = productos[modal];
+        if (producto.id == idProd) {
+        	
+        	var precioMult=producto.precio*cantidadProd;
+        	
+        	html_carrito += '<tr>'
+        	html_carrito += '<td>'+cantidadProd+'</td>'
+        	html_carrito += '<td>'+producto.nombre+'</td>'
+        	html_carrito += '<td>'+precioMult+'</td>'
+        	html_carrito += '<td><a href="#" class="borrarItemCarrito" data-precio='+precioMult+'><i class="material-icons">clear</i></a></td>'
+        	html_carrito += '</tr>'
+        		
+        		precioTot = precioTot + precioMult+'$'
+         
+        	$('.tablaCarrito').append(html_carrito);
+        	$('.precioTotalCarrito').html(precioTot);
+        } 
+      }  
+    });  
+   });
+
+    $(".borrarItemCarrito").on("click", function () {
+    	var precioTotalActual = $(".precioTotalCarrito").text();
+    	var precioItem = $(this).data('precio');
+    	
+    	$(this).parent.parent.remove();
+    	
+    	precioTot = precioTotalActual - precioItem+'$'
+    	
+    	$('.precioTotalCarrito').html(precioTot);
+    	
+    });
+    
 
   });
-
+  
+  
+  
   function rellenarModalProducto(){
     $(".cardProducto").on("click", function () {
       var producto_id = 0;
       producto_id = $(this).data('id');
       var img = "";
+      var boton = "";
 
       $.getJSON("http://localhost:8080/Proyecto_destila2/CProductos"
       ).done(function (response) {
@@ -106,10 +156,10 @@ rellenarModalProducto();
   
           $('.productoPrecio').html(producto.precio);
   
-          img += '<img class="responsive-img" src="../' + producto.img + '"/>'
-  
+          img += '<img class="responsive-img imgModalProducto" data-id="' + producto.id + '" src="../' + producto.img + '"/>'
   
           $('.productoImg').html(img);
+         
         }
   
       }
@@ -118,5 +168,7 @@ rellenarModalProducto();
     });
   });
   };
+  
+  
 });
 
