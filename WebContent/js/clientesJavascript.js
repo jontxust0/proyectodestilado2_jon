@@ -98,12 +98,13 @@ $(document).ready(function () {
     });
 
     //Añade productos al carrito
-
+    var precioTot = 0;
     $(".botonAddCarrito").on("click", function () {
 
       var idProd = $(".imgModalProducto").data('id');
       var cantidadProd = $("#cantidadProducto").val();
-      var precioTot = 0;
+      
+      
 
       //Llama a la Api CProductos
 
@@ -112,13 +113,14 @@ $(document).ready(function () {
 
         var productos = response;
         var html_carrito = "";
-
+        var html_precio = "";
+        
         //Recorre el api y añade lineas al array
 
         for (let modal = 0; modal < productos.length; modal++) {
           const producto = productos[modal];
           if (producto.id == idProd) {
-
+        	  
             var precioMult = producto.precio * cantidadProd;
 
             html_carrito += '<tr>'
@@ -128,26 +130,32 @@ $(document).ready(function () {
             html_carrito += '<td><a href="#" data-precio=' + precioMult + ' class="borrarItemCarrito"><i class="material-icons">clear</i></a></td>'
             html_carrito += '</tr>'
 
-            precioTot = precioTot + precioMult + '$'
+            precioTot = precioTot + precioMult
+            
+            html_precio += '<b class="precioCarr" value="'+precioTot+'">'+precioTot+'</b>'
 
             $('.tablaCarrito').append(html_carrito);
-            $('.precioTotalCarrito').html(precioTot);
+            $('.precioTotalCarrito').html(html_precio);
           }
         }
       });
     });
 
     //Borrar items del carrito
-
+    var precioTotalActual = 0;
     $(document).on('click', '.borrarItemCarrito', function (e) {
 
-      var precioTotalActual = $(".precioTotalCarrito").text();
+      precioTotalActual = $(".precioCarr").text();
       var precioItem = $(this).data('precio');
+      var html_precio = "";
+      
       $(this).parent().parent().remove();
 
-      precioTot = precioTotalActual - precioItem + '$'
+      precioTot = precioTotalActual - precioItem 
 
-      $('.precioTotalCarrito').html(precioTot);
+      html_precio += '<b class="precioCarr" value="'+precioTot+'">'+precioTot+'</b>'
+      
+      $('.precioTotalCarrito').html(html_precio);
     });
   });
 
