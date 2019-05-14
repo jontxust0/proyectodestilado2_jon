@@ -1,6 +1,5 @@
 $(document).ready(function () {
 
-
   $.getJSON("http://localhost:8080/Proyecto_destila2/CProductos"
   ).done(function (response) {
     console.log(response);
