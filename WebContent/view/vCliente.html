@@ -1,168 +1,137 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Cliente</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-    <link rel="stylesheet" href="../css/style.css">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Cliente</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+  <link rel="stylesheet" href="../css/style.css">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
+    integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
 </head>
+
 <body class="teal lighten-5">
-<!-- NAVBAR -->
-    <nav>
-        <div class="nav-wrapper teal lighten-1">
-    <div class="container">
-          <a href="vCliente.html" class="brand-logo"><i class="fas fa-wine-bottle"></i>DESTILA2</a>
-          <ul class="right hide-on-med-and-down">
+  <!-- NAVBAR -->
+  <nav>
+    <div class="nav-wrapper teal lighten-1">
+      <div class="container">
+        <a href="vCliente.html" class="brand-logo"><i class="fas fa-wine-bottle"></i>DESTILA2</a>
+        <ul class="right hide-on-med-and-down">
           <li><a href="../view/vIndex.html"><i class="material-icons">account_circle</i></a></li>
-            <li><a href="#modalCarrito" class="modal-trigger"><i class="material-icons">shopping_cart</i></a></li>
-            <ul id="nav-mobile" class="left hide-on-med-and-down">
-        <li><a href="#" data-target="slide-out" class="sidenav-trigger"><i class="material-icons">menu</i></a></li>
-      </ul>
-         
-</div> 
-        </div>
-      </nav>
-
-<!-- SIDENAVBAR -->
-<ul id="slide-out" class="sidenav teal lighten-2">
-<div class="col s2 sidebar teal lighten-2">
-   <div class="row">
-   <a class="waves-effect waves-teal btn-flat categorias col s12 center-align" href="vCliente.html"> Todos</a>
-   </div>
+          <li><a href="#modalCarrito" class="modal-trigger"><i class="material-icons">shopping_cart</i></a></li>
+          <ul id="nav-mobile" class="left hide-on-med-and-down">
+            <li><a href="#" data-target="slide-out" class="sidenav-trigger"><i class="material-icons">menu</i></a></li>
+          </ul>
       </div>
-<div class="col s2 sidebar teal lighten-2 rellenarCategorias">
-        
-      </div>
+    </div>
+  </nav>
 
+  <!-- SIDENAVBAR -->
+  <ul id="slide-out" class="sidenav teal lighten-2">
+    <div class="col s2 sidebar teal lighten-2">
+      <div class="row">
+        <a class="waves-effect waves-teal btn-flat categorias col s12 center-align" href="vCliente.html"> Todos</a>
+      </div>
+    </div>
+    <div class="col s2 sidebar teal lighten-2 rellenarCategorias">
+    </div>
   </ul>
   <br>
+  <div class="row cuerpo">
 
-
-    <div class="row cuerpo">
-
-      
-      
-      
-<!-- PRODUCTOS -->
-
-<div class="carousel carousel-slider">
-
-    <a class="carousel-item z-depth-3" href="#one!"><img src="../img/carrusel1.jpg"></a>
-	<a class="carousel-item z-depth-3" href="#two!"><img src="../img/carrusel2.jpg"></a>
-    <a class="carousel-item z-depth-3" href="#three!"><img src="../img/carrusel3.jpg"></a>
-    <a class="carousel-item z-depth-3" href="#four!"><img src="../img/carrusel4.jpg"></a> 
-    <a data-target="slide-out" class="btn-floating btn-large waves-effect waves-light teal lighten-2 botonSidebar sidenav-trigger"><i class="material-icons">menu</i></a>
-  </div>
-  
-<br>
-
-      <div class="col s12  teal lighten-5">
-      
-      
-    
-    <div class="cuerpoProductos">
-    
+    <!-- PRODUCTOS -->
+    <div class="carousel carousel-slider">
+      <a class="carousel-item z-depth-3" href="#one!"><img src="../img/carrusel1.jpg"></a>
+      <a class="carousel-item z-depth-3" href="#two!"><img src="../img/carrusel2.jpg"></a>
+      <a class="carousel-item z-depth-3" href="#three!"><img src="../img/carrusel3.jpg"></a>
+      <a class="carousel-item z-depth-3" href="#four!"><img src="../img/carrusel4.jpg"></a>
+      <a data-target="slide-out"
+        class="btn-floating btn-large waves-effect waves-light teal lighten-2 botonSidebar sidenav-trigger"><i
+          class="material-icons">menu</i></a>
     </div>
+    <br>
+    <div class="col s12  teal lighten-5">
+      <div class="cuerpoProductos">
       </div>
-      
-      
-      
-<!-- MODAL CARRITO -->
-<div id="modalCarrito" class="modal bottom-sheet">
-    <div class="modal-content">
-      <h4>Carrito</h4>
-      <table class="responsive-table">
-        <thead>
-          <tr>
+    </div>
+
+    <!-- MODAL CARRITO -->
+    <div id="modalCarrito" class="modal bottom-sheet">
+      <div class="modal-content">
+        <h4>Carrito</h4>
+        <table class="responsive-table">
+          <thead>
+            <tr>
               <th>Cantidad</th>
               <th>Producto</th>
               <th>Precio</th>
-          </tr>
-        </thead>
+              <th>Eliminar</th>
+            </tr>
+          </thead>
 
-        <tbody>
-          <tr>
-            <td>1</td>
-            <td>nombre</td>
-            <td>10$</td>
-          </tr>
-          <tr>
-            <td>2</td>
-            <td>nombre</td>
-            <td>20$</td>
-          </tr>
-          <tr>
-            <td>3</td>
-            <td>nombre</td>
-            <td>30$</td>
-          </tr>
-        </tbody>
-      </table>
+          <tbody class="tablaCarrito">
+          </tbody>
+        </table>
+      </div>
+      <div class="modal-footer">
+        <div class="row">
+          <div class="col s6">
+            <p class="left-align"><b class="precioTotalCarrito"></b></p>
+          </div>
+          <div class="col s6">
+            <a href="../CPago" class="modal-close waves-effect waves-green btn-flat">Comprar</a>
+          </div>
+        </div>
+      </div>
     </div>
-    <div class="modal-footer">
-    	<div class="row">
-    		<div class="col s6">
-    			<p class="left-align"><b>Precio Total: 000$</b></p>
-    		</div>
-    		<div class="col s6">
-      			<a href="../CPago" class="modal-close waves-effect waves-green btn-flat">Comprar</a>
-      		</div>
-    	</div>
-    </div>
-  </div>
-  
- <!-- MODAL PRODUCTO -->
-<div id="modalProducto" class="modal modal-fixed-footer">
-    <div class="modal-content">
-      <h4 class="productoTitulo center-align"></h4>
-            <div class="container">
-                <div class="row">
-                    <div class="col s6 productoImg">                        
-                                                                                           
-                    </div>   
-                    <div class="col s6">     
-                    	<h3>Descripcion</h3>                   
-                        <p class="productoDescripcion"></p>                                                                   
-                    </div>                    
-                </div>
-                <div class="row">
-                    <div class="input-field col s6">                        
-                        <input value="1" id="cantidadProducto" type="number" class="validate" min="1">
-      					<label class="active" for="cantidadProducto">Cantidad</label>                                                                 
-                    </div>   
-                    <div class="col s6">     
-                    	<h5>Precio Unidad</h5>                   
-                        <h6><b class="productoPrecio"></b><b>$</b></h6>                                                                   
-                    </div>                    
-                </div>
+
+
+    <!-- MODAL PRODUCTO -->
+    <div id="modalProducto" class="modal modal-fixed-footer">
+      <div class="modal-content">
+        <h4 class="productoTitulo center-align"></h4>
+        <div class="container">
+          <div class="row">
+            <div class="col s6 productoImg">
             </div>
-    </div>
-    <div class="modal-footer">
-      <a href="#!" class="modal-close waves-effect waves-green btn-flat">Agregar al carrito</a>
+            <div class="col s6">
+              <h3>Descripcion</h3>
+              <p class="productoDescripcion"></p>
+            </div>
+          </div>
+          <div class="row">
+            <div class="input-field col s6 cantidadProducto">
+            </div>
+            <div class="col s6">
+              <h5>Precio Unidad</h5>
+              <h6><b class="productoPrecio"></b><b>$</b></h6>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <a href="#!" class="modal-close waves-effect waves-green btn-flat botonAddCarrito">Agregar al carrito</a>
+      </div>
     </div>
   </div>
+  <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+  <script type="text/javascript" src="../js/clientesJavascript.js"></script>
+  <script>
+    $(document).ready(function () {
+      $('.modal').modal();
 
+      $('.sidenav').sidenav();
 
-    </div>
-    <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-    <script type="text/javascript" src="../js/clientesJavascript.js"></script>
-    <script>
-        $(document).ready(function(){
-         $('.modal').modal();
-         
-         $('.sidenav').sidenav();
-         
-         $('.carousel.carousel-slider').carousel({
-        	    fullWidth: true
-        	  });
-        });
-        
-        
-       </script>
+      $('.carousel.carousel-slider').carousel({
+        fullWidth: true
+      });
+    });
+  </script>
 </body>
+
 </html>
