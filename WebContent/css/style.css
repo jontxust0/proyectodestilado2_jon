@@ -39,8 +39,13 @@ margin-top:20px;
 
 .cardProducto{
 	height:100px;
-	  margin:5%;
+	margin:5%;
     height: 250px;
 }
+
+.cardProducto:link {color:white;}
+.cardProducto:visited {color:white;}
+.cardProducto:active {color:white;}
+.cardProducto:hover {color:white;}
 
 
