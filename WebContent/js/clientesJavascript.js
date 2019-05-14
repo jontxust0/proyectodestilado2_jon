@@ -33,7 +33,7 @@ $(document).ready(function () {
 
     $('.cuerpoProductos').html(html);
     
-    rellenarModalProducto();
+    añadirEventoClickModalProducto();
     
 
     $.getJSON("http://localhost:8080/Proyecto_destila2/CCategoria"
@@ -77,7 +77,7 @@ $(document).ready(function () {
   
             $('.cuerpoProductos').html(html_categoria);
 
-            rellenarModalProducto();
+            añadirEventoClickModalProducto();
 
           }
   
@@ -125,7 +125,6 @@ $(document).ready(function () {
     $(document).on('click','.borrarItemCarrito',function(e){
     	var precioTotalActual = $(".precioTotalCarrito").text();
     	var precioItem = $(this).data('precio');
-    	alert("AAAAA");
     	$(this).parent().parent().remove();
     	
     	precioTot = precioTotalActual - precioItem+'$'
@@ -139,7 +138,7 @@ $(document).ready(function () {
   
   
   
-  function rellenarModalProducto(){
+  function añadirEventoClickModalProducto(){
     $(".cardProducto").on("click", function () {
       var producto_id = 0;
       producto_id = $(this).data('id');
