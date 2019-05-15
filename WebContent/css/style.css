@@ -38,9 +38,8 @@ margin-top:20px;
 }
 
 .cardProducto{
-	height:100px;
-	margin:5%;
-    height: 250px;
+	
+    height: 100%;
 }
 
 .cardProducto:link {color:white;}

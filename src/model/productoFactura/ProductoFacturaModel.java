@@ -36,9 +36,9 @@ public class ProductoFacturaModel extends ProductoFacturaClass{
 	 * @param product
 	 * @param factura
 	 */
-	public ProductoFacturaModel(ProductClass producto, FacturaClass Linea_factura, int cantidad,
+	public ProductoFacturaModel(ProductClass producto, FacturaClass Linea_factura,
 			ArrayList<ProductClass> product, ArrayList<FacturaClass> factura) {
-		super(producto, Linea_factura, cantidad);
+		super(producto, Linea_factura);
 		this.product = product;
 		this.factura = factura;
 	}

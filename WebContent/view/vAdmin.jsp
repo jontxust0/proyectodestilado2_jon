@@ -9,7 +9,7 @@
     <link rel='stylesheet' href='css/main.css'>
     <title>Admin</title>
 </head>
-<body>  
+<body class="teal lighten-5">  
     <div class="container">
         <h1 class="col-12 center-align">Destila2</h1>
         <div class="row cuerpo">

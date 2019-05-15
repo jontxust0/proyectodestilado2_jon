@@ -15,18 +15,16 @@ public class ProductoFacturaClass  extends Connect{
 	
 	protected ProductClass producto;
 	protected FacturaClass Linea_factura;
-	protected int cantidad;
 
 	/**
 	 * @param producto
 	 * @param factura
 	 * @param cantidad
 	 */
-	public ProductoFacturaClass(ProductClass producto, FacturaClass Linea_factura, int cantidad) {
+	public ProductoFacturaClass(ProductClass producto, FacturaClass Linea_factura) {
 		super();
 		this.producto = producto;
 		this.Linea_factura = Linea_factura;
-		this.cantidad = cantidad;
 	}
 
 	public ProductoFacturaClass() {
@@ -60,20 +58,5 @@ public class ProductoFacturaClass  extends Connect{
 	public void setLinea_factura(FacturaClass Linea_factura) {
 		this.Linea_factura = Linea_factura;
 	}
-
-	/**
-	 * @return the cantidad
-	 */
-	public int getCantidad() {
-		return cantidad;
-	}
-
-	/**
-	 * @param cantidad the cantidad to set
-	 */
-	public void setCantidad(int cantidad) {
-		this.cantidad = cantidad;
-	}
-	
 
 }
