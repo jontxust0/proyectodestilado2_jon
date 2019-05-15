@@ -47,7 +47,7 @@
       </div>
       <div class="row">
         <a href="#" id="botonPagar" class="col s6 waves-effect waves-green btn-flat">Pagar</a>
-        <a href="CCliente" class="col s6 waves-effect waves-green btn-flat">Volver</a>
+        <a href="view/vCliente.html" class="col s6 waves-effect waves-green btn-flat">Volver</a>
       </div>
 
 
