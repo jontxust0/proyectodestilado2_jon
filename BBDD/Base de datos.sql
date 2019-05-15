@@ -1,11 +1,11 @@
-﻿-- phpMyAdmin SQL Dump
--- version 4.8.3
+-- phpMyAdmin SQL Dump
+-- version 4.8.5
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 15-05-2019 a las 09:05:53
--- Versión del servidor: 10.1.35-MariaDB
--- Versión de PHP: 7.1.21
+-- Tiempo de generación: 15-05-2019 a las 11:01:36
+-- Versión del servidor: 10.1.39-MariaDB
+-- Versión de PHP: 7.3.5
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -106,39 +106,9 @@ CREATE TABLE `facturas` (
 -- Disparadores `facturas`
 --
 DELIMITER $$
-CREATE TRIGGER `facturas_actualizadas` AFTER UPDATE ON `facturas` FOR EACH ROW INSERT INTO facturas_actualizadas (id, cantidadTot_nuevo, precioTot_nuevo, productos_nuevo, fecha_compra_nuevo, comprador_nuevo, cantidadTot_antiguo, precioTot_antiguo, productos_antiguo, fecha_compra_antiguo, comprador_antiguo, fecha_de_actualizacion, usuario_de_actualizacion) VALUES (id, new.cantidadTot, new.precioTot, new.productos, new.fecha_compra, new.comprador, old.cantidadTot, old.precioTot, old.productos, old.fecha_compra, old.comprador, NOW(), USER())
+CREATE TRIGGER `facturas_eliminadas` AFTER DELETE ON `facturas` FOR EACH ROW INSERT INTO facturas_eliminadas (id, cantidadTot, precioTot, productos, fecha_compra, comprador,direccion, telefono, fecha_de_eliminacion, usuario_de_eliminacion ) VALUES (old.id, old.cantidadTot, old.precioTot, old. productos, old.fecha_compra, old.comprador, old.direccion, old.telefono, NOW(), USER())
 $$
 DELIMITER ;
-DELIMITER $$
-CREATE TRIGGER `facturas_eliminadas` AFTER DELETE ON `facturas` FOR EACH ROW INSERT INTO facturas_eliminadas (id, cantidadTot, precioTot, productos, fecha_compra, comprador, fecha_de_eliminacion, usuario_de_eliminacion) VALUES (old.id, old.cantidadTot, old.precioTot, old. productos, old.fecha_compra, old.comprador, NOW(), USER())
-$$
-DELIMITER ;
-DELIMITER $$
-CREATE TRIGGER `nuevas_facturas` AFTER INSERT ON `facturas` FOR EACH ROW INSERT INTO facturas_nuevas (id, cantidadTot, precioTot, productos, fecha_compra, comprador, fecha_de_creacion, usuario_de_creacion) VALUES (new.id, new.cantidadTot, new.precioTot, new.productos, new.fecha_compra, new.comprador, NOW(), USER())
-$$
-DELIMITER ;
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `facturas_actualizadas`
---
-
-CREATE TABLE `facturas_actualizadas` (
-  `id` int(11) NOT NULL,
-  `cantidadTot_nuevo` int(11) NOT NULL,
-  `precioTot_nuevo` double NOT NULL,
-  `productos_nuevo` varchar(40) NOT NULL,
-  `fecha_compra_nuevo` date NOT NULL,
-  `comprador_nuevo` varchar(50) NOT NULL,
-  `cantidadTot_antiguo` int(11) NOT NULL,
-  `precioTot_antiguo` double NOT NULL,
-  `productos_antiguo` varchar(40) NOT NULL,
-  `fecha_compra_antiguo` date NOT NULL,
-  `comprador_antiguo` varchar(50) NOT NULL,
-  `fecha_de_actualizacion` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `usuario_de_actualizacion` varchar(60) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -153,6 +123,8 @@ CREATE TABLE `facturas_eliminadas` (
   `productos` varchar(40) NOT NULL,
   `fecha_compra` date NOT NULL,
   `comprador` varchar(50) NOT NULL,
+  `direccion` varchar(128) NOT NULL,
+  `telefono` int(9) NOT NULL,
   `fecha_de_eliminacion` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `usuario_de_eliminacion` varchar(60) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -161,33 +133,8 @@ CREATE TABLE `facturas_eliminadas` (
 -- Volcado de datos para la tabla `facturas_eliminadas`
 --
 
-INSERT INTO `facturas_eliminadas` (`id`, `cantidadTot`, `precioTot`, `productos`, `fecha_compra`, `comprador`, `fecha_de_eliminacion`, `usuario_de_eliminacion`) VALUES
-(1, 200, 20.1, 'VARIOS', '2019-04-05', 'YO NO', '2019-05-08 11:32:02', 'root@localhost');
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `facturas_nuevas`
---
-
-CREATE TABLE `facturas_nuevas` (
-  `id` int(11) NOT NULL,
-  `cantidadTot` int(11) NOT NULL,
-  `precioTot` double NOT NULL,
-  `productos` varchar(40) NOT NULL,
-  `fecha_compra` date NOT NULL,
-  `comprador` varchar(50) NOT NULL,
-  `fecha_de_creacion` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `usuario_de_creacion` varchar(60) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Volcado de datos para la tabla `facturas_nuevas`
---
-
-INSERT INTO `facturas_nuevas` (`id`, `cantidadTot`, `precioTot`, `productos`, `fecha_compra`, `comprador`, `fecha_de_creacion`, `usuario_de_creacion`) VALUES
-(1, 200, 20.1, 'VARIOS', '2019-04-05', 'YO NO', '2019-05-08 11:31:48', 'root@localhost'),
-(5, 500, 20.56, 'muchos', '2019-04-06', 'alguien', '2019-05-08 11:28:13', 'root@localhost');
+INSERT INTO `facturas_eliminadas` (`id`, `cantidadTot`, `precioTot`, `productos`, `fecha_compra`, `comprador`, `direccion`, `telefono`, `fecha_de_eliminacion`, `usuario_de_eliminacion`) VALUES
+(1, 200, 20.1, 'VARIOS', '2019-04-05', 'YO NO', '', 0, '2019-05-08 11:32:02', 'root@localhost');
 
 -- --------------------------------------------------------
 
@@ -324,21 +271,9 @@ ALTER TABLE `facturas`
   ADD KEY `id` (`id`);
 
 --
--- Indices de la tabla `facturas_actualizadas`
---
-ALTER TABLE `facturas_actualizadas`
-  ADD PRIMARY KEY (`id`);
-
---
 -- Indices de la tabla `facturas_eliminadas`
 --
 ALTER TABLE `facturas_eliminadas`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indices de la tabla `facturas_nuevas`
---
-ALTER TABLE `facturas_nuevas`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -387,22 +322,10 @@ ALTER TABLE `facturas`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT de la tabla `facturas_actualizadas`
---
-ALTER TABLE `facturas_actualizadas`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
---
 -- AUTO_INCREMENT de la tabla `facturas_eliminadas`
 --
 ALTER TABLE `facturas_eliminadas`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
---
--- AUTO_INCREMENT de la tabla `facturas_nuevas`
---
-ALTER TABLE `facturas_nuevas`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT de la tabla `productos`
