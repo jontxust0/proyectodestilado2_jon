@@ -94,6 +94,8 @@ public class FacturaModel extends FacturaClass{
 				factura.setProductos(rs.getString("productos"));
 				factura.setFecha_compra(rs.getDate("fecha_compra"));
 				factura.setComprador(rs.getString("comprador"));
+				factura.direccion=rs.getString("direccion");
+				factura.telefono=rs.getInt("telefono");
 				
 				this.factura.add(factura);
 			}

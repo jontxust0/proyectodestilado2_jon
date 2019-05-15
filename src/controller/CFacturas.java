@@ -50,8 +50,10 @@ public class CFacturas extends HttpServlet {
              jsonFactura.put("cantidadTot", factura.getFactura().get(i).getCantidadTot());
              jsonFactura.put("precioTot", factura.getFactura().get(i).getPrecioTot());
              jsonFactura.put("productos", factura.getFactura().get(i).getProductos());
-             jsonFactura.put("fehca_compra", factura.getFactura().get(i).getFecha_compra());
-             jsonFactura.put("comprador", factura.getFactura().get(i).getComprador());            
+             jsonFactura.put("fecha_compra", factura.getFactura().get(i).getFecha_compra());
+             jsonFactura.put("comprador", factura.getFactura().get(i).getComprador());
+             jsonFactura.put("direccion", factura.getFactura().get(i).getDireccion());
+             jsonFactura.put("telefono", factura.getFactura().get(i).getTelefono());
              
              jsonArrayFactura.add(jsonFactura);
          }

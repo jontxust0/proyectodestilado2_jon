@@ -15,14 +15,18 @@
 <div class="container">
 	
 <% for(int i=0;i< factura.size();i++){%>
-	<div><h1>Factura</h1>Fecha de compra <%=factura.get(i).getFecha_compra() %></div>
-	<div>Cliente: <%=factura.get(i).getComprador() %></div>
-	<div>Direccion: <%=factura.get(i).getProductos() %></div>
-	<div>Numero de Telefono: <%=factura.get(i).getCantidadTot() %></div>
-	<div>Cantidad de productos: <%=factura.get(i).getPrecioTot() %></div>
-	
-	<div><%=factura.get(i).getId() %></div>
 
+	<div><h1>Factura	 <%=factura.get(i).getFecha_compra() %></h1></div>
+	
+	<div>Cliente: <%=factura.get(i).getComprador() %></div>
+	<div>Direccion: <%=factura.get(i).getDireccion() %></div>	
+	<div>Numero de Telefono:  <%=factura.get(i).getTelefono()%></div>
+	<div>Cantidad de productos: <%=factura.get(i).getCantidadTot()%></div>
+	
+	
+	<div>Precio compra<%=factura.get(i).getPrecioTot() %></div>
+	<div>Id Factura: <%=factura.get(i).getId() %></div>
+	
 <%} %>
 </div>
 </body>
