@@ -7,27 +7,118 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<style>@import url(http://fonts.googleapis.com/css?family=Bree+Serif);
+  body, h1, h2, h3, h4, h5, h6{
+    font-family: 'Bree Serif', serif;
+  }
+  
+  </style>
 <title>Factura</title>
 </head>
+
 <body>
-<% ArrayList<FacturaClass> factura = (ArrayList<FacturaClass>)request.getAttribute("factura"); %>
 
-<div class="container">
-	
-<% for(int i=0;i< factura.size();i++){%>
+	<% ArrayList<FacturaClass> factura = (ArrayList<FacturaClass>)request.getAttribute("factura"); %>
 
-	<div><h1>Factura	 <%=factura.get(i).getFecha_compra() %></h1></div>
+	<div class="container">
+
+		<div class="col-xs-6">
+			<h1><a href="view/vIndex.html"><img alt="" src="img/logo.png" /></a></h1>
+		</div>
+		
+		<div class="col-xs-6 text-right">
+			<h1>FACTURA</h1>
+				<% for(int i=0;i< factura.size();i++){%>
+				<h1><small>Factura Nº <%=factura.get(i).getId() %></small></h1>
+		</div> 
+		<div class="container">
+			<div class="row">
+				<div class="col-xs-5 mr-5 ml-5">
+					<div class="panel panel-default">
+						<div class="panel-heading">
+							<h4>De: Destila2 S.A</h4>
+						</div>
+						<div class="panel-body">
+							<br>Direccion: 1-503 Whippoorwill 
+							<br>Ln Calera, AL 35040
+							<br>USA
+						</div>
+					</div>
+				</div>
+				<div class="col-xs-5 col-xs-offset-5 text-right ml-5">
+					<div class="panel panel-default">
+						<div class="panel-heading">
+							<h4>Cliente: <%=factura.get(i).getComprador() %></a></h4>
+						</div>
+						<div class="panel-body">
+						<br>Numero de Telefono:  <%=factura.get(i).getTelefono()%>
+						<br>Direccion: <%=factura.get(i).getDireccion() %>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+<!-- / fin de sección de datos del Cliente  -->
+
+		<pre>
+			<table class="table table-bordered">
+				<thead>
+					<tr>
+						<th><h4>Producto</h4></th>
+						<th><h4>Descripción</h4></th>
+<th>
+<h4>Hrs / Cantidad</h4>
+</th>
+<th>
+<h4>Tarifa / Precio</h4>
+</th>
+<th>
+<h4>Sub-Total</h4>
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Artículo</td>
+<td><%=factura.get(i).getProductos()%></td>
+<td class=" text-right ">-</td>
+<td class=" text-right ">200.00 </td>
+<td class=" text-right ">200.00 </td>
+</tr>
+<tr>
+<td>Plantilla de diseño</td>
+<td><a href="#"> Detalles del proyecto aquí </a></td>
+<td class="text-right">10</td>
+<td class="text-right ">75.00</td>
+<td class="text-right ">750.00 </td>
+</tr>
+</tbody>
+</table>
+<pre>
+</pre>
+<div class="row text-right">
+<div class="col-xs-3 col-xs-offset-7"><strong>
+Total:
+</strong></div>
+<div class="col-xs-2"><strong>
+<%=factura.get(i).getPrecioTot() %> $ 
+</strong></div>
+</div>
+<pre>Sección detalles de pago
+
 	
-	<div>Cliente: <%=factura.get(i).getComprador() %></div>
-	<div>Direccion: <%=factura.get(i).getDireccion() %></div>	
-	<div>Numero de Telefono:  <%=factura.get(i).getTelefono()%></div>
-	<div>Cantidad de productos: <%=factura.get(i).getCantidadTot()%></div>
 	
+<!--<div><h1>Factura <%=factura.get(i).getFecha_compra() %></h1></div>
 	
-	<div>Precio compra<%=factura.get(i).getPrecioTot() %></div>
-	<div>Id Factura: <%=factura.get(i).getId() %></div>
+	<div></div>
+	<div>Cantidad de productos:<%=factura.get(i).getCantidadTot()%></div>
+	<div>Producto: </div>
 	
-<%} %>
+	<div>Precio compra: </div>
+	<div>Id Factura:<%=factura.get(i).getId() %></div>-->	
+	
+<%}%>
 </div>
 </body>
 </html>
