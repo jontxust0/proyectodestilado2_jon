@@ -33,8 +33,8 @@
 				<h1><small>Factura Nº <%=factura.get(i).getId() %></small></h1>
 		</div> 
 		<div class="container">
-			<div class="row">
-				<div class="col-xs-5 mr-5 ml-5">
+			<div class="row justify-content-between">
+				<div class="col-3">
 					<div class="panel panel-default">
 						<div class="panel-heading">
 							<h4>De: Destila2 S.A</h4>
@@ -46,7 +46,7 @@
 						</div>
 					</div>
 				</div>
-				<div class="col-xs-5 col-xs-offset-5 text-right ml-5">
+				<div class="col-3 text-right">
 					<div class="panel panel-default">
 						<div class="panel-heading">
 							<h4>Cliente: <%=factura.get(i).getComprador() %></a></h4>

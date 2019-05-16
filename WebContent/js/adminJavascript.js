@@ -3,7 +3,7 @@ $(document).ready(function(){
     $('#modal').modal();
 
         
-        $.getJSON("http://localhost:8080/Proyecto_destila2/CProductos").done(function (response){
+        $.getJSON("http://localhost:8080/Proyecto_destila2/ApiProductos").done(function (response){
         	console.log(response);
         	
         	var productos= response;
@@ -25,7 +25,7 @@ $(document).ready(function(){
         	$('#selectNombres').html(html);
         });
         
-        $.getJSON("http://localhost:8080/Proyecto_destila2/CFacturas"
+        $.getJSON("http://localhost:8080/Proyecto_destila2/ApiFacturas"
     	).done(function (response) {
     		console.log(response);
         	
@@ -37,7 +37,8 @@ $(document).ready(function(){
     	         html += '<tr>'
     	    	 html += '<td><span>'+factura.id+'<span></td>'
     	    	 html += '<td><span>'+factura.comprador+'<span></td>'
-    	    	 html += '<td><a href="CVerFacturas?id='+factura.id+'" class="waves-effect waves-light btn-large">Seleccionar</button></td>'
+    	    	 html += '<td><a href="CVerFacturas?id='+factura.id+'" class="waves-effect waves-light btn-large">Seleccionar</a></td>'
+    	    	 html += '<td><a href="CBorrarFactura?id'+factura.id+'" class="waves-effect waves-light btn-large"><i class="material-icons">delete</i></a></td>'
     	    	 html += '</tr>'
     	      }
      	     

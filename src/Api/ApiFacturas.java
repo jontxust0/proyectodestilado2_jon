@@ -1,4 +1,4 @@
-package controller;
+package Api;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -11,21 +11,20 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.json.JSONObject;
-import org.json.JSONStringer;
 
-import model.categoria.CategoriaModel;
+import model.factura.FacturaModel;
 
 /**
- * Servlet implementation class CCategoria
+ * Servlet implementation class ApiFacturas
  */
-@WebServlet("/CCategoria")
-public class CCategoria extends HttpServlet {
+@WebServlet("/ApiFacturas")
+public class ApiFacturas extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public CCategoria() {
+    public ApiFacturas() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -34,23 +33,28 @@ public class CCategoria extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		
-		CategoriaModel categoria = new CategoriaModel();
-		categoria.loadData();
-		
-		String jsonString = JSONStringer.valueToString(categoria);
-		 ArrayList<JSONObject> jsonArrayCategoria=new ArrayList<JSONObject>();
 
-         for (int i=0;i<categoria.getCategoria().size();i++){
+		FacturaModel factura = new FacturaModel();
+		factura.loadData();
 
-             JSONObject jsonCategoria=new JSONObject();
+	//	String jsonString = JSONStringer.valueToString(productos);
+		 ArrayList<JSONObject> jsonArrayFactura=new ArrayList<JSONObject>();
+
+         for (int i=0;i<factura.getFactura().size();i++){
+
+             JSONObject jsonFactura=new JSONObject();
              
-             jsonCategoria.put("id", categoria.getCategoria().get(i).getId());
-             jsonCategoria.put("nombre", categoria.getCategoria().get(i).getNombre());
-
              
-             jsonArrayCategoria.add(jsonCategoria);
+             jsonFactura.put("id", factura.getFactura().get(i).getId());
+             jsonFactura.put("cantidadTot", factura.getFactura().get(i).getCantidadTot());
+             jsonFactura.put("precioTot", factura.getFactura().get(i).getPrecioTot());
+             jsonFactura.put("productos", factura.getFactura().get(i).getProductos());
+             jsonFactura.put("fecha_compra", factura.getFactura().get(i).getFecha_compra());
+             jsonFactura.put("comprador", factura.getFactura().get(i).getComprador());
+             jsonFactura.put("direccion", factura.getFactura().get(i).getDireccion());
+             jsonFactura.put("telefono", factura.getFactura().get(i).getTelefono());
+             
+             jsonArrayFactura.add(jsonFactura);
          }
 
         PrintWriter out = response.getWriter();
@@ -59,12 +63,8 @@ public class CCategoria extends HttpServlet {
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
 
-        out.print(jsonArrayCategoria);
+        out.print(jsonArrayFactura);
         out.flush();
-
-        
-		//request.getRequestDispatcher("view/vCliente.jsp").forward(request, response);
-		
 	}
 
 	/**

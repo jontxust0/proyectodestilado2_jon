@@ -26,11 +26,23 @@
     <br>
     <br>
     <div class="container">
-    <form class="col s12">
+    <form class="col s12" action="CPago">
       <div class="row">
         <div class="input-field col s12">
-          <input placeholder="Nombre Apellido" id="comprador" type="text" class="validate">
+          <input placeholder="Nombre Apellido" id="comprador" name="comprador" type="text" class="validate">
           <label for="comprador">Nombre y Apellidos</label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="input-field col s12">
+          <input placeholder="Direccion" id="direccion" name="direccion" type="text" class="validate">
+          <label for="direccion">Direccion</label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="input-field col s12">
+          <input placeholder="Telefono" id="telefono" type="tel" class="validate">
+          <label for="telefono">Telefono</label>
         </div>
       </div>
       <div class="row">
@@ -46,7 +58,7 @@
         </div>
       </div>
       <div class="row">
-        <a href="#" id="botonPagar" class="col s6 waves-effect waves-green btn-flat">Pagar</a>
+        <input type="submit" href="#" id="botonPagar" class="col s6 waves-effect waves-green btn-flat">Pagar</a>
         <a href="view/vCliente.html" class="col s6 waves-effect waves-green btn-flat">Volver</a>
       </div>
 

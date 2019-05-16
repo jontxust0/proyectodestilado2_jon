@@ -32,6 +32,9 @@ public class CVerFacturas extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		int id=Integer.parseInt(request.getParameter("id"));
+		//String carrito='[{nombre":"Cerveza Duff","cantidad":"1","precio":2.7},{"nombre":"Buitral Fresa","cantidad":"1","precio":14.5}]';
+		String carrito=request.getParameter("carrito");
+		
 		
 		FacturaModel factura =new FacturaModel();
 		factura.selectedFactura(id);

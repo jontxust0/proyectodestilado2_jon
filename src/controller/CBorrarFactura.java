@@ -8,16 +8,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class CPago
+ * Servlet implementation class CBorrarFactura
  */
-@WebServlet("/CPago")
-public class CPago extends HttpServlet {
+@WebServlet("/CBorrarFactura")
+public class CBorrarFactura extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public CPago() {
+    public CBorrarFactura() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -26,8 +26,7 @@ public class CPago extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-		request.getRequestDispatcher("view/vPago.jsp").forward(request, response);
+		
 		
 	}
 
