@@ -17,9 +17,6 @@
         </div>
       </nav>
 
-
-
-
     <div class="row">
     <br>
     <br>

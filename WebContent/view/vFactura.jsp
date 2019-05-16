@@ -66,14 +66,9 @@
 				<thead>
 					<tr>
 						<th><h4>Producto</h4></th>
-						<th><h4>Descripción</h4></th>
-<th>
-<h4>Hrs / Cantidad</h4>
-</th>
-<th>
-<h4>Tarifa / Precio</h4>
-</th>
-<th>
+						<th><h4>Cantidad</h4></th>
+						<th><h4>Tarifa / Precio</h4></th>
+	<th>
 <h4>Sub-Total</h4>
 </th>
 </tr>
