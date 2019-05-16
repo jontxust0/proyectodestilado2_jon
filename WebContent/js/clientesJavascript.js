@@ -7,7 +7,7 @@ $(document).ready(function () {
 
   //Llama a la Api CProductos
 
-  $.getJSON("http://localhost:8080/Proyecto_destila2/CProductos"
+  $.getJSON("http://localhost:8080/Proyecto_destila2/ApiProductos"
   ).done(function (response) {
 
     console.log(response);
@@ -24,7 +24,7 @@ $(document).ready(function () {
       html += '<div class="container">'
       html += '<div class="row">'
       html += '<div class="teal lighten-2 card-producto z-depth-1">'
-      html += '<img class="responsive-img circle" src="../' + producto.img + '"/>'
+      html += '<img class="img circle" width="100%" height="100%" src="../' + producto.img + '"/>'
       html += '<p class="center-align"><b>' + producto.nombre + '</b></p>'
       html += '</div>'
       html += '</div>'
@@ -37,11 +37,11 @@ $(document).ready(function () {
 
     $('.cuerpoProductos').html(html);
 
-    añadirEventoClickModalProducto();
+    aniadirEventoClickModalProducto();
 
     //Llama a la Api CCategoria
 
-    $.getJSON("http://localhost:8080/Proyecto_destila2/CCategoria"
+    $.getJSON("http://localhost:8080/Proyecto_destila2/ApiCategorias"
     ).done(function (response) {
 
       console.log(response);
@@ -91,14 +91,19 @@ $(document).ready(function () {
 
             $('.cuerpoProductos').html(html_categoria);
 
-            añadirEventoClickModalProducto();
+            aniadirEventoClickModalProducto();
           }
         }
       });
     });
+    //ver los productos del carrito
+    $(".verCarrito").on("click", function () {
 
+    });// click verCarrito
     //Añade productos al carrito
     var precioTot = 0;
+    
+    
     $(".botonAddCarrito").on("click", function () {
 
       var idProd = $(".imgModalProducto").data('id');
@@ -108,13 +113,19 @@ $(document).ready(function () {
 
       //Llama a la Api CProductos
 
-      $.getJSON("http://localhost:8080/Proyecto_destila2/CProductos"
+      $.getJSON("http://localhost:8080/Proyecto_destila2/ApiProductos"
       ).done(function (response) {
 
         var productos = response;
         var html_carrito = "";
         var html_precio = "";
         
+        var vCarrito=JSON.parse(localStorage.getItem("carrito"));
+        
+        if ( vCarrito==null){
+        	vCarrito=[];
+        }
+
         //Recorre el api y añade lineas al array
 
         for (let modal = 0; modal < productos.length; modal++) {
@@ -129,6 +140,12 @@ $(document).ready(function () {
             html_carrito += '<td>' + precioMult + '</td>'
             html_carrito += '<td><a href="#" data-precio=' + precioMult + ' class="borrarItemCarrito"><i class="material-icons">clear</i></a></td>'
             html_carrito += '</tr>'
+            var compra={
+            		nombre:producto.nombre,
+            		cantidad:cantidadProd,
+            		precio:producto.precio	
+            }
+            vCarrito.push(compra);
 
             precioTot = precioTot + precioMult
             
@@ -137,7 +154,9 @@ $(document).ready(function () {
             $('.tablaCarrito').append(html_carrito);
             $('.precioTotalCarrito').html(html_precio);
           }
-        }
+        } 
+        vCarrito= localStorage.setItem( "carrito", JSON.stringify ( vCarrito));
+
       });
     });
 
@@ -161,7 +180,7 @@ $(document).ready(function () {
 
   //Funcion rellenar modal
 
-  function añadirEventoClickModalProducto() {
+  function aniadirEventoClickModalProducto() {
 
     //click en el card rellena el modal
 
@@ -175,7 +194,7 @@ $(document).ready(function () {
 
       //Llama a la api
 
-      $.getJSON("http://localhost:8080/Proyecto_destila2/CProductos"
+      $.getJSON("http://localhost:8080/Proyecto_destila2/ApiProductos"
       ).done(function (response) {
 
         var productos = response;
@@ -202,7 +221,7 @@ $(document).ready(function () {
 
           }
         }
-      });
-    });
-  };
-});
+      }); // ajax apiproductos
+    }); //click cardProducto
+  }; // function aniadirEventoClickModalProducto
+});//ready

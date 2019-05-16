@@ -107,5 +107,24 @@ public class FacturaModel extends FacturaClass{
 		this.disconnect();
 		
 	}
+	/*
+	String mensaje="";
+	PreparedStatement pst;
+	try {
+		pst = this.con.prepareStatement("DELETE FROM LIBROS "
+										 + " WHERE LIBROS.id=?");
 		
+		pst.setInt(1, this.id);
+
+		
+		pst.execute();
+		mensaje="Libro borrado en la BD";
+		
+	} catch (SQLException e) {
+		
+		mensaje="No se ha podido borrado el libro en la BD";
+	}
+	return mensaje;
+}
+		*/
 }

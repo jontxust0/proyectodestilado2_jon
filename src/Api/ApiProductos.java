@@ -1,4 +1,4 @@
-package controller;
+package Api;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -11,21 +11,20 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.json.JSONObject;
-import org.json.JSONStringer;
 
 import model.producto.ProductModel;
 
 /**
- * Servlet implementation class CProductos
+ * Servlet implementation class ApiProductos
  */
-@WebServlet("/CProductos")
-public class CProductos extends HttpServlet {
+@WebServlet("/ApiProductos")
+public class ApiProductos extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public CProductos() {
+    public ApiProductos() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -34,7 +33,7 @@ public class CProductos extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		
 		ProductModel productos = new ProductModel();
 		productos.loadData();
 		
