@@ -67,26 +67,23 @@
 					<tr>
 						<th><h4>Producto</h4></th>
 						<th><h4>Cantidad</h4></th>
-						<th><h4>Tarifa / Precio</h4></th>
-	<th>
-<h4>Sub-Total</h4>
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Artículo</td>
-<td><%=factura.get(i).getProductos()%></td>
-<td class=" text-right ">-</td>
-<td class=" text-right ">200.00 </td>
-<td class=" text-right ">200.00 </td>
+						<th><h4>Precio unidad</h4></th>
+						<th><h4>Sub-Total</h4></th>
+					</tr>
+			</thead>
+
+			<tbody class="datos">
+				<tr>
+				<td><%=factura.get(i).getProductos()%></td>
+	<td>Cantidad</td>
+<td class=" text-right ">-precio por unidad</td>
+<td class=" text-right ">subTotal </td>
 </tr>
 <tr>
 <td>Plantilla de diseño</td>
 <td><a href="#"> Detalles del proyecto aquí </a></td>
 <td class="text-right">10</td>
 <td class="text-right ">75.00</td>
-<td class="text-right ">750.00 </td>
 </tr>
 </tbody>
 </table>
@@ -115,5 +112,34 @@ Total:
 	
 <%}%>
 </div>
+<script>
+$(document).ready(function() {
+	var carrito = JSON.parse(localStorage.getItem("carrito"));
+	console.log(carrito);
+	var url= http:'//localhost:8080/Proyecto_destila2/ApiProductos';
+	
+	$.getJSON(url, function(response){
+		console.log(response);
+		mostrarProductos(response);
+	});
+	
+	function mostrarProductos(response){
+		var lineasFactura='';
+		
+		for(i in carrito){
+			
+			for(j in response){
+				if(carrito[j].id == response[i].id_producto){
+					lineaFactura += '';
+					
+					$(.datos).append(lineaFactura);
+				}
+				
+			}
+		}
+	}
+	
+})
+</script>
 </body>
 </html>

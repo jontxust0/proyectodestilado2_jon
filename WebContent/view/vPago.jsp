@@ -18,16 +18,16 @@
       </nav>
 
     <div class="row">
-    <br>
-    <br>
-    <br>
-    <br>
-    <div class="container">
-    <form class="col s12" action="CPago">
-      <div class="row">
-        <div class="input-field col s12">
-          <input placeholder="Nombre Apellido" id="comprador" name="comprador" type="text" class="validate">
-          <label for="comprador">Nombre y Apellidos</label>
+    	<br>
+    	<br>
+    	<br>
+    	<br>
+    		<div class="container">
+    			<div class="col s12">
+      				<div class="row">
+        				<div class="input-field col s12">
+          				<input placeholder="Nombre Apellido" id="comprador" name="comprador" type="text" class="validate">
+          				<label for="comprador">Nombre y Apellidos</label>
         </div>
       </div>
       <div class="row">
@@ -38,13 +38,13 @@
       </div>
       <div class="row">
         <div class="input-field col s12">
-          <input placeholder="Telefono" id="telefono" type="tel" class="validate">
+          <input placeholder="Telefono" id="telefono" type="tel" class="validate" name="telefono">
           <label for="telefono">Telefono</label>
         </div>
       </div>
       <div class="row">
         <div class="input-field col s12">
-          <input placeholder="DNI" id="dni" type="text" class="validate">
+          <input placeholder="DNI" id="dni" type="text" class="validate" name="dni">
           <label for="dni">DNI</label>
         </div>
       </div>
@@ -55,27 +55,48 @@
         </div>
       </div>
       <div class="row">
-        <input type="submit" href="#" id="botonPagar" class="col s6 waves-effect waves-green btn-flat">Pagar</a>
+        <button type="button" id="botonPagar" class="col s6 waves-effect waves-green btn-flat">Pagar</button>
         <a href="view/vCliente.html" class="col s6 waves-effect waves-green btn-flat">Volver</a>
       </div>
 
-
-    </form>
+    </div>
     </div>  
-      
-
 
     </div>
-    <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-    
+    <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="crossorigin="anonymous"></script>
     <script>
         $(document).ready(function(){
-         $('.modal').modal();     
+      //   $('.modal').modal();     
          
          $('#botonPagar').on("click", function(){
         	 alert("Pago Realizado");
-         });
+        	 
+        	 var carrito=localStorage.getItem("carrito");
+        	 var comprador = document.getElementById("comprador");
+        	 var direccion = document.getElementById("direccion");
+        	 var telefono = document.getElementById("telefono");
+        	 var dni = document.getElementById("dni");
+        	 
+        	 $.ajax({
+        		 type:"POST",
+        		 data:{
+        			 'carrito':carrito,
+        			// 'comprador':comprador,
+        			 //'direccion':direccion,
+        			 //'telefono':telefono,
+        			// 'dni':dni,	 
+        		 	  },
+        		datatype:'json',
+        	 	url:'CCrearFactura',
+        	 	success: function(result){
+        	 		alert('bien');
+        	 	},
+        	 	error: function(xhr){
+        	 		alert('An error occured:'+ xhr.status);
+        	 	}
+        	 	}); 
+         	});
         });
        </script>
 </body>
