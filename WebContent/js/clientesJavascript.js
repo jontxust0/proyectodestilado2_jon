@@ -141,6 +141,7 @@ $(document).ready(function () {
             html_carrito += '<td><a href="#" data-precio=' + precioMult + ' class="borrarItemCarrito"><i class="material-icons">clear</i></a></td>'
             html_carrito += '</tr>'
             var compra={
+            		id:producto.id,
             		nombre:producto.nombre,
             		cantidad:cantidadProd,
             		precio:producto.precio	

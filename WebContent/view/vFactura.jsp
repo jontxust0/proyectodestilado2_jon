@@ -116,7 +116,7 @@ Total:
 $(document).ready(function() {
 	var carrito = JSON.parse(localStorage.getItem("carrito"));
 	console.log(carrito);
-	var url= http:'//localhost:8080/Proyecto_destila2/ApiProductos';
+	var url= 'http://localhost:8080/Proyecto_destila2/ApiProductos';
 	
 	$.getJSON(url, function(response){
 		console.log(response);

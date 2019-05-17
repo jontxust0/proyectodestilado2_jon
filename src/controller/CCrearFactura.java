@@ -9,6 +9,9 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.json.JSONArray;
 
+import model.factura.FacturaModel;
+import model.productoFactura.ProductoFacturaModel;
+
 /**
  * Servlet implementation class CCrearFactura
  */
@@ -29,15 +32,6 @@ public class CCrearFactura extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		
-		String comprador=request.getParameter("comprador");
-		String direccion=request.getParameter("direccion");
-		String telefono=request.getParameter("telefono");
-		String dni=request.getParameter("dni");
-		String carrito=request.getParameter("carrito");
-		
-		//JSONArray arrCarrito =new JSONArray(carrito);
-		System.out.println("comp:" + comprador + " Carrito:" +carrito );
 	}
 
 	/**
@@ -45,15 +39,29 @@ public class CCrearFactura extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-//		int id=Integer.parseInt(request.getParameter("id"));
+			int idProducto=Integer.parseInt(request.getParameter("id"));
 			String comprador=request.getParameter("comprador");
 			String direccion=request.getParameter("direccion");
 			String telefono=request.getParameter("telefono");
 			String dni=request.getParameter("dni");
 			String carrito=request.getParameter("carrito");
 			
-			//JSONArray arrCarrito =new JSONArray(carrito);
-			System.out.println("comp:" + comprador + " Carrito:" +carrito );
+			//inser factura en la BBDD y recojes la id de factura
+			FacturaModel factura=new FacturaModel();
+			factura.insertFactura(idProducto,comprador,direccion,telefono, dni);
+			
+			//ProductoFacturaModel lineaFactura= new ProductoFacturaModel();
+			//lineaFactura.insertLinea(carrito, idFactura);
+			
+			JSONArray arrCarrito =new JSONArray(carrito);
+			//recorrer el carrito y hacer inserts en producto factura
+			
+			
+			
+			
+			//System.out.println("comp:" + comprador + " Carrito:" +carrito );
+			
+			
 	}
 
 }

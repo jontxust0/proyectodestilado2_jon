@@ -9,6 +9,7 @@
 	 */
 package model.factura;
 
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -56,14 +57,11 @@ public class FacturaModel extends FacturaClass{
 			{
 				FacturaModel newF = new FacturaModel();
 				newF.id=Integer.parseInt(rs.getString("id"));
-				newF.cantidadTot=Integer.parseInt(rs.getString("cantidadTot"));
-				newF.precioTot=Double.parseDouble(rs.getString("precioTot"));
-				newF.productos=rs.getString("productos");
 				newF.fecha_compra=rs.getDate("fecha_compra");
 				newF.comprador=rs.getString("comprador");
 				newF.direccion=rs.getString("direccion");
 				newF.telefono=rs.getInt("telefono");
-				
+				newF.dni=rs.getString("id");
 				
 				this.factura.add(newF);
 			
@@ -89,13 +87,11 @@ public class FacturaModel extends FacturaClass{
 				FacturaClass factura = new FacturaClass();
 				
 				factura.setId(rs.getInt("id"));
-				factura.setCantidadTot(rs.getInt("cantidadTot"));
-				factura.setPrecioTot(rs.getDouble("precioTot"));
-				factura.setProductos(rs.getString("productos"));
 				factura.setFecha_compra(rs.getDate("fecha_compra"));
 				factura.setComprador(rs.getString("comprador"));
 				factura.direccion=rs.getString("direccion");
 				factura.telefono=rs.getInt("telefono");
+				factura.dni=rs.getString("id");
 				
 				this.factura.add(factura);
 			}
@@ -127,4 +123,60 @@ public class FacturaModel extends FacturaClass{
 	return mensaje;
 }
 		*/
+
+	public void insertFactura(String comprador, String direccion, String telefono, String dni) {
+		this.createConnection();
+		
+		
+		PreparedStatement pst;
+		try {
+			pst = this.con.prepareStatement("call InsertarFactura(?,?,?,?)");
+			
+			pst.setString(1, this.titulo);
+			pst.setString(2, this.autor);
+			pst.setInt(3, this.num_pag);
+			pst.setInt(4, this.id);
+
+			
+			pst.execute();
+			mensaje="Libro modificado de la BD";
+			
+		} catch (SQLException e) {
+			
+			mensaje="No se ha podido modificar el libro de la BD";
+		}
+		return mensaje;
+		
+		
+		
+		Statement st;
+		try {
+			st = this.con.createStatement();	
+			ResultSet rs = st.executeQuery("call InsertarFactura(?,?,?,?)");
+			
+			st.setS
+			
+			
+			
+			while (rs.next()){
+				
+				FacturaClass factura = new FacturaClass();
+				Date fecha_compra
+				factura.setFecha_compra(rs.getDate("fecha_compra"));
+				factura.setComprador(rs.getString("comprador"));
+				factura.direccion=rs.getString("direccion");
+				factura.telefono=rs.getInt("telefono");
+				factura.dni=rs.getString("dni");
+				
+				this.factura.add(factura);
+			}
+
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		}
+		this.disconnect();
+		
+		
+	}
 }

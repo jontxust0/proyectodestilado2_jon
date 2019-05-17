@@ -70,24 +70,33 @@
       //   $('.modal').modal();     
          
          $('#botonPagar').on("click", function(){
-        	 alert("Pago Realizado");
+        	// alert("Pago Realizado");
+        	 var vCarrito=localStorage.getItem("carrito");
+        	 var vCarritoModificado=localStorage.getItem("carritoModificado");
+        	 var carrito="";
+        	 if(vCarritoModificado != null){
+        		 carrito=localStorage.getItem("carritoModificado");
+        	 }else{
+        		 carrito=localStorage.getItem("carrito");
+        	 }
+        		 
         	 
-        	 var carrito=localStorage.getItem("carrito");
-        	 var comprador = document.getElementById("comprador");
-        	 var direccion = document.getElementById("direccion");
-        	 var telefono = document.getElementById("telefono");
-        	 var dni = document.getElementById("dni");
+        	 
+        	 var comprador = $("#comprador").val();
+        	 var direccion = $("#direccion").val();
+        	 var telefono = $("#telefono").val();
+        	 var dni = $("#dni").val();
         	 
         	 $.ajax({
         		 type:"POST",
         		 data:{
-        			 'carrito':carrito,
-        			// 'comprador':comprador,
-        			 //'direccion':direccion,
-        			 //'telefono':telefono,
-        			// 'dni':dni,	 
-        		 	  },
-        		datatype:'json',
+        			   'carrito':carrito,
+        			   'comprador':comprador,
+        			   'direccion':direccion,
+        			   'telefono':telefono,
+        			  'dni':dni,	 
+        		  },
+        		//datatype:'json',
         	 	url:'CCrearFactura',
         	 	success: function(result){
         	 		alert('bien');
