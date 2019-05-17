@@ -124,7 +124,7 @@ public class FacturaModel extends FacturaClass{
 }
 		*/
 
-	public void insertFactura(String comprador, String direccion, String telefono, String dni) {
+	public int insertFactura(String comprador, String direccion, String telefono, String dni) {
 		this.createConnection();
 		
 		
@@ -132,51 +132,26 @@ public class FacturaModel extends FacturaClass{
 		try {
 			pst = this.con.prepareStatement("call InsertarFactura(?,?,?,?)");
 			
-			pst.setString(1, this.titulo);
-			pst.setString(2, this.autor);
+			pst.setString(1, this.comprador);
+			pst.setString(2, this.direccion);
 			pst.setInt(3, this.num_pag);
 			pst.setInt(4, this.id);
-
+	
+			ResultSet rs= pst.executeQuery();
 			
-			pst.execute();
-			mensaje="Libro modificado de la BD";
+			if (rs.next) {
 			
-		} catch (SQLException e) {
-			
-			mensaje="No se ha podido modificar el libro de la BD";
-		}
-		return mensaje;
-		
-		
-		
-		Statement st;
-		try {
-			st = this.con.createStatement();	
-			ResultSet rs = st.executeQuery("call InsertarFactura(?,?,?,?)");
-			
-			st.setS
-			
-			
-			
-			while (rs.next()){
-				
-				FacturaClass factura = new FacturaClass();
-				Date fecha_compra
-				factura.setFecha_compra(rs.getDate("fecha_compra"));
-				factura.setComprador(rs.getString("comprador"));
-				factura.direccion=rs.getString("direccion");
-				factura.telefono=rs.getInt("telefono");
-				factura.dni=rs.getString("dni");
-				
-				this.factura.add(factura);
+				return rs.getInt("id");
 			}
+			
 
+			
 		} catch (SQLException e) {
 			
-			e.printStackTrace();
+			return -1;
 		}
+		
 		this.disconnect();
-		
-		
+			
 	}
 }
