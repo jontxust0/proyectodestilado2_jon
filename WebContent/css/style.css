@@ -47,4 +47,6 @@ margin-top:20px;
 .cardProducto:active {color:white;}
 .cardProducto:hover {color:white;}
 
-
+.botonAniadirCarritoCard{
+	margin-bottom:15px;
+}

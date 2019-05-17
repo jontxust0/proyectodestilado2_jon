@@ -26,6 +26,7 @@ $(document).ready(function () {
       html += '<div class="teal lighten-2 card-producto z-depth-1">'
       html += '<img class="img circle" width="100%" height="100%" src="../' + producto.img + '"/>'
       html += '<p class="center-align"><b>' + producto.nombre + '</b></p>'
+      html += '<a class="waves-effect waves-light btn teal col s12 botonAniadirCarritoCard">Añadir al carrito</a>'
       html += '</div>'
       html += '</div>'
       html += '</div>'
