@@ -34,8 +34,9 @@ public class CVerFacturas extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
+		int idFactura=Integer.parseInt(request.getParameter("idFactura"));
 		int id=Integer.parseInt(request.getParameter("id"));
-
+		
 		FacturaModel factura =new FacturaModel();
 		factura.selectedFactura(id);
 		

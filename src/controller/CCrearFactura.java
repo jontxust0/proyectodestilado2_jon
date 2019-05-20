@@ -59,7 +59,7 @@ public class CCrearFactura extends HttpServlet {
 			JSONArray arrCarrito =new JSONArray(carrito);
 	
 			
-			//cada linea del carrito
+			//recorrer el carrito y hacer inserts en producto factura
 			
 			for (int i=0; i <arrCarrito.length();i++)  {
 				
@@ -77,10 +77,8 @@ public class CCrearFactura extends HttpServlet {
 				
 				lineaFactura.insertLinea();
 			}
-
-			//recorrer el carrito y hacer inserts en producto factura
-			
-			
+			request.setAttribute("idFactura", idFactura);
+			request.getRequestDispatcher("CVerFactura").forward(request, response);
 			
 			
 			//System.out.println("comp:" + comprador + " Carrito:" +carrito );
