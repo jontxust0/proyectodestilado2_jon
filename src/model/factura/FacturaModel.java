@@ -149,11 +149,12 @@ public class FacturaModel extends FacturaClass{
 		}
 		
 		this.disconnect();
+		
 		return idFactura;
 		
 	}
 
-	public void newId() {
+	/*public void newId() {
 		this.createConnection();
 		
 		Statement st;
@@ -171,7 +172,7 @@ public class FacturaModel extends FacturaClass{
 			e1.printStackTrace();
 		}
 		this.disconnect();
-	}
+	}*/
 
 		
 		

@@ -4,7 +4,9 @@
  */
 
 $(document).ready(function () {
-
+	
+	 
+	 $(".carVacio").hide();
   //Llama a la Api CProductos
 
   $.getJSON("http://localhost:8080/Proyecto_destila2/ApiProductos"
@@ -26,6 +28,7 @@ $(document).ready(function () {
       html += '<div class="teal lighten-2 card-producto z-depth-1">'
       html += '<img class="img circle" width="100%" height="100%" src="../' + producto.img + '"/>'
       html += '<p class="center-align"><b>' + producto.nombre + '</b></p>'
+      html += '<a class="waves-effect waves-light btn teal col s12 botonAniadirCarritoCard" data-id="' + producto.id + '">Añadir al carrito</a>'
       html += '</div>'
       html += '</div>'
       html += '</div>'
@@ -74,18 +77,19 @@ $(document).ready(function () {
 
           if (categoria_id == producto.id_categoria) {
 
-            html_categoria += '<div class="col s6 m3 l3 cardProducto">'
-            html_categoria += '<a href="#modalProducto" class="modal-trigger cardProducto" data-id="' + producto.id + '">'
-            html_categoria += '<div class="container">'
-            html_categoria += '<div class="row">'
-            html_categoria += '<div class="teal lighten-2 cardProducto z-depth-1">'
-            html_categoria += '<img class="responsive-img circle" src="../' + producto.img + '"/>'
-            html_categoria += '<p class="center-align"><b>' + producto.nombre + '</b></p>'
-            html_categoria += '</div>'
-            html_categoria += '</div>'
-            html_categoria += '</div>'
-            html_categoria += '</a>'
-            html_categoria += '</div>'
+        	  html_categoria += '<div class="col s6 m3 l3">'
+        	  html_categoria += '<a href="#modalProducto" class="modal-trigger cardProducto" data-id="' + producto.id + '">'
+        	  html_categoria += '<div class="container">'
+        	  html_categoria += '<div class="row">'
+        	  html_categoria += '<div class="teal lighten-2 card-producto z-depth-1">'
+        	  html_categoria += '<img class="img circle" width="100%" height="100%" src="../' + producto.img + '"/>'
+        	  html_categoria += '<p class="center-align"><b>' + producto.nombre + '</b></p>'
+        	  html_categoria += '<a class="waves-effect waves-light btn teal col s12 botonAniadirCarritoCard" data-id="' + producto.id + '">Añadir al carrito</a>'
+        	  html_categoria += '</div>'
+        	  html_categoria += '</div>'
+        	  html_categoria += '</div>'
+        	  html_categoria += '</a>'
+        	  html_categoria += '</div>'
 
             //Inserta el array en el html
 
@@ -97,8 +101,50 @@ $(document).ready(function () {
       });
     });
     //ver los productos del carrito
-    $(".verCarrito").on("click", function () {
+    $("#verCarrito").on("click", function () {
+    	
+    	var html = "";
+    	
+    	var vCarrito = JSON.parse(localStorage.getItem("carrito"));
+    	
+    	if (vCarrito == null) {
+    		$(".carVacio").show();
+            $(".tablaCarrito").hide();
+            $(".precioCar").hide();
+            $(".botonComprarCar").hide();
+        }else {
+        	$(".carVacio").hide();
+            $(".tablaCarrito").show();
+            $(".precioCar").show();
+            $(".botonComprarCar").show();
+            
+            
+            for (let index = 0; index < vCarrito.length; index++) {
+            	var precioTot = 0;
+            	var precioMult = vCarrito[index].precio * vCarrito[index].cantidad;
+            	var html_precio = "";
+            	
+            	
+            	html += '<tr>'
+                html += '<td>' + vCarrito[index].cantidad + '</td>'
+            	html += '<td>' + vCarrito[index].nombre + '</td>'
+            	html += '<td>' + precioMult + '</td>'
+            	html += '<td><a href="#" data-id=' + vCarrito[index].id + ' class="borrarItemCarrito"><i class="material-icons">clear</i></a></td>'
+            	html += '</tr>'
+            	
+            	var precioTot = parseFloat(precioTot)+parseFloat(precioMult);
+            	
+            	html_precio += '<p>'+precioTot+'</p>'
+            	
 
+            	
+            	$('.tablaCarrito').html(html);
+            	$('.precioTotalCarrito').html(html_precio);
+            }
+        }
+    	
+    	
+    	
     });// click verCarrito
     //Añade productos al carrito
     var precioTot = 0;
@@ -108,74 +154,208 @@ $(document).ready(function () {
 
       var idProd = $(".imgModalProducto").data('id');
       var cantidadProd = $("#cantidadProducto").val();
+      var cantidadaux = 0;
       
-      
+
+  
 
       //Llama a la Api CProductos
 
       $.getJSON("http://localhost:8080/Proyecto_destila2/ApiProductos"
       ).done(function (response) {
-
-        var productos = response;
-        var html_carrito = "";
-        var html_precio = "";
-        
-        var vCarrito=JSON.parse(localStorage.getItem("carrito"));
-        
-        if ( vCarrito==null){
-        	vCarrito=[];
-        }
-
-        //Recorre el api y añade lineas al array
-
-        for (let modal = 0; modal < productos.length; modal++) {
-          const producto = productos[modal];
-          if (producto.id == idProd) {
-        	  
-            var precioMult = producto.precio * cantidadProd;
-
-            html_carrito += '<tr>'
-            html_carrito += '<td>' + cantidadProd + '</td>'
-            html_carrito += '<td>' + producto.nombre + '</td>'
-            html_carrito += '<td>' + precioMult + '</td>'
-            html_carrito += '<td><a href="#" data-precio=' + precioMult + ' class="borrarItemCarrito"><i class="material-icons">clear</i></a></td>'
-            html_carrito += '</tr>'
-            var compra={
-            		id:producto.id,
-            		nombre:producto.nombre,
-            		cantidad:cantidadProd,
-            		precio:producto.precio	
-            }
-            vCarrito.push(compra);
-
-            precioTot = precioTot + precioMult
+      	  var productos = response;
+           
             
-            html_precio += '<b class="precioCarr" value="'+precioTot+'">'+precioTot+'</b>'
-
-            $('.tablaCarrito').append(html_carrito);
-            $('.precioTotalCarrito').html(html_precio);
+      	var vCarrito = JSON.parse(localStorage.getItem("carrito")); //de string a array JSON
+          var encontrado = false;
+          if (vCarrito == null) {
+              vCarrito = [];
           }
-        } 
-        vCarrito= localStorage.setItem( "carrito", JSON.stringify ( vCarrito));
+          else {
+              for (let index = 0; index < vCarrito.length; index++) {
+
+                  if (vCarrito[index].id == idProd) {
+                	  cantidadaux = vCarrito[index].cantidad;
+                      var sumaCantidades = parseInt(cantidadProd) + parseInt(cantidadaux);
+                      vCarrito[index].cantidad= sumaCantidades;
+                      encontrado = true;
+                  }
+              }
+          }
+          if (encontrado == false) {
+          	
+          	for (let modal = 0; modal < productos.length; modal++) {
+                  const producto = productos[modal];
+                  if (producto.id == idProd) {
+                	  
+//                    var precioMult = producto.precio * cantidad;
+//
+//                    html_carrito += '<tr>'
+//                    html_carrito += '<td>' + cantidad + '</td>'
+//                    html_carrito += '<td>' + producto.nombre + '</td>'
+//                    html_carrito += '<td>' + precioMult + '</td>'
+//                    html_carrito += '<td><a href="#" data-precio=' + precioMult + ' class="borrarItemCarrito"><i class="material-icons">clear</i></a></td>'
+//                    html_carrito += '</tr>'
+//                    
+//
+//                    precioTot = precioTot + precioMult
+//                    
+//                    html_precio += '<b class="precioCarr" value="'+precioTot+'">'+precioTot+'</b>'
+//                    $('.tablaCarrito').append(html_carrito);
+//                    $('.precioTotalCarrito').html(html_precio);
+                	var compra={
+                    		id:producto.id,
+                    		nombre:producto.nombre,
+                    		cantidad:cantidadProd,
+                    		precio:producto.precio	
+                    }
+                    
+                    
+                  }
+                } 
+          	vCarrito.push(compra);
+              
+          }
+      	
+          localStorage.setItem("carrito", JSON.stringify(vCarrito));
+          
 
       });
     });
+    
+    //añade productos al carrito desde el card
+
+    $(document).on('click', '.botonAniadirCarritoCard', function (e) {
+   
+    	var cantidadProd = 1;
+
+        var idProd = $(this).data('id');
+
+        //Llama a la Api CProductos
+
+        $.getJSON("http://localhost:8080/Proyecto_destila2/ApiProductos"
+        ).done(function (response) {
+        	  var productos = response;     
+        
+              
+        	var vCarrito = JSON.parse(localStorage.getItem("carrito")); //de string a array JSON
+            var encontrado = false;
+            if (vCarrito == null) {
+                vCarrito = [];
+            }
+            else {
+                for (let index = 0; index < vCarrito.length; index++) {
+
+                    if (vCarrito[index].id == idProd) {
+                        vCarrito[index].cantidad++;
+                        encontrado = true;
+                    }
+                }
+            }
+            if (encontrado == false) {
+            	
+            	for (let modal = 0; modal < productos.length; modal++) {
+                    const producto = productos[modal];
+                    if (producto.id == idProd) {
+                  	  
+//                      var precioMult = producto.precio * cantidad;
+//
+//                      html_carrito += '<tr>'
+//                      html_carrito += '<td>' + cantidad + '</td>'
+//                      html_carrito += '<td>' + producto.nombre + '</td>'
+//                      html_carrito += '<td>' + precioMult + '</td>'
+//                      html_carrito += '<td><a href="#" data-precio=' + precioMult + ' class="borrarItemCarrito"><i class="material-icons">clear</i></a></td>'
+//                      html_carrito += '</tr>'
+//                      
+//
+//                      precioTot = precioTot + precioMult
+//                      
+//                      html_precio += '<b class="precioCarr" value="'+precioTot+'">'+precioTot+'</b>'
+//                      $('.tablaCarrito').append(html_carrito);
+//                      $('.precioTotalCarrito').html(html_precio);
+                  	var compra={
+                      		id:producto.id,
+                      		nombre:producto.nombre,
+                      		cantidad:cantidadProd,
+                      		precio:producto.precio	
+                      }
+                      
+                      
+                    }
+                  } 
+            	vCarrito.push(compra);
+                
+            }
+        	
+            localStorage.setItem("carrito", JSON.stringify(vCarrito));
+          
+         
+
+        });
+      });
+    
 
     //Borrar items del carrito
-    var precioTotalActual = 0;
+    
     $(document).on('click', '.borrarItemCarrito', function (e) {
 
-      precioTotalActual = $(".precioCarr").text();
-      var precioItem = $(this).data('precio');
-      var html_precio = "";
-      
-      $(this).parent().parent().remove();
+    	idProd = $(this).data('id');
+    	var html = "";
+    	
+    	var vCarrito = JSON.parse(localStorage.getItem("carrito"));
+    	var vCarrito2 = JSON.parse(localStorage.getItem("carrito2")); //de string a array JSON
+        
+    	 if (vCarrito2 == null) {
+            vCarrito2 = [];
+    	 }
+    	      
+    	for (let index = 0; index < vCarrito.length; index++) {    
+    		if (vCarrito[index].id != idProd) {
+    			var compra2={
+                  		id:vCarrito[index].id,
+                  		nombre:vCarrito[index].nombre,
+                  		cantidad:vCarrito[index].cantidad,
+                  		precio:vCarrito[index].precio	
+                  }     
+    			vCarrito2.push(compra2);
+			}
+    		
+    	}
+    	
+    	
+    	
+    	localStorage.setItem("carrito2", JSON.stringify(vCarrito2));
+    	
+    	$(".tablaCarrito").children().remove();
+    	$(".precioTotalCarrito").children().remove();
+     
 
-      precioTot = precioTotalActual - precioItem 
+        for (let index = 0; index < vCarrito2.length; index++) {
+        	var precioTot = 0;
+        	var precioMult = vCarrito2[index].precio * vCarrito2[index].cantidad;
+        	var html_precio = "";
+        	
+        	
+        	html += '<tr>'
+            html += '<td>' + vCarrito2[index].cantidad + '</td>'
+        	html += '<td>' + vCarrito2[index].nombre + '</td>'
+        	html += '<td>' + precioMult + '</td>'
+        	html += '<td><a href="#" data-id=' + vCarrito2[index].id + ' class="borrarItemCarrito"><i class="material-icons">clear</i></a></td>'
+        	html += '</tr>'
+        	
+        	var precioTot = parseFloat(precioTot)+parseFloat(precioMult);
+        	
+        	html_precio += '<p>'+precioTot+'</p>'
+        	
 
-      html_precio += '<b class="precioCarr" value="'+precioTot+'">'+precioTot+'</b>'
+        	
+        	$('.tablaCarrito').html(html);
+        	$('.precioTotalCarrito').html(html_precio);
+        }
+    	 
+     
       
-      $('.precioTotalCarrito').html(html_precio);
+     
     });
   });
 
