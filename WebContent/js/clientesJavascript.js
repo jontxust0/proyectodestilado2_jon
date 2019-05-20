@@ -298,49 +298,48 @@ $(document).ready(function () {
     //Borrar items del carrito
     
     $(document).on('click', '.borrarItemCarrito', function (e) {
-
+    	
     	idProd = $(this).data('id');
     	var html = "";
     	
     	var vCarrito = JSON.parse(localStorage.getItem("carrito"));
-    	var vCarrito2 = JSON.parse(localStorage.getItem("carrito2")); //de string a array JSON
-        
-    	 if (vCarrito2 == null) {
-            vCarrito2 = [];
-    	 }
-    	      
+    	
+    	
+  	 //llenar carrito Modificado con los datos del antiguo
     	for (let index = 0; index < vCarrito.length; index++) {    
     		if (vCarrito[index].id != idProd) {
-    			var compra2={
+    			var compraModificada={
                   		id:vCarrito[index].id,
                   		nombre:vCarrito[index].nombre,
                   		cantidad:vCarrito[index].cantidad,
                   		precio:vCarrito[index].precio	
                   }     
-    			vCarrito2.push(compra2);
+    			vCarrito.push(compraModificada);
 			}
     		
     	}
     	
     	
     	
-    	localStorage.setItem("carrito2", JSON.stringify(vCarrito2));
+    	localStorage.setItem("carrito", JSON.stringify(vCarrito));
     	
+    	
+    	// refrescar el modal recorriendo el carrito
     	$(".tablaCarrito").children().remove();
     	$(".precioTotalCarrito").children().remove();
      
 
-        for (let index = 0; index < vCarrito2.length; index++) {
+        for (let index = 0; index < vCarritoModificado.length; index++) {
         	var precioTot = 0;
-        	var precioMult = vCarrito2[index].precio * vCarrito2[index].cantidad;
+        	var precioMult = vCarritoModificado[index].precio * vCarritoModificado[index].cantidad;
         	var html_precio = "";
         	
         	
         	html += '<tr>'
-            html += '<td>' + vCarrito2[index].cantidad + '</td>'
-        	html += '<td>' + vCarrito2[index].nombre + '</td>'
+            html += '<td>' + vCarritoModificado[index].cantidad + '</td>'
+        	html += '<td>' + vCarritoModificado[index].nombre + '</td>'
         	html += '<td>' + precioMult + '</td>'
-        	html += '<td><a href="#" data-id=' + vCarrito2[index].id + ' class="borrarItemCarrito"><i class="material-icons">clear</i></a></td>'
+        	html += '<td><a href="#" data-id=' + vCarritoModificado[index].id + ' class="borrarItemCarrito"><i class="material-icons">clear</i></a></td>'
         	html += '</tr>'
         	
         	var precioTot = parseFloat(precioTot)+parseFloat(precioMult);
@@ -352,9 +351,10 @@ $(document).ready(function () {
         	$('.tablaCarrito').html(html);
         	$('.precioTotalCarrito').html(html_precio);
         }
-    	 
+        
+        
      
-      
+       
      
     });
   });

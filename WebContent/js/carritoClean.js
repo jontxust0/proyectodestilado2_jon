@@ -3,5 +3,5 @@
  */
 $(document).ready(function () {
     localStorage.removeItem( "carrito");
-    localStorage.removeItem( "carrito2");
+    localStorage.removeItem( "carritoModificado");
 });
