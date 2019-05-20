@@ -5,75 +5,19 @@
 	 */
 package model.productoFactura;
 
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
+import org.json.JSONObject;
+
 import model.factura.FacturaClass;
 import model.producto.ProductClass;
 import model.subcategoria.SubcategoriaModel;
 
-public class ProductoFacturaModel extends ProductoFacturaClass{
-
-	ArrayList<ProductClass> product =new ArrayList<>(); 
-	
-	ArrayList<FacturaClass> factura =new ArrayList<>(); 
-	
-	
-	//Constructores y getters setters
-	/**
-	 * 
-	 */
-	public ProductoFacturaModel() {
-		super();
-	}
-
-	/**
-	 * @param producto
-	 * @param Linea_factura
-	 * @param cantidad
-	 * @param product
-	 * @param factura
-	 */
-	public ProductoFacturaModel(ProductClass producto, FacturaClass Linea_factura, int cantidad,
-			ArrayList<ProductClass> product, ArrayList<FacturaClass> factura) {
-		super(producto, Linea_factura, cantidad);
-		this.product = product;
-		this.factura = factura;
-	}
-
-
-	/**
-	 * @return the product
-	 */
-	public ArrayList<ProductClass> getProduct() {
-		return product;
-	}
-
-
-	/**
-	 * @param product the product to set
-	 */
-	public void setProduct(ArrayList<ProductClass> product) {
-		this.product = product;
-	}
-
-
-	/**
-	 * @return the factura
-	 */
-	public ArrayList<FacturaClass> getFactura() {
-		return factura;
-	}
-
-
-	/**
-	 * @param factura the factura to set
-	 */
-	public void setFactura(ArrayList<FacturaClass> factura) {
-		this.factura = factura;
-	}
+public class ProductoFacturaModel extends ProductoFacturaClass{	
 
 
 	//Metodos
@@ -102,6 +46,36 @@ public class ProductoFacturaModel extends ProductoFacturaClass{
 			e1.printStackTrace();
 		}
 		this.disconnect();
+	}
+
+	public void insertLinea() {
+		
+		//cada linea del carrito
+		
+		this.createConnection();
+		
+		PreparedStatement pst;
+
+		try {
+			pst = this.con.prepareStatement("call InsertarLineaFactura(?,?,?,?,?)");
+			
+			pst.setInt(1, this.id_factura);
+			pst.setInt(2, this.id_producto);
+			pst.setString(3, this.nombre);
+			pst.setInt(4, this.cantidad);
+			pst.setDouble(5, this.precio);
+			
+			
+			pst.execute();
+				
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+			
+		this.disconnect();
+		
 	}
 	
 

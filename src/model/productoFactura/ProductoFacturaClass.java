@@ -13,67 +13,101 @@ import model.producto.ProductClass;
 
 public class ProductoFacturaClass  extends Connect{
 	
-	protected ProductClass producto;
-	protected FacturaClass Linea_factura;
+	protected int id_factura;
+	protected int id_producto;
+	protected String nombre;
 	protected int cantidad;
-
+	protected double precio;
+	
+	
+	
+	
+	
+	
+	
 	/**
-	 * @param producto
-	 * @param factura
-	 * @param cantidad
+	 * 
 	 */
-	public ProductoFacturaClass(ProductClass producto, FacturaClass Linea_factura, int cantidad) {
-		super();
-		this.producto = producto;
-		this.Linea_factura = Linea_factura;
-		this.cantidad = cantidad;
-	}
-
 	public ProductoFacturaClass() {
 		super();
 	}
-
 	/**
-	 * @return the producto
+	 * @param id_factura
+	 * @param id_producto
+	 * @param nombre
+	 * @param cantidad
+	 * @param precio
 	 */
-	public ProductClass getProducto() {
-		return producto;
+	public ProductoFacturaClass(int id_factura, int id_producto, String nombre, int cantidad, double precio) {
+		super();
+		this.id_factura = id_factura;
+		this.id_producto = id_producto;
+		this.nombre = nombre;
+		this.cantidad = cantidad;
+		this.precio = precio;
 	}
-
 	/**
-	 * @param producto the producto to set
+	 * @return the id_factura
 	 */
-	public void setProducto(ProductClass producto) {
-		this.producto = producto;
+	public int getId_factura() {
+		return id_factura;
 	}
-
 	/**
-	 * @return the factura
+	 * @param id_factura the id_factura to set
 	 */
-	public FacturaClass getLinea_factura() {
-		return Linea_factura;
+	public void setId_factura(int id_factura) {
+		this.id_factura = id_factura;
 	}
-
 	/**
-	 * @param factura the factura to set
+	 * @return the id_producto
 	 */
-	public void setLinea_factura(FacturaClass Linea_factura) {
-		this.Linea_factura = Linea_factura;
+	public int getId_producto() {
+		return id_producto;
 	}
-
+	/**
+	 * @param id_producto the id_producto to set
+	 */
+	public void setId_producto(int id_producto) {
+		this.id_producto = id_producto;
+	}
+	/**
+	 * @return the nombre
+	 */
+	public String getNombre() {
+		return nombre;
+	}
+	/**
+	 * @param nombre the nombre to set
+	 */
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
 	/**
 	 * @return the cantidad
 	 */
 	public int getCantidad() {
 		return cantidad;
 	}
-
 	/**
 	 * @param cantidad the cantidad to set
 	 */
 	public void setCantidad(int cantidad) {
 		this.cantidad = cantidad;
 	}
+	/**
+	 * @return the precio
+	 */
+	public double getPrecio() {
+		return precio;
+	}
+	/**
+	 * @param precio the precio to set
+	 */
+	public void setPrecio(double precio) {
+		this.precio = precio;
+	}
+
+	
 	
 
 }

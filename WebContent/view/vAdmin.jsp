@@ -16,7 +16,7 @@
         <div class="row cuerpo">
 <!-- Añadir Producto -->
                 <div class="col s12 botones">
-                    <a class="waves-effect waves-light btn-large modal-trigger col s12"  href="#modalAniadir" >Aniadir producto</a>
+                    <a class="waves-effect waves-light btn-large modal-trigger col s12"  href="#modalAniadir" disabled>Aniadir producto</a>
     
                     <div id="modalAniadir" class="modal">
                         <div class="modal-content">
@@ -68,7 +68,7 @@
 
 <!-- Editar producto -->
                 <div class="col s12 botones">
-                    <a class="waves-effect waves-light btn-large modal-trigger col s12" href="#modalEditar">Editar producto</a>
+                    <a class="waves-effect waves-light btn-large modal-trigger col s12" href="#modalEditar" disabled>Editar producto</a>
 
                     <div id="modalEditar" class="modal">
                             <div class="modal-content">
@@ -89,7 +89,7 @@
  
  <!-- Borrar producto -->               
                 <div class="col s12 botones">
-                    <a class="waves-effect waves-light btn-large modal-trigger col s12" href="#modalBorrar">Borrar producto</a>
+                    <a class="waves-effect waves-light btn-large modal-trigger col s12" href="#modalBorrar" disabled>Borrar producto</a>
 
                     <div id="modalBorrar" class="modal">
                             <div class="modal-content">

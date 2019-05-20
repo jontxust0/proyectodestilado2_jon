@@ -60,7 +60,7 @@ public class FacturaModel extends FacturaClass{
 				newF.fecha_compra=rs.getDate("fecha_compra");
 				newF.comprador=rs.getString("comprador");
 				newF.direccion=rs.getString("direccion");
-				newF.telefono=rs.getInt("telefono");
+				newF.telefono=rs.getString("telefono");
 				newF.dni=rs.getString("id");
 				
 				this.factura.add(newF);
@@ -90,7 +90,7 @@ public class FacturaModel extends FacturaClass{
 				factura.setFecha_compra(rs.getDate("fecha_compra"));
 				factura.setComprador(rs.getString("comprador"));
 				factura.direccion=rs.getString("direccion");
-				factura.telefono=rs.getInt("telefono");
+				factura.telefono=rs.getString("telefono");
 				factura.dni=rs.getString("id");
 				
 				this.factura.add(factura);
@@ -124,7 +124,7 @@ public class FacturaModel extends FacturaClass{
 }
 		*/
 
-	public int insertFactura(String comprador, String direccion, int telefono, String dni) {
+	public int insertFactura() {
 		this.createConnection();
 		
 		PreparedStatement pst;
@@ -135,7 +135,7 @@ public class FacturaModel extends FacturaClass{
 			
 			pst.setString(1, this.comprador);
 			pst.setString(2, this.direccion);
-			pst.setInt(3, this.telefono);
+			pst.setString(3, this.telefono);
 			pst.setString(4, this.dni);
 	
 			ResultSet rs= pst.executeQuery();
@@ -152,7 +152,9 @@ public class FacturaModel extends FacturaClass{
 		
 		return idFactura;
 		
+		
 	}
+
 
 	/*public void newId() {
 		this.createConnection();

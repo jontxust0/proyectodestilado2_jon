@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.json.JSONArray;
+import org.json.JSONObject;
 
 import model.factura.FacturaModel;
 import model.productoFactura.ProductoFacturaModel;
@@ -42,19 +43,40 @@ public class CCrearFactura extends HttpServlet {
 			//int idProducto=Integer.parseInt(request.getParameter("id"));
 			String comprador=request.getParameter("comprador");
 			String direccion=request.getParameter("direccion");
-			int telefono=Integer.parseInt(request.getParameter("telefono"));
+			String telefono=request.getParameter("telefono");
 			String dni=request.getParameter("dni");
 			String carrito=request.getParameter("carrito");
 			
 			//inser factura en la BBDD y recojes la id de factura
 			FacturaModel factura=new FacturaModel();
-			factura.insertFactura(comprador,direccion,telefono, dni);
+			factura.setComprador(comprador);
+			factura.setDireccion(direccion);
+			factura.setTelefono(telefono);
+			factura.setDni(dni);
 			
-			//ProductoFacturaModel lineaFactura= new ProductoFacturaModel();
-			//lineaFactura.insertLinea(carrito, idFactura);
+			int idFactura= factura.insertFactura();
 			
 			JSONArray arrCarrito =new JSONArray(carrito);
+	
 			
+			//cada linea del carrito
+			
+			for (int i=0; i <arrCarrito.length();i++)  {
+				
+				ProductoFacturaModel lineaFactura= new ProductoFacturaModel();
+				
+				JSONObject compra=arrCarrito.getJSONObject(i);
+				
+				lineaFactura.setId_factura(idFactura);
+				lineaFactura.setId_producto(compra.getInt("id_producto"));
+				lineaFactura.setNombre(compra.getString("nombre"));
+				lineaFactura.setCantidad(compra.getInt("cantidad"));
+				lineaFactura.setPrecio(compra.getDouble("precio"));
+				
+				
+				lineaFactura.insertLinea();	
+			}
+
 			//recorrer el carrito y hacer inserts en producto factura
 			
 			

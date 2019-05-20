@@ -10,7 +10,7 @@ public class FacturaClass extends Connect{
 	protected Date fecha_compra;
 	protected String comprador;
 	protected String direccion;
-	protected int telefono;
+	protected String telefono;
 	protected String dni;
 	
 
@@ -28,7 +28,7 @@ public class FacturaClass extends Connect{
 	 * @param dni
 	 */
 	public FacturaClass(int id, int cantidadTot, double precioTot, String productos, Date fecha_compra,
-			String comprador, String direccion, int telefono) {
+			String comprador, String direccion, String telefono) {
 		super();
 		this.id = id;
 		this.fecha_compra = fecha_compra;
@@ -100,14 +100,14 @@ public class FacturaClass extends Connect{
 	/**
 	 * @return the telefono
 	 */
-	public int getTelefono() {
+	public String getTelefono() {
 		return telefono;
 	}
 
 	/**
 	 * @param telefono the telefono to set
 	 */
-	public void setTelefono(int telefono) {
+	public void setTelefono(String telefono) {
 		this.telefono = telefono;
 	}
 
