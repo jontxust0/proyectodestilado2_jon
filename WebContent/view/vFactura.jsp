@@ -18,9 +18,6 @@
 </head>
 
 <body>
-
-	<% ArrayList<FacturaClass> factura = (ArrayList<FacturaClass>)request.getAttribute("factura"); %>
-
 	<div class="container">
 
 		<div class="col-xs-6">
@@ -29,8 +26,7 @@
 		
 		<div class="col-xs-6 text-right">
 			<h1>FACTURA</h1>
-				<% for(int i=0;i< factura.size();i++){%>
-				<h1><small>Factura Nº <%=factura.get(i).getId() %></small></h1>
+				<h1><small>Factura Nº </small></h1>
 		</div> 
 		<div class="container">
 			<div class="row justify-content-between">
@@ -49,11 +45,11 @@
 				<div class="col-3 text-right">
 					<div class="panel panel-default">
 						<div class="panel-heading">
-							<h4>Cliente: <%=factura.get(i).getComprador() %></a></h4>
+							<h4>Cliente: </a></h4>
 						</div>
 						<div class="panel-body">
-						<br>Numero de Telefono:  <%=factura.get(i).getTelefono()%>
-						<br>Direccion: <%=factura.get(i).getDireccion() %>
+						<br>Numero de Telefono: 
+						<br>Direccion: 
 						</div>
 					</div>
 				</div>
@@ -74,44 +70,23 @@
 
 			<tbody class="datos">
 				<tr>
-				<td><%=factura.get(i).getProductos()%></td>
-	<td>Cantidad</td>
-<td class=" text-right ">-precio por unidad</td>
-<td class=" text-right ">subTotal </td>
-</tr>
-<tr>
-<td>Plantilla de diseño</td>
-<td><a href="#"> Detalles del proyecto aquí </a></td>
-<td class="text-right">10</td>
-<td class="text-right ">75.00</td>
-</tr>
-</tbody>
-</table>
-<pre>
-</pre>
-<div class="row text-right">
-<div class="col-xs-3 col-xs-offset-7"><strong>
-Total:
-</strong></div>
-<div class="col-xs-2"><strong>
-<%=factura.get(i).getPrecioTot() %> $ 
-</strong></div>
-</div>
-<pre>Sección detalles de pago
-
-	
-	
-<!--<div><h1>Factura <%=factura.get(i).getFecha_compra() %></h1></div>
-	
-	<div></div>
-	<div>Cantidad de productos:<%=factura.get(i).getCantidadTot()%></div>
-	<div>Producto: </div>
-	
-	<div>Precio compra: </div>
-	<div>Id Factura:<%=factura.get(i).getId() %></div>-->	
-	
-<%}%>
-</div>
+					<td>Producto</td>
+					<td>Cantidad</td>
+					<td class>Precio por unidad</td>
+					<td class=" text-right ">Subtotal </td>
+				</tr>
+				<tr>
+					<td>Plantilla de diseño</td>
+					<td><a href="#"> Detalles del proyecto aquí </a></td>
+					<td class="text-right">10</td>
+					<td class="text-right ">75.00</td>
+				</tr>
+			</tbody>
+			</table>
+		<div class="row text-right">
+			<div class="col-xs-3 col-xs-offset-7"><strong>Total:   $ </strong></div>
+		</div>
+	</div>
 <script>
 $(document).ready(function() {
 	var carrito = JSON.parse(localStorage.getItem("carrito"));
@@ -139,7 +114,7 @@ $(document).ready(function() {
 		}
 	}
 	
-})
+}) 
 </script>
 </body>
 </html>

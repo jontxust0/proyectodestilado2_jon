@@ -46,13 +46,11 @@ public class ApiFacturas extends HttpServlet {
              
              
              jsonFactura.put("id", factura.getFactura().get(i).getId());
-             jsonFactura.put("cantidadTot", factura.getFactura().get(i).getCantidadTot());
-             jsonFactura.put("precioTot", factura.getFactura().get(i).getPrecioTot());
-             jsonFactura.put("productos", factura.getFactura().get(i).getProductos());
              jsonFactura.put("fecha_compra", factura.getFactura().get(i).getFecha_compra());
              jsonFactura.put("comprador", factura.getFactura().get(i).getComprador());
              jsonFactura.put("direccion", factura.getFactura().get(i).getDireccion());
              jsonFactura.put("telefono", factura.getFactura().get(i).getTelefono());
+             jsonFactura.put("dni", factura.getFactura().get(i).getDni());
              
              jsonArrayFactura.add(jsonFactura);
          }

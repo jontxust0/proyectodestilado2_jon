@@ -57,14 +57,13 @@ public class ProductoFacturaModel extends ProductoFacturaClass{
 		PreparedStatement pst;
 
 		try {
-			pst = this.con.prepareStatement("call InsertarLineaFactura(?,?,?,?,?)");
+			pst = this.con.prepareStatement("call InsertLineaFactura(?,?,?,?,?)");
 			
 			pst.setInt(1, this.id_factura);
 			pst.setInt(2, this.id_producto);
 			pst.setString(3, this.nombre);
 			pst.setInt(4, this.cantidad);
 			pst.setDouble(5, this.precio);
-			
 			
 			pst.execute();
 				

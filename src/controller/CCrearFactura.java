@@ -68,13 +68,14 @@ public class CCrearFactura extends HttpServlet {
 				JSONObject compra=arrCarrito.getJSONObject(i);
 				
 				lineaFactura.setId_factura(idFactura);
-				lineaFactura.setId_producto(compra.getInt("id_producto"));
+				lineaFactura.setId_producto(compra.getInt("id"));
 				lineaFactura.setNombre(compra.getString("nombre"));
 				lineaFactura.setCantidad(compra.getInt("cantidad"));
 				lineaFactura.setPrecio(compra.getDouble("precio"));
 				
+				//System.out.println(compra.toString());
 				
-				lineaFactura.insertLinea();	
+				lineaFactura.insertLinea();
 			}
 
 			//recorrer el carrito y hacer inserts en producto factura
