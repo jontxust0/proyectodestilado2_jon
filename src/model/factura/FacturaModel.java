@@ -124,34 +124,55 @@ public class FacturaModel extends FacturaClass{
 }
 		*/
 
-	public int insertFactura(String comprador, String direccion, String telefono, String dni) {
+	public int insertFactura(String comprador, String direccion, int telefono, String dni) {
 		this.createConnection();
 		
-		
 		PreparedStatement pst;
+		int idFactura=0;
+		
 		try {
 			pst = this.con.prepareStatement("call InsertarFactura(?,?,?,?)");
 			
 			pst.setString(1, this.comprador);
 			pst.setString(2, this.direccion);
-			pst.setInt(3, this.num_pag);
-			pst.setInt(4, this.id);
+			pst.setInt(3, this.telefono);
+			pst.setString(4, this.dni);
 	
 			ResultSet rs= pst.executeQuery();
 			
-			if (rs.next) {
-			
-				return rs.getInt("id");
+			if (rs.next()) {
+				 idFactura= rs.getInt("idFactura");
 			}
+						
+			} catch (SQLException e) {
 			
-
-			
-		} catch (SQLException e) {
-			
-			return -1;
 		}
 		
 		this.disconnect();
-			
+		return idFactura;
+		
 	}
+
+	public void newId() {
+		this.createConnection();
+		
+		Statement st;
+		try {
+			
+			st = this.con.createStatement();
+			ResultSet rs = st.executeQuery("SELECT max(id) FROM `facturas`");
+
+			while (rs.next()) // reads the table line by line
+			{
+
+			} 
+		}catch (SQLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		this.disconnect();
+	}
+
+		
+		
 }

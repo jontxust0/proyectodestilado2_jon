@@ -39,21 +39,22 @@ public class CCrearFactura extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-			int idProducto=Integer.parseInt(request.getParameter("id"));
+			//int idProducto=Integer.parseInt(request.getParameter("id"));
 			String comprador=request.getParameter("comprador");
 			String direccion=request.getParameter("direccion");
-			String telefono=request.getParameter("telefono");
+			int telefono=Integer.parseInt(request.getParameter("telefono"));
 			String dni=request.getParameter("dni");
 			String carrito=request.getParameter("carrito");
 			
 			//inser factura en la BBDD y recojes la id de factura
 			FacturaModel factura=new FacturaModel();
-			factura.insertFactura(idProducto,comprador,direccion,telefono, dni);
+			factura.insertFactura(comprador,direccion,telefono, dni);
 			
 			//ProductoFacturaModel lineaFactura= new ProductoFacturaModel();
 			//lineaFactura.insertLinea(carrito, idFactura);
 			
 			JSONArray arrCarrito =new JSONArray(carrito);
+			
 			//recorrer el carrito y hacer inserts en producto factura
 			
 			
