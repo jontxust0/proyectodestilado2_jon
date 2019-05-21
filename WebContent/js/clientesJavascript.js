@@ -127,6 +127,7 @@ $(document).ready(function () {
             	
             	html += '<tr>'
                 html += '<td>' + vCarrito[index].cantidad + '</td>'
+                html += '<td><a href="#" class="botonPlus" data-id="'+vCarrito[index].id+'"><i class="material-icons">add_circle</i></a><a href="#" class="botonMinus" data-id="'+vCarrito[index].id+'"><i class="material-icons">do_not_disturb_on</i></a></td>'
             	html += '<td>' + vCarrito[index].nombre + '</td>'
             	html += '<td>' + precioMult + '</td>'
             	html += '<td><a href="#" data-id=' + vCarrito[index].id + ' class="borrarItemCarrito"><i class="material-icons">clear</i></a></td>'
@@ -294,12 +295,152 @@ $(document).ready(function () {
         });
       });
     
+    //sumar uno al la cantidad
+    $(document).on('click', '.botonPlus', function (e) {
+    	var html_precio = "";
+    	var html = "";
+
+        var idProd = $(this).data('id');
+
+        //Llama a la Api CProductos
+
+        $.getJSON("http://localhost:8080/Proyecto_destila2/ApiProductos"
+        ).done(function (response) {
+        	  var productos = response;     
+        
+              
+        	var vCarrito = JSON.parse(localStorage.getItem("carrito")); //de string a array JSON
+            var encontrado = false;
+            if (vCarrito == null) {
+                vCarrito = [];
+            }
+            else {
+                for (let index = 0; index < vCarrito.length; index++) {
+
+                    if (vCarrito[index].id == idProd) {
+                        vCarrito[index].cantidad++;
+                        encontrado = true;
+                    }
+                }
+            }
+
+        	
+            localStorage.setItem("carrito", JSON.stringify(vCarrito));
+          
+          	$(".tablaCarrito").children().remove();
+        	$(".precioTotalCarrito").children().remove();
+         
+
+            for (let index = 0; index < vCarrito.length; index++) {
+            	
+            	var precioMult = vCarrito[index].precio * vCarrito[index].cantidad;
+            	
+            	
+            	
+            	html += '<tr>'
+                html += '<td>' + vCarrito[index].cantidad + '</td>'
+                html += '<td><a href="#" class="botonPlus" data-id="'+vCarrito[index].id+'"><i class="material-icons">add_circle</i></a><a href="#" class="botonMinus" data-id="'+vCarrito[index].id+'"><i class="material-icons">do_not_disturb_on</i></a></td>'
+            	html += '<td>' + vCarrito[index].nombre + '</td>'
+            	html += '<td>' + precioMult + '</td>'
+            	html += '<td><a href="#" data-id=' + vCarrito[index].id + ' class="borrarItemCarrito"><i class="material-icons">clear</i></a></td>'
+            	html += '</tr>'
+            	
+            	precioTot = parseFloat(precioTot)+parseFloat(precioMult);
+            	
+            	
+            	
+
+            	
+            	
+            	
+            	
+            }
+            html_precio += '<p>'+precioTot+'</p>'
+            $('.tablaCarrito').html(html);
+            $('.precioTotalCarrito').html(html_precio);
+
+        });
+      });
+    
+    //restar uno al la cantidad
+    $(document).on('click', '.botonMinus', function (e) {
+    	var html_precio = "";
+    	var html = "";
+
+    	var idProd = $(this).data('id');
+
+        //Llama a la Api CProductos
+
+        $.getJSON("http://localhost:8080/Proyecto_destila2/ApiProductos"
+        ).done(function (response) {
+        	  var productos = response;     
+        
+              
+        	var vCarrito = JSON.parse(localStorage.getItem("carrito")); //de string a array JSON
+            
+            if (vCarrito == null) {
+                vCarrito = [];
+            }
+            else {
+                for (let index = 0; index < vCarrito.length; index++) {
+
+                    if (vCarrito[index].id == idProd) {
+                    	if (vCarrito[index].cantidad <= 1) {
+                    		
+                    		alert("No se pueden quitar mas productos");
+						} else {
+							vCarrito[index].cantidad--;
+	                        
+						}
+                    	
+                        
+                    }
+                }
+            }
+
+        	
+            localStorage.setItem("carrito", JSON.stringify(vCarrito));
+          
+          	$(".tablaCarrito").children().remove();
+        	$(".precioTotalCarrito").children().remove();
+         
+
+            for (let index = 0; index < vCarrito.length; index++) {
+            	
+            	var precioMult = vCarrito[index].precio * vCarrito[index].cantidad;
+            	
+            	
+            	
+            	html += '<tr>'
+                html += '<td>' + vCarrito[index].cantidad + '</td>'
+                html += '<td><a href="#" class="botonPlus" data-id="'+vCarrito[index].id+'"><i class="material-icons">add_circle</i></a><a href="#" class="botonMinus" data-id="'+vCarrito[index].id+'"><i class="material-icons">do_not_disturb_on</i></a></td>'
+            	html += '<td>' + vCarrito[index].nombre + '</td>'
+            	html += '<td>' + precioMult + '</td>'
+            	html += '<td><a href="#" data-id=' + vCarrito[index].id + ' class="borrarItemCarrito"><i class="material-icons">clear</i></a></td>'
+            	html += '</tr>'
+            	
+            	precioTot = parseFloat(precioTot)+parseFloat(precioMult);
+            	
+            	
+            	
+
+            	
+            	
+            	
+            	
+            }
+            html_precio += '<p>'+precioTot+'</p>'
+            $('.tablaCarrito').html(html);
+            $('.precioTotalCarrito').html(html_precio);
+
+        });
+      });
+    
 
     //Borrar items del carrito
     
     $(document).on('click', '.borrarItemCarrito', function (e) {
-    	
-    	idProd = $(this).data('id');
+    	var idProd = $(this).data('id');
     	var html = "";
     	var indiceAux = -1;
     	var html_precio = "";
@@ -307,11 +448,11 @@ $(document).ready(function () {
     	var vCarrito = JSON.parse(localStorage.getItem("carrito"));
     	
     	
-  	 //llenar carrito Modificado con los datos del antiguo
+    	 //llenar carrito Modificado con los datos del antiguo
     	for (let index = 0; index < vCarrito.length; index++) {    
     		if (vCarrito[index].id == idProd) {
     			indiceAux = index;
-			}	
+    		}	
     	}
     	vCarrito.splice(indiceAux, 1);
     	
@@ -332,6 +473,7 @@ $(document).ready(function () {
         	
         	html += '<tr>'
             html += '<td>' + vCarrito[index].cantidad + '</td>'
+            html += '<td><a href="#" class="botonPlus" data-id="'+vCarrito[index].id+'"><i class="material-icons">add_circle</i></a><a href="#" class="botonMinus" data-id="'+vCarrito[index].id+'"><i class="material-icons">do_not_disturb_on</i></a></td>'
         	html += '<td>' + vCarrito[index].nombre + '</td>'
         	html += '<td>' + precioMult + '</td>'
         	html += '<td><a href="#" data-id=' + vCarrito[index].id + ' class="borrarItemCarrito"><i class="material-icons">clear</i></a></td>'
@@ -350,7 +492,6 @@ $(document).ready(function () {
         html_precio += '<p>'+precioTot+'</p>'
         $('.tablaCarrito').html(html);
         $('.precioTotalCarrito').html(html_precio);
-     
        
      
     });
@@ -402,4 +543,6 @@ $(document).ready(function () {
       }); // ajax apiproductos
     }); //click cardProducto
   }; // function aniadirEventoClickModalProducto
+  
+  
 });//ready
