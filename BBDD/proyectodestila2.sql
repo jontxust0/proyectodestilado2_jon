@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 15-05-2019 a las 11:01:36
+-- Tiempo de generación: 20-05-2019 a las 09:33:13
 -- Versión del servidor: 10.1.39-MariaDB
 -- Versión de PHP: 7.3.5
 
@@ -30,8 +30,13 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `EliminarFactura` (`_id` INT(11))  B
 DELETE FROM facturas WHERE id = _id;
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `NuevaFactura` (IN `_cantidadTot` INT(11), IN `_precioTot` DOUBLE, IN `_productos` VARCHAR(40), IN `_fecha_compra` DATE, IN `_comprador` VARCHAR(50))  BEGIN 
-INSERT INTO facturas (cantidadTot, precioTot, productos, fecha_compra, comprador) VALUES (_cantidadTot, _precioTot, _productos, _fecha_compra, _comprador);
+CREATE DEFINER=`root`@`localhost` PROCEDURE `InsertarFactura` (IN `comprador` INT, IN `direccion` INT, IN `telefono` INT, IN `dni` INT)  NO SQL
+BEGIN
+INSERT into facturas(facturas.fecha_compra, facturas.comprador, facturas.direccion,facturas.telefono, facturas.dni)
+VALUES(now(), comprador, direccion ,telefono, dni)
+
+;
+SELECT last_insert_id() as idFactura;
 END$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `OrdenarPorPrecioAscendente` ()  BEGIN
@@ -42,20 +47,8 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `OrdenarPorPrecioDescendente` ()  BE
 SELECT * FROM productos ORDER BY precio DESC;
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `SeleccionarCervezas` ()  BEGIN
-SELECT productos.* FROM productos JOIN categorias ON productos.id_categoria = categorias.id WHERE categorias.nombre = 'Cerveza';
-END$$
-
-CREATE DEFINER=`root`@`localhost` PROCEDURE `SeleccionarLicores` ()  BEGIN
-SELECT productos.* FROM productos JOIN categorias ON productos.id_categoria = categorias.id WHERE categorias.nombre = 'Licor';
-END$$
-
-CREATE DEFINER=`root`@`localhost` PROCEDURE `SeleccionarSidras` ()  BEGIN
-SELECT productos.* FROM productos JOIN categorias ON productos.id_categoria = categorias.id WHERE categorias.nombre = 'Sidra';
-END$$
-
-CREATE DEFINER=`root`@`localhost` PROCEDURE `SeleccionarVinos` ()  BEGIN
-SELECT productos.* FROM productos JOIN categorias ON productos.id_categoria = categorias.id WHERE categorias.nombre = 'Vino';
+CREATE DEFINER=`root`@`localhost` PROCEDURE `SeleccionarCategoria` (IN `categoria` INT)  BEGIN
+SELECT productos.* FROM productos JOIN categorias ON productos.id_categoria = categorias.id WHERE categorias.nombre = categoria;
 END$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `SellecionarTodosLosProductos` ()  BEGIN 
@@ -93,14 +86,22 @@ INSERT INTO `categorias` (`id`, `nombre`) VALUES
 
 CREATE TABLE `facturas` (
   `id` int(11) NOT NULL,
-  `cantidadTot` int(11) NOT NULL,
-  `precioTot` double NOT NULL,
-  `productos` varchar(40) COLLATE utf8_unicode_ci NOT NULL,
   `fecha_compra` date NOT NULL,
   `comprador` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
   `direccion` varchar(128) COLLATE utf8_unicode_ci NOT NULL,
-  `telefono` int(9) NOT NULL
+  `telefono` int(9) NOT NULL,
+  `dni` varchar(20) COLLATE utf8_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Volcado de datos para la tabla `facturas`
+--
+
+INSERT INTO `facturas` (`id`, `fecha_compra`, `comprador`, `direccion`, `telefono`, `dni`) VALUES
+(1, '2019-05-15', 'Karlos Isla', 'sdgvdvafvjhg', 889889889, '151551534v'),
+(2, '2019-05-15', 'Carlos Isla', 'sdgvdvafvjhg', 889889889, '45464432v'),
+(3, '2019-05-20', '0', '0', 0, ''),
+(4, '2019-05-20', '0', '0', 0, '12');
 
 --
 -- Disparadores `facturas`
@@ -120,7 +121,7 @@ CREATE TABLE `facturas_eliminadas` (
   `id` int(11) NOT NULL,
   `cantidadTot` int(11) NOT NULL,
   `precioTot` double NOT NULL,
-  `productos` varchar(40) NOT NULL,
+  `productos` text CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
   `fecha_compra` date NOT NULL,
   `comprador` varchar(50) NOT NULL,
   `direccion` varchar(128) NOT NULL,
@@ -213,9 +214,11 @@ INSERT INTO `productos_actualizados` (`id`, `nombre_nuevo`, `descripcion_nuevo`,
 --
 
 CREATE TABLE `productos_facturas` (
-  `id_producto` int(11) NOT NULL,
   `id_factura` int(11) NOT NULL,
-  `cantidad` int(11) NOT NULL
+  `id_producto` int(11) NOT NULL,
+  `nombre` varchar(40) COLLATE utf8_unicode_ci NOT NULL,
+  `cantidad` int(11) NOT NULL,
+  `precio` double NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
@@ -319,7 +322,7 @@ ALTER TABLE `categorias`
 -- AUTO_INCREMENT de la tabla `facturas`
 --
 ALTER TABLE `facturas`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de la tabla `facturas_eliminadas`

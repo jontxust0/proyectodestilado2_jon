@@ -9,6 +9,7 @@
 	 */
 package model.factura;
 
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -56,14 +57,11 @@ public class FacturaModel extends FacturaClass{
 			{
 				FacturaModel newF = new FacturaModel();
 				newF.id=Integer.parseInt(rs.getString("id"));
-				newF.cantidadTot=Integer.parseInt(rs.getString("cantidadTot"));
-				newF.precioTot=Double.parseDouble(rs.getString("precioTot"));
-				newF.productos=rs.getString("productos");
 				newF.fecha_compra=rs.getDate("fecha_compra");
 				newF.comprador=rs.getString("comprador");
 				newF.direccion=rs.getString("direccion");
-				newF.telefono=rs.getInt("telefono");
-				
+				newF.telefono=rs.getString("telefono");
+				newF.dni=rs.getString("id");
 				
 				this.factura.add(newF);
 			
@@ -89,13 +87,11 @@ public class FacturaModel extends FacturaClass{
 				FacturaClass factura = new FacturaClass();
 				
 				factura.setId(rs.getInt("id"));
-				factura.setCantidadTot(rs.getInt("cantidadTot"));
-				factura.setPrecioTot(rs.getDouble("precioTot"));
-				factura.setProductos(rs.getString("productos"));
 				factura.setFecha_compra(rs.getDate("fecha_compra"));
 				factura.setComprador(rs.getString("comprador"));
 				factura.direccion=rs.getString("direccion");
-				factura.telefono=rs.getInt("telefono");
+				factura.telefono=rs.getString("telefono");
+				factura.dni=rs.getString("id");
 				
 				this.factura.add(factura);
 			}
@@ -127,4 +123,59 @@ public class FacturaModel extends FacturaClass{
 	return mensaje;
 }
 		*/
+
+	public int insertFactura() {
+		this.createConnection();
+		
+		PreparedStatement pst;
+		int idFactura=0;
+		
+		try {
+			pst = this.con.prepareStatement("call InsertarFactura(?,?,?,?)");
+			
+			pst.setString(1, this.comprador);
+			pst.setString(2, this.direccion);
+			pst.setString(3, this.telefono);
+			pst.setString(4, this.dni);
+	
+			ResultSet rs= pst.executeQuery();
+			
+			if (rs.next()) {
+				 idFactura= rs.getInt("idFactura");
+			}
+						
+			} catch (SQLException e) {
+			
+		}
+		
+		this.disconnect();
+		
+		return idFactura;
+		
+		
+	}
+
+
+	/*public void newId() {
+		this.createConnection();
+		
+		Statement st;
+		try {
+			
+			st = this.con.createStatement();
+			ResultSet rs = st.executeQuery("SELECT max(id) FROM `facturas`");
+
+			while (rs.next()) // reads the table line by line
+			{
+
+			} 
+		}catch (SQLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		this.disconnect();
+	}*/
+
+		
+		
 }

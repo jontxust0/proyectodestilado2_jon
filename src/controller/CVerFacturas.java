@@ -7,9 +7,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.json.JSONObject;
+
 import model.factura.FacturaModel;
 
 import java.io.PrintWriter;
+import java.util.ArrayList;
 
 /**
  * Servlet implementation class CverFacturas
@@ -31,10 +34,8 @@ public class CVerFacturas extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
+		int idFactura=Integer.parseInt(request.getParameter("idFactura"));
 		int id=Integer.parseInt(request.getParameter("id"));
-		//String carrito='[{nombre":"Cerveza Duff","cantidad":"1","precio":2.7},{"nombre":"Buitral Fresa","cantidad":"1","precio":14.5}]';
-		String carrito=request.getParameter("carrito");
-		
 		
 		FacturaModel factura =new FacturaModel();
 		factura.selectedFactura(id);

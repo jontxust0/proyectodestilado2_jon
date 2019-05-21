@@ -27,6 +27,8 @@ public class CPago extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
+	
+		
 		request.getRequestDispatcher("view/vPago.jsp").forward(request, response);
 		
 	}

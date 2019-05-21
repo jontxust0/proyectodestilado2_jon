@@ -7,13 +7,11 @@ import model.Connect;
 public class FacturaClass extends Connect{
 
 	protected int id;
-	protected int cantidadTot;
-	protected double precioTot;
-	protected String productos;
 	protected Date fecha_compra;
 	protected String comprador;
 	protected String direccion;
-	protected int telefono;
+	protected String telefono;
+	protected String dni;
 	
 
 	//----------------------\\
@@ -23,25 +21,21 @@ public class FacturaClass extends Connect{
 
 	/**
 	 * @param id
-	 * @param cantidadTot
-	 * @param precioTot
-	 * @param productos
 	 * @param fecha_compra
 	 * @param comprador
 	 * @param direccion
 	 * @param telefono
+	 * @param dni
 	 */
 	public FacturaClass(int id, int cantidadTot, double precioTot, String productos, Date fecha_compra,
-			String comprador, String direccion, int telefono) {
+			String comprador, String direccion, String telefono) {
 		super();
 		this.id = id;
-		this.cantidadTot = cantidadTot;
-		this.precioTot = precioTot;
-		this.productos = productos;
 		this.fecha_compra = fecha_compra;
 		this.comprador = comprador;
 		this.direccion = direccion;
 		this.telefono = telefono;
+		this.dni = dni;
 	}
 
 
@@ -61,42 +55,6 @@ public class FacturaClass extends Connect{
 	 */
 	public void setId(int id) {
 		this.id = id;
-	}
-	/**
-	 * @return the telefono
-	 */
-	public int getCantidadTot() {
-		return cantidadTot;
-	}
-	/**
-	 * @param cantidadTot the cantidadTot to set
-	 */
-	public void setCantidadTot(int cantidadTot) {
-		this.cantidadTot = cantidadTot;
-	}
-	/**
-	 * @return the precioTot
-	 */
-	public double getPrecioTot() {
-		return precioTot;
-	}
-	/**
-	 * @param precioTot the precioTot to set
-	 */
-	public void setPrecioTot(double precioTot) {
-		this.precioTot = precioTot;
-	}
-	/**
-	 * @return the productos
-	 */
-	public String getProductos() {
-		return productos;
-	}
-	/**
-	 * @param productos the productos to set
-	 */
-	public void setProductos(String productos) {
-		this.productos = productos;
 	}
 	/**
 	 * @return the fecha_compra
@@ -142,15 +100,29 @@ public class FacturaClass extends Connect{
 	/**
 	 * @return the telefono
 	 */
-	public int getTelefono() {
+	public String getTelefono() {
 		return telefono;
 	}
 
 	/**
 	 * @param telefono the telefono to set
 	 */
-	public void setTelefono(int telefono) {
+	public void setTelefono(String telefono) {
 		this.telefono = telefono;
+	}
+
+	/**
+	 * @return the dni
+	 */
+	public String getDni() {
+		return dni;
+	}
+
+	/**
+	 * @param dni the dni to set
+	 */
+	public void setDni(String dni) {
+		this.dni = dni;
 	}
 
 

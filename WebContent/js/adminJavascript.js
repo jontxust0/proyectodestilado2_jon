@@ -25,8 +25,7 @@ $(document).ready(function(){
         	$('#selectNombres').html(html);
         });
         
-        $.getJSON("http://localhost:8080/Proyecto_destila2/ApiFacturas"
-    	).done(function (response) {
+        $.getJSON("http://localhost:8080/Proyecto_destila2/ApiFacturas").done(function (response) {
     		console.log(response);
         	
     		var facturas = response; 
