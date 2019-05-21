@@ -7,6 +7,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import model.factura.FacturaModel;
+
 /**
  * Servlet implementation class CBorrarFactura
  */
@@ -26,8 +28,14 @@ public class CBorrarFactura extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		int idFactura=Integer.parseInt(request.getParameter("id"));
 		
+		FacturaModel factura= new FacturaModel();
+		factura.setId(idFactura);
 		
+		factura.borrarFactura(idFactura);
+		
+		request.getRequestDispatcher("view/vAdmin.jsp").forward(request, response);
 	}
 
 	/**

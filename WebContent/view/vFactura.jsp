@@ -12,11 +12,12 @@
   body, h1, h2, h3, h4, h5, h6{
     font-family: 'Bree Serif', serif;
   }
-  
   </style>
 <title>Factura</title>
 </head>
-
+ <% 	ArrayList<FacturaClass> factura = (ArrayList<FacturaClass>)request.getAttribute("factura");	 
+ 		for(int i=0; i<factura.size();i++){
+ 		%>
 <body>
 	<div class="container">
 
@@ -25,8 +26,8 @@
 		</div>
 		
 		<div class="col-xs-6 text-right">
-			<h1>FACTURA</h1>
-				<h1><small>Factura Nº </small></h1>
+			<h1>FACTURA	<%=factura.get(i).getFecha_compra() %></h1>
+				<h1><small>Factura Nº <%=factura.get(i).getId() %></small></h1>
 		</div> 
 		<div class="container">
 			<div class="row justify-content-between">
@@ -45,11 +46,11 @@
 				<div class="col-3 text-right">
 					<div class="panel panel-default">
 						<div class="panel-heading">
-							<h4>Cliente: </a></h4>
+							<h4>Cliente: <%=factura.get(i).getComprador() %></a></h4>
 						</div>
 						<div class="panel-body">
-						<br>Numero de Telefono: 
-						<br>Direccion: 
+						<br>Numero de Telefono: <%=factura.get(i).getTelefono() %>
+						<br>Direccion: <%=factura.get(i).getDireccion() %>
 						</div>
 					</div>
 				</div>
@@ -87,8 +88,11 @@
 			<div class="col-xs-3 col-xs-offset-7"><strong>Total:   $ </strong></div>
 		</div>
 	</div>
+	<%} %>
+	
+	
 <script>
-$(document).ready(function() {
+/* $(document).ready(function() {
 	var carrito = JSON.parse(localStorage.getItem("carrito"));
 	console.log(carrito);
 	var url= 'http://localhost:8080/Proyecto_destila2/ApiProductos';
@@ -107,14 +111,14 @@ $(document).ready(function() {
 				if(carrito[j].id == response[i].id_producto){
 					lineaFactura += '';
 					
-					$(.datos).append(lineaFactura);
+					$('.datos').append(lineaFactura);
 				}
 				
 			}
 		}
 	}
 	
-}) 
+}) */
 </script>
 </body>
 </html>

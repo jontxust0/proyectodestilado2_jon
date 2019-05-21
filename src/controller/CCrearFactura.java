@@ -40,7 +40,6 @@ public class CCrearFactura extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-			//int idProducto=Integer.parseInt(request.getParameter("id"));
 			String comprador=request.getParameter("comprador");
 			String direccion=request.getParameter("direccion");
 			String telefono=request.getParameter("telefono");

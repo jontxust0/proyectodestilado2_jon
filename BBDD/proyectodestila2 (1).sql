@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 20-05-2019 a las 09:33:13
+-- Tiempo de generación: 21-05-2019 a las 09:45:27
 -- Versión del servidor: 10.1.39-MariaDB
 -- Versión de PHP: 7.3.5
 
@@ -30,13 +30,19 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `EliminarFactura` (`_id` INT(11))  B
 DELETE FROM facturas WHERE id = _id;
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `InsertarFactura` (IN `comprador` INT, IN `direccion` INT, IN `telefono` INT, IN `dni` INT)  NO SQL
+CREATE DEFINER=`root`@`localhost` PROCEDURE `InsertarFactura` (IN `comprador` VARCHAR(40), IN `direccion` VARCHAR(40), IN `telefono` VARCHAR(40), IN `dni` VARCHAR(40))  NO SQL
 BEGIN
 INSERT into facturas(facturas.fecha_compra, facturas.comprador, facturas.direccion,facturas.telefono, facturas.dni)
 VALUES(now(), comprador, direccion ,telefono, dni)
 
 ;
 SELECT last_insert_id() as idFactura;
+END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `InsertLineaFactura` (IN `id_factura` INT, IN `id_producto` INT, IN `nombre` VARCHAR(40), IN `cantidad` INT, IN `precio` DOUBLE)  NO SQL
+BEGIN
+INSERT into productos_facturas (productos_facturas.id_factura, productos_facturas.id_producto, productos_facturas.nombre, productos_facturas.cantidad, productos_facturas.precio)
+VALUES(id_factura, id_producto, nombre, cantidad, precio);
 END$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `OrdenarPorPrecioAscendente` ()  BEGIN
@@ -89,7 +95,7 @@ CREATE TABLE `facturas` (
   `fecha_compra` date NOT NULL,
   `comprador` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
   `direccion` varchar(128) COLLATE utf8_unicode_ci NOT NULL,
-  `telefono` int(9) NOT NULL,
+  `telefono` varchar(9) COLLATE utf8_unicode_ci NOT NULL,
   `dni` varchar(20) COLLATE utf8_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
@@ -98,18 +104,26 @@ CREATE TABLE `facturas` (
 --
 
 INSERT INTO `facturas` (`id`, `fecha_compra`, `comprador`, `direccion`, `telefono`, `dni`) VALUES
-(1, '2019-05-15', 'Karlos Isla', 'sdgvdvafvjhg', 889889889, '151551534v'),
-(2, '2019-05-15', 'Carlos Isla', 'sdgvdvafvjhg', 889889889, '45464432v'),
-(3, '2019-05-20', '0', '0', 0, ''),
-(4, '2019-05-20', '0', '0', 0, '12');
-
---
--- Disparadores `facturas`
---
-DELIMITER $$
-CREATE TRIGGER `facturas_eliminadas` AFTER DELETE ON `facturas` FOR EACH ROW INSERT INTO facturas_eliminadas (id, cantidadTot, precioTot, productos, fecha_compra, comprador,direccion, telefono, fecha_de_eliminacion, usuario_de_eliminacion ) VALUES (old.id, old.cantidadTot, old.precioTot, old. productos, old.fecha_compra, old.comprador, old.direccion, old.telefono, NOW(), USER())
-$$
-DELIMITER ;
+(3, '2019-05-20', '0', '0', '0', ''),
+(4, '2019-05-20', '0', '0', '0', '12'),
+(5, '2019-05-20', '0', '0', '0', '1'),
+(6, '2019-05-20', 'a', 'hsgasg, 37 ', '555555559', '56235632v'),
+(7, '2019-05-20', 'a', 'hsgasg, 37 ', '555555559', '5555555555a'),
+(8, '2019-05-20', 'Adrian Rodriguez', 'Calle de la piruleta, 420', '696969699', '657565765C'),
+(9, '2019-05-20', 'Adrian', 'Askatasun', '555555598', '657565765C'),
+(10, '2019-05-20', 'Adrian', 'Askatasun', '555555598', '657565765C'),
+(11, '2019-05-20', 'a', 'asah, 37', '555555559', '56235632v'),
+(12, '2019-05-20', 'a', 'asah, 37', '555555559', '56235632v'),
+(13, '2019-05-20', 'a', 'hsgasg, 37 ', '555555559', '56235632v'),
+(14, '2019-05-20', 'a', 'asah, 37', '555555559', '657565765c'),
+(15, '2019-05-20', 'a', 'hsgasg, 37 ', '555555559', '56235632v'),
+(16, '2019-05-20', 'a', 'asah, 37', '555555559', '56235632v'),
+(17, '2019-05-20', 'a', 'asah, 37', '555555559', '56235632v'),
+(18, '2019-05-20', 'a', 'asah, 37', '555555559', '56235632v'),
+(19, '2019-05-20', 'a', 'asah, 37', '555555559', '56235632v'),
+(20, '2019-05-20', 'a', 'asah, 37', '555555559', '56235632v'),
+(21, '2019-05-20', 'a', 'asah, 37', '555555559', '657565765c'),
+(22, '2019-05-20', 'mbmn', 'mnbmn', 'nmbn', 'mnbb');
 
 -- --------------------------------------------------------
 
@@ -221,6 +235,15 @@ CREATE TABLE `productos_facturas` (
   `precio` double NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
+--
+-- Volcado de datos para la tabla `productos_facturas`
+--
+
+INSERT INTO `productos_facturas` (`id_factura`, `id_producto`, `nombre`, `cantidad`, `precio`) VALUES
+(20, 4, 'Irium Gold\r\n', 1, 7.95),
+(21, 4, 'Irium Gold\r\n', 1, 7.95),
+(21, 3, 'Buitral Fresa', 1, 14.5);
+
 -- --------------------------------------------------------
 
 --
@@ -322,7 +345,7 @@ ALTER TABLE `categorias`
 -- AUTO_INCREMENT de la tabla `facturas`
 --
 ALTER TABLE `facturas`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT de la tabla `facturas_eliminadas`
@@ -363,7 +386,7 @@ ALTER TABLE `productos`
 --
 ALTER TABLE `productos_facturas`
   ADD CONSTRAINT `productos_facturas_ibfk_1` FOREIGN KEY (`id_producto`) REFERENCES `productos` (`id`),
-  ADD CONSTRAINT `productos_facturas_ibfk_2` FOREIGN KEY (`id_factura`) REFERENCES `facturas` (`id`);
+  ADD CONSTRAINT `productos_facturas_ibfk_2` FOREIGN KEY (`id_factura`) REFERENCES `facturas` (`id`) ON DELETE CASCADE;
 
 --
 -- Filtros para la tabla `subcategorias`

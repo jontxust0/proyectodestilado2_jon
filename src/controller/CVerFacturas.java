@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.json.JSONObject;
 
 import model.factura.FacturaModel;
+import model.productoFactura.ProductoFacturaModel;
 
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -34,12 +35,14 @@ public class CVerFacturas extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-		int idFactura=Integer.parseInt(request.getParameter("idFactura"));
 		int id=Integer.parseInt(request.getParameter("id"));
 		
 		FacturaModel factura =new FacturaModel();
-		factura.selectedFactura(id);
+		ProductoFacturaModel lineaFactura = new ProductoFacturaModel();
 		
+		factura.selectedFactura(id);
+		lineaFactura.selectedLineaFactura(id);
+	
 		
 		request.setAttribute("factura", factura.getFactura());
 		request.getRequestDispatcher("view/vFactura.jsp").forward(request, response);

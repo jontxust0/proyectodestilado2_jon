@@ -19,35 +19,48 @@ import model.subcategoria.SubcategoriaModel;
 
 public class ProductoFacturaModel extends ProductoFacturaClass{	
 
+	ArrayList<ProductoFacturaClass> lineaFactura = new ArrayList<ProductoFacturaClass>();
+
+	/**
+	 * 
+	 */
+	public ProductoFacturaModel() {
+		super();
+	}
+
+	/**
+	 * @param id_factura
+	 * @param id_producto
+	 * @param nombre
+	 * @param cantidad
+	 * @param precio
+	 * @param lineaFactura
+	 */
+	public ProductoFacturaModel(int id_factura, int id_producto, String nombre, int cantidad, double precio,
+			ArrayList<ProductoFacturaClass> lineaFactura) {
+		super(id_factura, id_producto, nombre, cantidad, precio);
+		this.lineaFactura = lineaFactura;
+	}
 
 	//Metodos
 	
 	/**
-	 * Carga los datos 
+	 * @return the lineaFactura
 	 */
-	public void loadData()
-	{
-		this.createConnection();
-		
-		Statement st;
-		try {
-			
-			st = this.con.createStatement();
-			ResultSet rs = st.executeQuery("SELECT * FROM producto_factura");
-
-			while (rs.next()) // reads the table line by line
-			{
-				ProductoFacturaModel newD = new ProductoFacturaModel();
-				
-			
-			} 
-		}catch (SQLException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
-		this.disconnect();
+	public ArrayList<ProductoFacturaClass> getLineaFactura() {
+		return lineaFactura;
 	}
 
+	/**
+	 * @param lineaFactura the lineaFactura to set
+	 */
+	public void setLineaFactura(ArrayList<ProductoFacturaClass> lineaFactura) {
+		this.lineaFactura = lineaFactura;
+	}
+
+	/**
+	 * Carga los datos 
+	 */
 	public void insertLinea() {
 		
 		//cada linea del carrito
@@ -74,6 +87,44 @@ public class ProductoFacturaModel extends ProductoFacturaClass{
 		}
 			
 		this.disconnect();
+		
+	}
+
+	public void selectedLineaFactura(int id) {
+		this.createConnection();
+		
+		Statement st;
+		try {
+			st = this.con.createStatement();	
+			ResultSet rs = st.executeQuery("call mostrarFacturas(?)");
+			
+			while (rs.next()){
+				
+				ProductoFacturaClass lineaFactura = new ProductoFacturaClass();
+				
+				
+				lineaFactura.setId_factura(rs.getInt("id_factura"));
+				lineaFactura.setId_producto(rs.getInt("id_producto"));
+				lineaFactura.setNombre(rs.getString("nombre"));
+				lineaFactura.setCantidad(rs.getInt("cantidad"));
+				lineaFactura.setPrecio(rs.getInt("precio"));
+				
+				this.lineaFactura.add(lineaFactura);
+				
+
+			}
+
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		}
+		this.disconnect();
+		
+
+	
+		
+		
+		
 		
 	}
 	

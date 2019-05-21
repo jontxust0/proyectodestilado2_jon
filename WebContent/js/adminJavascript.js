@@ -37,7 +37,7 @@ $(document).ready(function(){
     	    	 html += '<td><span>'+factura.id+'<span></td>'
     	    	 html += '<td><span>'+factura.comprador+'<span></td>'
     	    	 html += '<td><a href="CVerFacturas?id='+factura.id+'" class="waves-effect waves-light btn-large">Seleccionar</a></td>'
-    	    	 html += '<td><a href="CBorrarFactura?id'+factura.id+'" class="waves-effect waves-light btn-large"><i class="material-icons">delete</i></a></td>'
+    	    	 html += '<td><a href="CBorrarFactura?id='+factura.id+'" class="waves-effect waves-light btn-large"><i class="material-icons">delete</i></a></td>'
     	    	 html += '</tr>'
     	      }
      	     

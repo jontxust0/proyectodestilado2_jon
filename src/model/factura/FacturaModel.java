@@ -15,6 +15,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
+import model.productoFactura.ProductoFacturaModel;
+
 
 public class FacturaModel extends FacturaClass{
 
@@ -80,20 +82,23 @@ public class FacturaModel extends FacturaClass{
 		Statement st;
 		try {
 			st = this.con.createStatement();	
-			ResultSet rs = st.executeQuery("SELECT * FROM facturas WHERE  id = "+id);
+			ResultSet rs = st.executeQuery("call mostrarFacturas(?)");
 			
 			while (rs.next()){
 				
 				FacturaClass factura = new FacturaClass();
+				
 				
 				factura.setId(rs.getInt("id"));
 				factura.setFecha_compra(rs.getDate("fecha_compra"));
 				factura.setComprador(rs.getString("comprador"));
 				factura.direccion=rs.getString("direccion");
 				factura.telefono=rs.getString("telefono");
-				factura.dni=rs.getString("id");
+				factura.dni=rs.getString("dni");
 				
 				this.factura.add(factura);
+				
+
 			}
 
 		} catch (SQLException e) {
@@ -103,26 +108,6 @@ public class FacturaModel extends FacturaClass{
 		this.disconnect();
 		
 	}
-	/*
-	String mensaje="";
-	PreparedStatement pst;
-	try {
-		pst = this.con.prepareStatement("DELETE FROM LIBROS "
-										 + " WHERE LIBROS.id=?");
-		
-		pst.setInt(1, this.id);
-
-		
-		pst.execute();
-		mensaje="Libro borrado en la BD";
-		
-	} catch (SQLException e) {
-		
-		mensaje="No se ha podido borrado el libro en la BD";
-	}
-	return mensaje;
-}
-		*/
 
 	public int insertFactura() {
 		this.createConnection();
@@ -152,30 +137,24 @@ public class FacturaModel extends FacturaClass{
 		
 		return idFactura;
 		
-		
 	}
 
+	public void borrarFactura(int idFactura) {
 
-	/*public void newId() {
-		this.createConnection();
-		
-		Statement st;
-		try {
-			
-			st = this.con.createStatement();
-			ResultSet rs = st.executeQuery("SELECT max(id) FROM `facturas`");
+        this.createConnection();
 
-			while (rs.next()) // reads the table line by line
-			{
+        try (
+                PreparedStatement pst = this.con.prepareStatement("call EliminarFactura(?)");
+            ) {
 
-			} 
-		}catch (SQLException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
-		this.disconnect();
-	}*/
+                pst.setInt(1, idFactura);
 
-		
-		
+                pst.execute();
+                pst.close();
+
+            } catch (SQLException ex) {
+                System.out.println(ex.getMessage());
+                ex.printStackTrace();
+            }
+        }
 }

@@ -18,12 +18,7 @@ public class ProductoFacturaClass  extends Connect{
 	protected String nombre;
 	protected int cantidad;
 	protected double precio;
-	
-	
-	
-	
-	
-	
+
 	
 	/**
 	 * 
