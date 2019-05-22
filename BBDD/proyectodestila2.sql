@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 22-05-2019 a las 08:50:28
+-- Tiempo de generación: 22-05-2019 a las 13:08:58
 -- Versión del servidor: 10.1.39-MariaDB
 -- Versión de PHP: 7.3.5
 
@@ -19,7 +19,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de datos: `proyecto_destila2`
+-- Base de datos: `proyectodestila2`
 --
 
 DELIMITER $$
@@ -93,15 +93,8 @@ CREATE TABLE `facturas` (
 --
 
 INSERT INTO `facturas` (`id`, `fecha_compra`, `comprador`, `direccion`, `telefono`, `dni`) VALUES
-(1, '2019-05-15', 'dsdfds', 'sfsdf', 666666666, '');
-
---
--- Disparadores `facturas`
---
-DELIMITER $$
-CREATE TRIGGER `facturas_eliminadas` AFTER DELETE ON `facturas` FOR EACH ROW INSERT INTO facturas_eliminadas (id, cantidadTot, precioTot, productos, fecha_compra, comprador,direccion, telefono, fecha_de_eliminacion, usuario_de_eliminacion ) VALUES (old.id, old.cantidadTot, old.precioTot, old. productos, old.fecha_compra, old.comprador, old.direccion, old.telefono, NOW(), USER())
-$$
-DELIMITER ;
+(5, '2019-05-22', 'Carlos Isla', 'BI-2238, 53', 654782422, '98547535C'),
+(7, '2019-05-22', 'Carlos Isla', 'Arteaga', 654987315, '59314522K');
 
 -- --------------------------------------------------------
 
@@ -111,13 +104,11 @@ DELIMITER ;
 
 CREATE TABLE `facturas_eliminadas` (
   `id` int(11) NOT NULL,
-  `cantidadTot` int(11) NOT NULL,
-  `precioTot` double NOT NULL,
-  `productos` varchar(40) NOT NULL,
   `fecha_compra` date NOT NULL,
   `comprador` varchar(50) NOT NULL,
   `direccion` varchar(128) NOT NULL,
   `telefono` int(9) NOT NULL,
+  `dni` varchar(40) NOT NULL,
   `fecha_de_eliminacion` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `usuario_de_eliminacion` varchar(60) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -126,8 +117,8 @@ CREATE TABLE `facturas_eliminadas` (
 -- Volcado de datos para la tabla `facturas_eliminadas`
 --
 
-INSERT INTO `facturas_eliminadas` (`id`, `cantidadTot`, `precioTot`, `productos`, `fecha_compra`, `comprador`, `direccion`, `telefono`, `fecha_de_eliminacion`, `usuario_de_eliminacion`) VALUES
-(1, 200, 20.1, 'VARIOS', '2019-04-05', 'YO NO', '', 0, '2019-05-08 11:32:02', 'root@localhost');
+INSERT INTO `facturas_eliminadas` (`id`, `fecha_compra`, `comprador`, `direccion`, `telefono`, `dni`, `fecha_de_eliminacion`, `usuario_de_eliminacion`) VALUES
+(1, '2019-04-05', 'YO NO', '', 0, '', '2019-05-08 11:32:02', 'root@localhost');
 
 -- --------------------------------------------------------
 
@@ -220,10 +211,23 @@ INSERT INTO `productos_actualizados` (`id`, `nombre_nuevo`, `descripcion_nuevo`,
 CREATE TABLE `productos_facturas` (
   `id_factura` int(11) NOT NULL,
   `id_producto` int(11) NOT NULL,
-  `nombre` int(11) NOT NULL,
+  `nombre` varchar(40) COLLATE utf8_unicode_ci NOT NULL,
   `cantidad` int(11) NOT NULL,
-  `precio` int(11) NOT NULL
+  `precio` double NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Volcado de datos para la tabla `productos_facturas`
+--
+
+INSERT INTO `productos_facturas` (`id_factura`, `id_producto`, `nombre`, `cantidad`, `precio`) VALUES
+(5, 1, '0', 2, 16),
+(5, 5, '0', 3, 18),
+(5, 6, '0', 4, 12),
+(7, 19, '0', 1, 8),
+(7, 22, '0', 1, 12),
+(7, 21, '0', 1, 12),
+(7, 20, '0', 1, 8);
 
 -- --------------------------------------------------------
 
@@ -267,8 +271,7 @@ INSERT INTO `subcategorias` (`id`, `nombre`, `id_categoria`) VALUES
 -- Indices de la tabla `categorias`
 --
 ALTER TABLE `categorias`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `id` (`id`);
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indices de la tabla `facturas`
@@ -317,16 +320,10 @@ ALTER TABLE `subcategorias`
 --
 
 --
--- AUTO_INCREMENT de la tabla `categorias`
---
-ALTER TABLE `categorias`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
-
---
 -- AUTO_INCREMENT de la tabla `facturas`
 --
 ALTER TABLE `facturas`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT de la tabla `facturas_eliminadas`
@@ -363,11 +360,17 @@ ALTER TABLE `productos`
   ADD CONSTRAINT `productos_ibfk_1` FOREIGN KEY (`id_categoria`) REFERENCES `categorias` (`id`);
 
 --
+-- Filtros para la tabla `productos_actualizados`
+--
+ALTER TABLE `productos_actualizados`
+  ADD CONSTRAINT `productos_actualizados_ibfk_1` FOREIGN KEY (`id`) REFERENCES `productos` (`id`);
+
+--
 -- Filtros para la tabla `productos_facturas`
 --
 ALTER TABLE `productos_facturas`
   ADD CONSTRAINT `productos_facturas_ibfk_1` FOREIGN KEY (`id_producto`) REFERENCES `productos` (`id`),
-  ADD CONSTRAINT `productos_facturas_ibfk_2` FOREIGN KEY (`id_factura`) REFERENCES `facturas` (`id`);
+  ADD CONSTRAINT `productos_facturas_ibfk_2` FOREIGN KEY (`id_factura`) REFERENCES `facturas` (`id`) ON DELETE CASCADE;
 
 --
 -- Filtros para la tabla `subcategorias`
