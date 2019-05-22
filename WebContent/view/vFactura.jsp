@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <%@ page import="model.factura.*" %>
+<%@ page import="model.productoFactura.*" %>
 <%@ page import="java.util.ArrayList" %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -15,7 +16,8 @@
   </style>
 <title>Factura</title>
 </head>
- <% 	ArrayList<FacturaClass> factura = (ArrayList<FacturaClass>)request.getAttribute("factura");	 
+ <% 	ArrayList<FacturaClass> factura = (ArrayList<FacturaClass>)request.getAttribute("factura");	
+		ArrayList<ProductoFacturaClass> lineaFactura = (ArrayList<ProductoFacturaClass>)request.getAttribute("lineaFactura");
  		for(int i=0; i<factura.size();i++){
  		%>
 <body>
@@ -57,7 +59,7 @@
 			</div>
 		</div>
 <!-- / fin de sección de datos del Cliente  -->
-
+	
 		<pre>
 			<table class="table table-bordered">
 				<thead>
@@ -70,55 +72,26 @@
 			</thead>
 
 			<tbody class="datos">
+			<% for(int j=0; j<lineaFactura.size();j++){ %>
 				<tr>
-					<td>Producto</td>
-					<td>Cantidad</td>
-					<td class>Precio por unidad</td>
-					<td class=" text-right ">Subtotal </td>
+					<td><%=lineaFactura.get(j).getNombre() %></td>
+					<td><%=lineaFactura.get(j).getCantidad() %></td>
+					<td class><%=lineaFactura.get(j).getPrecio() %></td>
+					<td class=" text-right "><%=lineaFactura.get(j).getPrecio()%> </td>
 				</tr>
-				<tr>
-					<td>Plantilla de diseño</td>
-					<td><a href="#"> Detalles del proyecto aquí </a></td>
-					<td class="text-right">10</td>
-					<td class="text-right ">75.00</td>
-				</tr>
+				<%}%>
 			</tbody>
 			</table>
 		<div class="row text-right">
 			<div class="col-xs-3 col-xs-offset-7"><strong>Total:   $ </strong></div>
 		</div>
 	</div>
-	<%} %>
-	
-	
+	<%}%>
+
 <script>
-/* $(document).ready(function() {
-	var carrito = JSON.parse(localStorage.getItem("carrito"));
-	console.log(carrito);
-	var url= 'http://localhost:8080/Proyecto_destila2/ApiProductos';
-	
-	$.getJSON(url, function(response){
-		console.log(response);
-		mostrarProductos(response);
-	});
-	
-	function mostrarProductos(response){
-		var lineasFactura='';
-		
-		for(i in carrito){
-			
-			for(j in response){
-				if(carrito[j].id == response[i].id_producto){
-					lineaFactura += '';
-					
-					$('.datos').append(lineaFactura);
-				}
-				
-			}
-		}
-	}
-	
-}) */
+ $(document).ready(function() {
+ 
+ });
 </script>
 </body>
 </html>

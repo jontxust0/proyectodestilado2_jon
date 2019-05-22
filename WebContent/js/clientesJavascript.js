@@ -156,9 +156,6 @@ $(document).ready(function () {
       var idProd = $(".imgModalProducto").data('id');
       var cantidadProd = $("#cantidadProducto").val();
       var cantidadaux = 0;
-      
-
-  
 
       //Llama a la Api CProductos
 
@@ -190,7 +187,6 @@ $(document).ready(function () {
                   if (producto.id == idProd) {
                 	  
 //                    var precioMult = producto.precio * cantidad;
-//
 //                    html_carrito += '<tr>'
 //                    html_carrito += '<td>' + cantidad + '</td>'
 //                    html_carrito += '<td>' + producto.nombre + '</td>'
@@ -208,7 +204,7 @@ $(document).ready(function () {
                     		id:producto.id,
                     		nombre:producto.nombre,
                     		cantidad:cantidadProd,
-                    		precio:producto.precio	
+                    		precio:producto.precio
                     }
                     
                     
@@ -346,14 +342,7 @@ $(document).ready(function () {
             	html += '</tr>'
             	
             	precioTot = parseFloat(precioTot)+parseFloat(precioMult);
-            	
-            	
-            	
-
-            	
-            	
-            	
-            	
+	
             }
             html_precio += '<p>'+precioTot+'</p>'
             $('.tablaCarrito').html(html);
@@ -362,8 +351,8 @@ $(document).ready(function () {
         });
       });
     
-    //restar uno al la cantidad
-    $(document).on('click', '.botonMinus', function (e) {
+    	//restar uno al la cantidad
+    	$(document).on('click', '.botonMinus', function (e) {
     	var html_precio = "";
     	var html = "";
 

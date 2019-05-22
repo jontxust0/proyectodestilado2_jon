@@ -28,7 +28,7 @@ public class CBorrarFactura extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int idFactura=Integer.parseInt(request.getParameter("id"));
+		int idFactura=Integer.parseInt(request.getParameter("idFactura"));
 		
 		FacturaModel factura= new FacturaModel();
 		factura.setId(idFactura);

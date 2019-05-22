@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 21-05-2019 a las 09:45:27
+-- Tiempo de generación: 22-05-2019 a las 08:50:28
 -- Versión del servidor: 10.1.39-MariaDB
 -- Versión de PHP: 7.3.5
 
@@ -19,16 +19,14 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de datos: `proyectodestila2`
+-- Base de datos: `proyecto_destila2`
 --
 
 DELIMITER $$
 --
 -- Procedimientos
 --
-CREATE DEFINER=`root`@`localhost` PROCEDURE `EliminarFactura` (`_id` INT(11))  BEGIN
-DELETE FROM facturas WHERE id = _id;
-END$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `EliminarFactura` (IN `_id` INT(11))  DELETE FROM facturas WHERE id = _id$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `InsertarFactura` (IN `comprador` VARCHAR(40), IN `direccion` VARCHAR(40), IN `telefono` VARCHAR(40), IN `dni` VARCHAR(40))  NO SQL
 BEGIN
@@ -45,21 +43,10 @@ INSERT into productos_facturas (productos_facturas.id_factura, productos_factura
 VALUES(id_factura, id_producto, nombre, cantidad, precio);
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `OrdenarPorPrecioAscendente` ()  BEGIN
-SELECT * FROM productos ORDER BY precio ASC;
-END$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `mostrarFactura` (IN `pId` INT)  NO SQL
+SELECT * FROM facturas WHERE facturas.id= pId$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `OrdenarPorPrecioDescendente` ()  BEGIN
-SELECT * FROM productos ORDER BY precio DESC;
-END$$
-
-CREATE DEFINER=`root`@`localhost` PROCEDURE `SeleccionarCategoria` (IN `categoria` INT)  BEGIN
-SELECT productos.* FROM productos JOIN categorias ON productos.id_categoria = categorias.id WHERE categorias.nombre = categoria;
-END$$
-
-CREATE DEFINER=`root`@`localhost` PROCEDURE `SellecionarTodosLosProductos` ()  BEGIN 
-SELECT * FROM productos;
-END$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `SelectAll` ()  SELECT * FROM productos$$
 
 DELIMITER ;
 
@@ -82,7 +69,9 @@ INSERT INTO `categorias` (`id`, `nombre`) VALUES
 (1, 'Vino'),
 (2, 'Licor'),
 (3, 'Cerveza'),
-(4, 'Crema');
+(4, 'Crema'),
+(5, 'Vodka'),
+(6, 'Hidromiel');
 
 -- --------------------------------------------------------
 
@@ -95,8 +84,8 @@ CREATE TABLE `facturas` (
   `fecha_compra` date NOT NULL,
   `comprador` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
   `direccion` varchar(128) COLLATE utf8_unicode_ci NOT NULL,
-  `telefono` varchar(9) COLLATE utf8_unicode_ci NOT NULL,
-  `dni` varchar(20) COLLATE utf8_unicode_ci NOT NULL
+  `telefono` int(9) NOT NULL,
+  `dni` varchar(40) COLLATE utf8_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
@@ -104,26 +93,15 @@ CREATE TABLE `facturas` (
 --
 
 INSERT INTO `facturas` (`id`, `fecha_compra`, `comprador`, `direccion`, `telefono`, `dni`) VALUES
-(3, '2019-05-20', '0', '0', '0', ''),
-(4, '2019-05-20', '0', '0', '0', '12'),
-(5, '2019-05-20', '0', '0', '0', '1'),
-(6, '2019-05-20', 'a', 'hsgasg, 37 ', '555555559', '56235632v'),
-(7, '2019-05-20', 'a', 'hsgasg, 37 ', '555555559', '5555555555a'),
-(8, '2019-05-20', 'Adrian Rodriguez', 'Calle de la piruleta, 420', '696969699', '657565765C'),
-(9, '2019-05-20', 'Adrian', 'Askatasun', '555555598', '657565765C'),
-(10, '2019-05-20', 'Adrian', 'Askatasun', '555555598', '657565765C'),
-(11, '2019-05-20', 'a', 'asah, 37', '555555559', '56235632v'),
-(12, '2019-05-20', 'a', 'asah, 37', '555555559', '56235632v'),
-(13, '2019-05-20', 'a', 'hsgasg, 37 ', '555555559', '56235632v'),
-(14, '2019-05-20', 'a', 'asah, 37', '555555559', '657565765c'),
-(15, '2019-05-20', 'a', 'hsgasg, 37 ', '555555559', '56235632v'),
-(16, '2019-05-20', 'a', 'asah, 37', '555555559', '56235632v'),
-(17, '2019-05-20', 'a', 'asah, 37', '555555559', '56235632v'),
-(18, '2019-05-20', 'a', 'asah, 37', '555555559', '56235632v'),
-(19, '2019-05-20', 'a', 'asah, 37', '555555559', '56235632v'),
-(20, '2019-05-20', 'a', 'asah, 37', '555555559', '56235632v'),
-(21, '2019-05-20', 'a', 'asah, 37', '555555559', '657565765c'),
-(22, '2019-05-20', 'mbmn', 'mnbmn', 'nmbn', 'mnbb');
+(1, '2019-05-15', 'dsdfds', 'sfsdf', 666666666, '');
+
+--
+-- Disparadores `facturas`
+--
+DELIMITER $$
+CREATE TRIGGER `facturas_eliminadas` AFTER DELETE ON `facturas` FOR EACH ROW INSERT INTO facturas_eliminadas (id, cantidadTot, precioTot, productos, fecha_compra, comprador,direccion, telefono, fecha_de_eliminacion, usuario_de_eliminacion ) VALUES (old.id, old.cantidadTot, old.precioTot, old. productos, old.fecha_compra, old.comprador, old.direccion, old.telefono, NOW(), USER())
+$$
+DELIMITER ;
 
 -- --------------------------------------------------------
 
@@ -135,7 +113,7 @@ CREATE TABLE `facturas_eliminadas` (
   `id` int(11) NOT NULL,
   `cantidadTot` int(11) NOT NULL,
   `precioTot` double NOT NULL,
-  `productos` text CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `productos` varchar(40) NOT NULL,
   `fecha_compra` date NOT NULL,
   `comprador` varchar(50) NOT NULL,
   `direccion` varchar(128) NOT NULL,
@@ -180,7 +158,19 @@ INSERT INTO `productos` (`id`, `nombre`, `descripcion`, `img`, `precio`, `id_cat
 (7, 'Libellis Gin', 'Descubre la magia de Libellis Premium Gin, la ginebra premium que te harán cambiar la percepción de la realidad. Siente la exquisitez de su sabor y aroma y deléitate con sus sorprendentes efectos visuales.', 'img/libellis.jpg', 16.95, 2),
 (8, 'Bock Damm', 'Nacida en Einbeck, consagrada en Munich.\r\nEn el siglo XIV la ciudad de Einbeck se hizo famosa por sus cervezas de excelente calidad. Munich no conseguía competir con estas hasta que el duque Maximiliano I decidió montar su propia cervecería con el maestro cervecero de Einbeck, Elias Pichler. Él fue el encargado de trasladar todos los conocimientos y acabó consagrando Munich como el gran referente de este estilo.', 'img/bockdamm.jpg', 0.61, 3),
 (9, 'Leche De Pantera', 'Leche de Pantera es una sutil y agradable crema de licor de leche condensada elaborada a partir de la destilería artesanal de Martes Santo, originaria de la Legión Española y convertida en bebida tradicional del Tercio. Una de sus principales características es que posee un sabor inigualable, de carácter gourmet para llevar hasta nuestra comodidad un néctar exquisito.', 'img/lechedepantera.jpg', 14, 4),
-(10, 'Gin Eco Martes Santo', 'Ginebra Ecológica Martes Santo Gin Excelent 100% Ecológica Certificada.\r\n\r\nSurge tras destilar en alambique centenario de cobre calentado por leña de encina, el mejor alcohol de grano junto con botánicos de muy alta calidad, previamente seleccionados ( enebro, corteza de mandarina, corteza de lima, canela, raíz de angélica, pétalos de jazmín, vainilla, nueces….). Todos ellos ecológicos 100% certificados.\r\n\r\nDando lugar a la primera ginebra española 100% ecológica certificada. Muy fina y equilibrada, con toques mediterráneos y exóticos, completamente distinta a las existentes en el mercado.\r\n\r\nEnvase de 70 cl. 40º', 'img/gineco.jpg', 35, 2);
+(10, 'Gin Eco Martes Santo', 'Ginebra Ecológica Martes Santo Gin Excelent 100% Ecológica Certificada.\r\n\r\nSurge tras destilar en alambique centenario de cobre calentado por leña de encina, el mejor alcohol de grano junto con botánicos de muy alta calidad, previamente seleccionados ( enebro, corteza de mandarina, corteza de lima, canela, raíz de angélica, pétalos de jazmín, vainilla, nueces….). Todos ellos ecológicos 100% certificados.\r\n\r\nDando lugar a la primera ginebra española 100% ecológica certificada. Muy fina y equilibrada, con toques mediterráneos y exóticos, completamente distinta a las existentes en el mercado.\r\n\r\nEnvase de 70 cl. 40º', 'img/gineco.jpg', 35, 2),
+(11, 'Absolut Elyx', 'Absolut Elyx es un vodka de lujo cuya elaboración se basa en los principios de la calidad, la integridad y la artesanía, y su destilación manual se realiza en un alambique de cobre', 'img/absolutelyx.jpg', 42.9, 5),
+(12, 'Vodka crystal head', 'Vodka destilado cuatro veces, y tres veces filtrado con una variedad de cristales de cuarzo conocidos como diamantes Herkimer.', 'img/crystalhead.jpg', 42.75, 5),
+(13, 'Royal Dragon Vodka Elite', 'Vodka de alta calidad.', 'img/royaldragon.jpg', 34.34, 5),
+(14, 'Mamont Vodka', 'Gran sabor\r\nMáxima calidad\r\nPara cualquier ocasión', 'img/mamont.jpg', 47.9, 5),
+(15, 'Kraken Black Spiced Rum ', 'Importado desde el Caribe y envejecido en barricas de roble entre 12 a 14 meses\r\nKraken Rum cuenta con 13 especias exóticas entre las que encontramos la canela, el jengibre y el clavo\r\nLlamado así en honor a la bestia del mar, sus mitos e increíbles leyendas. Kraken Rum es intenso, oscuro, misterioso y salvaje', 'img/kraken.jpg', 21.38, 2),
+(16, 'Grand Old Parr Scotch Whisky', 'Graduación:40º\r\nCapacidad: 100cl\r\nColor dorado', 'img/oldparr.jpg', 33, 2),
+(17, 'Suntory Whisky Toki', 'Color dorado claro\r\nEn nariz de pomelo, ciruela amarilla, madera de vainilla, gotas de pera, hierbas frescas de jardín\r\nEl paladar es cruasanes de almendras, pomelo blanco, uvas verdes y manzanas\r\nUn poco de especia pimienta-vainilla-jengibre y más notas de mentol-albahaca\r\nSedoso con un final dulce y picante sutil', 'img/suntory.jpg', 38.21, 2),
+(18, 'Yamazakura Whisky ', 'Graduación: 40º\r\nCapacidad: 70CL\r\nYamazakura + Gb 0,7 L 40º', 'img/yamazakura.jpg', 47.48, 2),
+(19, 'Hidromiel Clásica', 'Valhalla Clasica: Inspirado en el Hidromiel que bebido en la antigüedad por grandes personajes como Julio Cesar.', 'img/hidromielclasica.jpg', 7.99, 6),
+(20, 'Hidromiel Tradicional', 'Inspirado en el Hidromiel que bebieron los vikingos, como el rey Ragnar Lodbrok.', 'img/hidromieltradicional.jpg', 7.99, 6),
+(21, 'Hidromiel Doble Miel', 'Botella de 75 cl de Valhalla Doble Miel. También conocido como melomiel en la Antigüedad. Como su nombre indica, se elabora a partir de una gran cantidad de miel natural lo que le otorga un sabor y aroma intensos a miel.', 'img/hidromieldoble.jpg', 11.99, 6),
+(22, 'Hidromiel Freyja', 'Venta de Botella de 75cl de Hidromiel Freyja. Nuestro homenaje a Freyja una de la diosas mayores de la mitología nórdica y germánica, diosa del Amor, la Belleza y la Fertilidad.', 'img/hidromielfreyja.jpg', 11.99, 6);
 
 --
 -- Disparadores `productos`
@@ -230,19 +220,10 @@ INSERT INTO `productos_actualizados` (`id`, `nombre_nuevo`, `descripcion_nuevo`,
 CREATE TABLE `productos_facturas` (
   `id_factura` int(11) NOT NULL,
   `id_producto` int(11) NOT NULL,
-  `nombre` varchar(40) COLLATE utf8_unicode_ci NOT NULL,
+  `nombre` int(11) NOT NULL,
   `cantidad` int(11) NOT NULL,
-  `precio` double NOT NULL
+  `precio` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
---
--- Volcado de datos para la tabla `productos_facturas`
---
-
-INSERT INTO `productos_facturas` (`id_factura`, `id_producto`, `nombre`, `cantidad`, `precio`) VALUES
-(20, 4, 'Irium Gold\r\n', 1, 7.95),
-(21, 4, 'Irium Gold\r\n', 1, 7.95),
-(21, 3, 'Buitral Fresa', 1, 14.5);
 
 -- --------------------------------------------------------
 
@@ -339,13 +320,13 @@ ALTER TABLE `subcategorias`
 -- AUTO_INCREMENT de la tabla `categorias`
 --
 ALTER TABLE `categorias`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT de la tabla `facturas`
 --
 ALTER TABLE `facturas`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `facturas_eliminadas`
@@ -357,7 +338,7 @@ ALTER TABLE `facturas_eliminadas`
 -- AUTO_INCREMENT de la tabla `productos`
 --
 ALTER TABLE `productos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT de la tabla `productos_actualizados`
@@ -386,7 +367,7 @@ ALTER TABLE `productos`
 --
 ALTER TABLE `productos_facturas`
   ADD CONSTRAINT `productos_facturas_ibfk_1` FOREIGN KEY (`id_producto`) REFERENCES `productos` (`id`),
-  ADD CONSTRAINT `productos_facturas_ibfk_2` FOREIGN KEY (`id_factura`) REFERENCES `facturas` (`id`) ON DELETE CASCADE;
+  ADD CONSTRAINT `productos_facturas_ibfk_2` FOREIGN KEY (`id_factura`) REFERENCES `facturas` (`id`);
 
 --
 -- Filtros para la tabla `subcategorias`

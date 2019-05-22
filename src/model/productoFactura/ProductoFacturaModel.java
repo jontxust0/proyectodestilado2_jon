@@ -90,13 +90,13 @@ public class ProductoFacturaModel extends ProductoFacturaClass{
 		
 	}
 
-	public void selectedLineaFactura(int id) {
+	public void selectedLineaFactura(int idFactura) {
 		this.createConnection();
 		
 		Statement st;
 		try {
 			st = this.con.createStatement();	
-			ResultSet rs = st.executeQuery("call mostrarFacturas(?)");
+			ResultSet rs = st.executeQuery("SELECT * FROM productos_facturas WHERE productos_facturas.id_factura="+ idFactura);
 			
 			while (rs.next()){
 				
@@ -110,8 +110,7 @@ public class ProductoFacturaModel extends ProductoFacturaClass{
 				lineaFactura.setPrecio(rs.getInt("precio"));
 				
 				this.lineaFactura.add(lineaFactura);
-				
-
+			
 			}
 
 		} catch (SQLException e) {
@@ -119,13 +118,7 @@ public class ProductoFacturaModel extends ProductoFacturaClass{
 			e.printStackTrace();
 		}
 		this.disconnect();
-		
-
 	
-		
-		
-		
-		
 	}
 	
 

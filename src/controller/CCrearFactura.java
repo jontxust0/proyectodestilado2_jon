@@ -76,9 +76,9 @@ public class CCrearFactura extends HttpServlet {
 				
 				lineaFactura.insertLinea();
 			}
-			request.setAttribute("idFactura", idFactura);
-			request.getRequestDispatcher("CVerFactura").forward(request, response);
 			
+			request.setAttribute("idFactura", idFactura);
+			//request.getRequestDispatcher("view/vCompra.jsp").forward(request, response);
 			
 			//System.out.println("comp:" + comprador + " Carrito:" +carrito );
 			

@@ -94,12 +94,13 @@
         			   'comprador':comprador,
         			   'direccion':direccion,
         			   'telefono':telefono,
-        			  'dni':dni,	 
+        			   'dni':dni,	 
         		  },
         		//datatype:'json',
         	 	url:'CCrearFactura',
         	 	success: function(result){
-        	 		alert('bien');
+        	 		alert('Gracias por realizar la compra');
+        	 		
         	 	},
         	 	error: function(xhr){
         	 		alert('An error occured:'+ xhr.status);

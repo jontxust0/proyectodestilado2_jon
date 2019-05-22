@@ -35,16 +35,17 @@ public class CVerFacturas extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-		int id=Integer.parseInt(request.getParameter("id"));
+		int idFactura=Integer.parseInt(request.getParameter("idFactura"));
 		
 		FacturaModel factura =new FacturaModel();
 		ProductoFacturaModel lineaFactura = new ProductoFacturaModel();
 		
-		factura.selectedFactura(id);
-		lineaFactura.selectedLineaFactura(id);
+		factura.selectedFactura(idFactura);
+		lineaFactura.selectedLineaFactura(idFactura);
 	
-		
+		request.setAttribute("lineaFactura", lineaFactura.getLineaFactura());
 		request.setAttribute("factura", factura.getFactura());
+		
 		request.getRequestDispatcher("view/vFactura.jsp").forward(request, response);
 
 	}

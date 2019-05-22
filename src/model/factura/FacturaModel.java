@@ -76,18 +76,16 @@ public class FacturaModel extends FacturaClass{
 	}
 
 
-	public void selectedFactura(int id) {
+	public void selectedFactura(int idFactura) {
 		this.createConnection();
 		
 		Statement st;
 		try {
 			st = this.con.createStatement();	
-			ResultSet rs = st.executeQuery("call mostrarFacturas(?)");
+			ResultSet rs = st.executeQuery("SELECT * FROM facturas WHERE facturas.id="+idFactura);
 			
 			while (rs.next()){
-				
 				FacturaClass factura = new FacturaClass();
-				
 				
 				factura.setId(rs.getInt("id"));
 				factura.setFecha_compra(rs.getDate("fecha_compra"));
@@ -130,7 +128,7 @@ public class FacturaModel extends FacturaClass{
 			}
 						
 			} catch (SQLException e) {
-			
+			e.printStackTrace();
 		}
 		
 		this.disconnect();
@@ -142,11 +140,12 @@ public class FacturaModel extends FacturaClass{
 	public void borrarFactura(int idFactura) {
 
         this.createConnection();
-
-        try (
-                PreparedStatement pst = this.con.prepareStatement("call EliminarFactura(?)");
-            ) {
-
+        
+        	PreparedStatement pst;
+        try  {
+                pst = this.con.prepareStatement("call EliminarFactura(?)");
+           
+        	//DELETE FROM facturas WHERE id = _id
                 pst.setInt(1, idFactura);
 
                 pst.execute();
