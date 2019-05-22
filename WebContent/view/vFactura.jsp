@@ -13,6 +13,10 @@
   body, h1, h2, h3, h4, h5, h6{
     font-family: 'Bree Serif', serif;
   }
+  .total{
+  margin-right:10px;
+  
+  }
   </style>
 <title>Factura</title>
 </head>
@@ -72,26 +76,22 @@
 			</thead>
 
 			<tbody class="datos">
-			<% for(int j=0; j<lineaFactura.size();j++){ %>
+			<% double total=0; 
+			for(int j=0; j<lineaFactura.size();j++){ %>
 				<tr>
 					<td><%=lineaFactura.get(j).getNombre() %></td>
 					<td><%=lineaFactura.get(j).getCantidad() %></td>
-					<td class><%=lineaFactura.get(j).getPrecio() %></td>
-					<td class=" text-right "><%=lineaFactura.get(j).getPrecio()%> </td>
+					<td class><%=lineaFactura.get(j).getPrecio() %>  $/U</td>
+					<td class=" text-right "><%=lineaFactura.get(j).getPrecio()* lineaFactura.get(j).getCantidad()%>  $</td>
 				</tr>
-				<%}%>
+				<% total=total+(lineaFactura.get(j).getPrecio()* lineaFactura.get(j).getCantidad());
+				}%>
 			</tbody>
 			</table>
-		<div class="row text-right">
-			<div class="col-xs-3 col-xs-offset-7"><strong>Total:   $ </strong></div>
+		<div class="row total float-right">
+			<div class="col-xs-3 col-xs-offset-7 "><strong>Total: <%=total %> $</strong></div>
 		</div>
 	</div>
 	<%}%>
-
-<script>
- $(document).ready(function() {
- 
- });
-</script>
 </body>
 </html>
